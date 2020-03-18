@@ -1,22 +1,38 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import Index from '../views/Index.vue'
+import DataBrowsing from '../views/DataBrowsing.vue'
+import HotShaftWarning from '../views/HotShaftWarning.vue'
+import StatisticalReports from '../views/StatisticalReports.vue'
+import MaintenanceServices from '../views/MaintenanceServices.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    name: 'Index',
+    component: Index
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/databrowsing',
+    name: 'DataBrowsing',
+    component: DataBrowsing
+  },
+  {
+    path: '/hotshaftwarning',
+    name: 'HotShaftWarning',
+    component: HotShaftWarning
+  },
+  {
+    path: '/statisticalreports',
+    name: 'StatisticalReports',
+    component: StatisticalReports
+  },
+  {
+    path: '/maintenanceservices',
+    name: 'MaintenanceServices',
+    component: MaintenanceServices
   }
 ]
 

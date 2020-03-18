@@ -1,0 +1,51 @@
+{
+  "id": "1697382",
+  "name": "no name",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "4159792",
+      "name": "设置，轮轴",
+      "font_class": "setting",
+      "unicode": "e63b",
+      "unicode_decimal": 58939
+    },
+    {
+      "icon_id": "5434088",
+      "name": "数据统计",
+      "font_class": "shujutongji",
+      "unicode": "e621",
+      "unicode_decimal": 58913
+    },
+    {
+      "icon_id": "8605725",
+      "name": "服务链路",
+      "font_class": "fuwulianlu",
+      "unicode": "e662",
+      "unicode_decimal": 58978
+    },
+    {
+      "icon_id": "6237687",
+      "name": "user",
+      "font_class": "user",
+      "unicode": "e71d",
+      "unicode_decimal": 59165
+    },
+    {
+      "icon_id": "7621",
+      "name": "主页",
+      "font_class": "zhuye",
+      "unicode": "e600",
+      "unicode_decimal": 58880
+    },
+    {
+      "icon_id": "592049",
+      "name": "菜单",
+      "font_class": "caidan1",
+      "unicode": "e790",
+      "unicode_decimal": 59280
+    }
+  ]
+}
