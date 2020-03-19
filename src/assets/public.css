@@ -27,3 +27,24 @@ a:hover {
   color: red;
   text-decoration: none;
 }
+
+.el-table{
+  font-size: 0.5rem;
+}
+.el-table thead {
+  color: #fff !important;
+  background-color: #3971C4 !important;
+}
+
+.el-table td, .el-table th{
+  padding: 1% 0;
+}
+.el-table th, .el-table tr {
+  background-color:transparent;
+}
+.el-table__body{
+  background-color: #BDE5FF;
+}
+.el-table__row--level-1{
+  background-color: #fff!important;
+}
