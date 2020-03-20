@@ -4,8 +4,8 @@
       <div class="title_1">报表统计</div>
     </div>
     <div class="searchst">
-      <div class="station">
-        <el-select v-model="value" filterable placeholder="请选择">
+      <div class="stationst">
+        <el-select v-model="value" filterable placeholder="日报表">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -14,18 +14,12 @@
           ></el-option>
         </el-select>
       </div>
-      <div class="time">
-        <!-- <span class="demonstration">默认</span> -->
-        <el-date-picker
-          v-model="value1"
-          type="daterange"
-          range-separator="--"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
+      <div class="timest">
+        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <el-date-picker v-model="value1" type="date"></el-date-picker>
       </div>
-      <div class="bot">
-        <el-button size="small" type="danger" round>搜索</el-button>
+      <div class="botst">
+        <el-button type="danger" round>搜索</el-button>
       </div>
     </div>
     <div class="contentst">
@@ -63,7 +57,7 @@
 <script>
 import echarts from "echarts";
 export default {
-  data() {
+  data () {
     return {
       options: [
         {
@@ -88,18 +82,18 @@ export default {
         }
       ],
       value: "",
-      value1: ""
+      value1: "",
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.trainNum();
     this.carNum();
     this.axleNum();
     this.thermalNum();
   },
   methods: {
-    trainNum() {
+    trainNum () {
       var myChart = echarts.init(document.getElementById("trainnum"));
       var option = {
         xAxis: [
@@ -232,11 +226,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     },
-    carNum() {
+    carNum () {
       var myChart = echarts.init(document.getElementById("carnum"));
       var option = {
         legend: {
@@ -263,7 +257,7 @@ export default {
             color: "#3c3c3c",
             fontSize: 16
           },
-          formatter: function(p) {
+          formatter: function (p) {
             return p.seriesName + "<br>" + "车辆数量：" + p.value;
           },
           extraCssText: "box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)"
@@ -271,7 +265,7 @@ export default {
         xAxis: {
           axisLabel: {
             show: false,
-            formatter: function(v) {
+            formatter: function (v) {
               return v;
             }
           },
@@ -339,7 +333,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function(v) {
+                formatter: function (v) {
                   return v.value;
                 },
                 textStyle: {
@@ -378,7 +372,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function(v) {
+                formatter: function (v) {
                   return v.value;
                 },
                 textStyle: {
@@ -409,11 +403,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     },
-    axleNum() {
+    axleNum () {
       var myChart = echarts.init(document.getElementById("axlenum"));
       var option = {
         grid: {
@@ -564,11 +558,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     },
-    thermalNum() {
+    thermalNum () {
       var myChart = echarts.init(document.getElementById("thermalnum"));
       var option = {
         tooltip: {
@@ -658,7 +652,7 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     }
@@ -670,6 +664,7 @@ export default {
   width: 100%;
   height: 1.5rem;
   background-color: #ffffff;
+  margin-top: -0.3%;
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
   .title_1 {
     font-size: 0.6rem;
@@ -681,31 +676,30 @@ export default {
 }
 .searchst {
   width: 98%;
-  height: 2rem;
+  height: 2.5rem;
   background-color: #ffffff;
   margin-top: 0.8%;
   transform: translate(1%, 0);
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
-  .station {
-    width: 20%;
+  .stationst {
+    width: 15%;
     height: inherit;
-    position: absolute;
-    padding-top: 0.5%;
+    float: left;
+    line-height: 2.3rem;
   }
-  .time {
-    width: 50%;
-    position: absolute;
-    padding-left: 8%;
-    padding-top: 0.5%;
+  .timest {
+    width: 35%;
+    float: left;
+    line-height: 2.3rem;
+    margin-left: -4rem;
   }
-  .bot {
+  .botst {
     width: 10%;
-    position: absolute;
-    padding-left: 45%;
-    padding-top: 0.5%;
+    float: left;
+    line-height: 2.3rem;
+    margin-left: -5rem;
   }
 }
-
 .contentst {
   width: 98%;
   height: 25.5rem;

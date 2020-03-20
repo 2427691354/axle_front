@@ -24,14 +24,10 @@
             <i class="el-icon-menu"></i>
             <span slot="title">数据浏览</span>
           </el-menu-item>
-          <el-submenu index="/hotshaftwarning">
-            <template slot="title">
+          <el-menu-item index="/hotshaftwarning">
               <i class="el-icon-document"></i>
               <span slot="title">热轴预警</span>
-            </template>
-            <el-menu-item index="/hotshaftwarning">选项1</el-menu-item>
-            <el-menu-item index="/hotshaftwarning">选项2</el-menu-item>
-          </el-submenu>
+          </el-menu-item>
           <el-menu-item index="/statisticalreports">
             <i class="el-icon-setting"></i>
             <span slot="title">统计报表</span>
@@ -249,14 +245,14 @@ export default {
   }
 }
 
-#context {
-  margin-top: 0.4rem;
+ #context {
+  // margin-top: 0rem;
   height: 30.3rem;
-  margin-left: 0.5rem;
-  width: 86%;
-  border: 1px solid red;
+  // margin-left: 0.5rem;
+  width: 88%;
+  // border: 1px solid red;
   float: left;
-  box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+  // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
 }
 
 #headline {
