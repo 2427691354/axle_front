@@ -165,3 +165,26 @@ a:hover {
   padding: 0.08rem 0;
   color: #337ab7;
 }
+
+
+
+.hotshaftwarning .el-table{
+  font-size: 0.5rem;
+}
+.hotshaftwarning .el-table thead {
+  color: #fff !important;
+  background-color: #3971C4 !important;
+}
+
+.hotshaftwarning .el-table td, .el-table th{
+  padding: 1% 0;
+}
+.hotshaftwarning .el-table th, .el-table tr {
+  background-color:transparent;
+}
+.hotshaftwarning .el-table__body{
+  background-color: #BDE5FF;
+}
+.hotshaftwarning .el-table__row--level-1{
+  background-color: #fff!important;
+}
