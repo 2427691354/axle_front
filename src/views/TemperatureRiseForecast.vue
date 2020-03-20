@@ -40,7 +40,24 @@ export default {
       // 车厢编号输入框
       carriageNumber: "",
       // 环境温度输入框
-      ambientTemperature: ""
+      ambientTemperature: "",
+      //左轴数据
+      left1: [4, 3, 8, 7, 15, 20],
+      left2: [10, 15, 9, 5, 3, 7],
+      left3: [14, 9, 6, 10, 13, 8],
+      left4: [6, 16, 7, 3, 6, 6],
+      //右轴数据
+      right1: [4, 3, 8, 7, 15, 20],
+      right2: [10, 15, 9, 5, 3, 7],
+      right3: [14, 9, 6, 10, 13, 8],
+      right4: [6, 16, 7, 3, 6, 6],
+
+      icon1:
+        "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAlElEQVQokbXOLwrCcBjH4Wf+CTZ3A7EaxCwYPMOSN9DmURTEbt0NLHoCQTB6BQUtQxCUH2zF6LZPe8v3eaNPOpA3xgJ9tP3fAwesJZdnAcywQ7PE8G9nTBroYFPxeGiIZQBG6FY8XjQNQFzTeCgOwL1G4B6AE241AfsAvDDHu+Lx8PiqlR8prjnUQ1RiOMMRW8kl+wIJ9Rtl5pyxkAAAAABJRU5ErkJggg==",
+      icon2:
+        "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAvUlEQVQokbXSMUpDQRSF4S8z80ACNvYuQB6idhIiZCMuISLiMiQpsp2AYCFWFpJgo5WdjV1SBIJcTCR93jvFzJnL5f+b6Qwnayk5zsl9Ti5y1i2JkqnK5t70v3fnv8d8d68ky5y95WR0deoTCmo84Ugz6eP6eW7Qq70mPDQI3+YQ4+ghGDQM36b/8q4KwUFLgmB341i2JFhjEYJpS4LHyxOrENzhu2H4D26jxDf9wDlucIZqD/AKM0x6tS/4BRx1HPx+8r9CAAAAAElFTkSuQmCC",
+      icon3:
+        "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAdUlEQVQokbWSMQ7CQAwEd32JCCJP5Af8AZ2SP/BLOpBOifAiC7q056lczRRr1loRGPVy8YJOELgLWIe/zl1kL3kgYJlsx/C7c2g+LmbUOysQmMRTaoBUSw30HvcQADAT8Az5VPZbBOKNSqE/e8rPZbu2z/j4ArOiIel4bYGnAAAAAElFTkSuQmCC"
     };
   },
   mounted() {
@@ -77,9 +94,9 @@ export default {
           // icon:
           //   "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAlElEQVQokbXOLwrCcBjH4Wf+CTZ3A7EaxCwYPMOSN9DmURTEbt0NLHoCQTB6BQUtQxCUH2zF6LZPe8v3eaNPOpA3xgJ9tP3fAwesJZdnAcywQ7PE8G9nTBroYFPxeGiIZQBG6FY8XjQNQFzTeCgOwL1G4B6AE241AfsAvDDHu+Lx8PiqlR8prjnUQ1RiOMMRW8kl+wIJ9Rtl5pyxkAAAAABJRU5ErkJggg==",
           // itemWidth: 20,
-          itemHeight: 10,
+          itemHeight: 8,
           textStyle: {
-            color: "#B4B4B4"
+            color: "black"
           },
           selected: {
             "2轴": false,
@@ -90,24 +107,20 @@ export default {
             {
               name: "1轴",
 
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAlElEQVQokbXOLwrCcBjH4Wf+CTZ3A7EaxCwYPMOSN9DmURTEbt0NLHoCQTB6BQUtQxCUH2zF6LZPe8v3eaNPOpA3xgJ9tP3fAwesJZdnAcywQ7PE8G9nTBroYFPxeGiIZQBG6FY8XjQNQFzTeCgOwL1G4B6AE241AfsAvDDHu+Lx8PiqlR8prjnUQ1RiOMMRW8kl+wIJ9Rtl5pyxkAAAAABJRU5ErkJggg=="
+              icon: this.icon1
             },
             {
               name: "2轴",
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAvUlEQVQokbXSMUpDQRSF4S8z80ACNvYuQB6idhIiZCMuISLiMiQpsp2AYCFWFpJgo5WdjV1SBIJcTCR93jvFzJnL5f+b6Qwnayk5zsl9Ti5y1i2JkqnK5t70v3fnv8d8d68ky5y95WR0deoTCmo84Ugz6eP6eW7Qq70mPDQI3+YQ4+ghGDQM36b/8q4KwUFLgmB341i2JFhjEYJpS4LHyxOrENzhu2H4D26jxDf9wDlucIZqD/AKM0x6tS/4BRx1HPx+8r9CAAAAAElFTkSuQmCC"
+              icon: this.icon3
             },
             {
               name: "3轴",
 
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAlElEQVQokbXOLwrCcBjH4Wf+CTZ3A7EaxCwYPMOSN9DmURTEbt0NLHoCQTB6BQUtQxCUH2zF6LZPe8v3eaNPOpA3xgJ9tP3fAwesJZdnAcywQ7PE8G9nTBroYFPxeGiIZQBG6FY8XjQNQFzTeCgOwL1G4B6AE241AfsAvDDHu+Lx8PiqlR8prjnUQ1RiOMMRW8kl+wIJ9Rtl5pyxkAAAAABJRU5ErkJggg=="
+              icon: this.icon3
             },
             {
               name: "4轴",
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAvUlEQVQokbXSMUpDQRSF4S8z80ACNvYuQB6idhIiZCMuISLiMiQpsp2AYCFWFpJgo5WdjV1SBIJcTCR93jvFzJnL5f+b6Qwnayk5zsl9Ti5y1i2JkqnK5t70v3fnv8d8d68ky5y95WR0deoTCmo84Ugz6eP6eW7Qq70mPDQI3+YQ4+ghGDQM36b/8q4KwUFLgmB341i2JFhjEYJpS4LHyxOrENzhu2H4D26jxDf9wDlucIZqD/AKM0x6tS/4BRx1HPx+8r9CAAAAAElFTkSuQmCC"
+              icon: this.icon3
             }
           ]
         },
@@ -224,7 +237,7 @@ export default {
             //     }
             //   }
             // },
-            data: [ 4, 3, 8, 7, 15, 20]
+            data: this.left1
           },
           {
             name: "2轴",
@@ -262,7 +275,7 @@ export default {
             //     }
             //   }
             // },
-            data: [10, 15, 9, 5, 3, 7]
+            data: this.left2
           },
           {
             name: "3轴",
@@ -300,7 +313,7 @@ export default {
             //     }
             //   }
             // },
-            data: [ 14, 9, 6, 10, 13, 8]
+            data: this.left3
           },
           {
             name: "4轴",
@@ -338,11 +351,47 @@ export default {
             //     }
             //   }
             // },
-            data: [ 6, 16, 7, 3, 6, 6]
+            data: this.left4
           }
         ]
       };
       myChart.setOption(option);
+
+      var self = this;
+      myChart.on("legendselectchanged", function(params) {
+        let { selected } = params;
+        // console.log(selected["3轴"]);
+        // console.log(name);
+        // console.log(selected[name]);
+        // console.log(params)
+        var i1 = selected["1轴"] ? self.icon1 : self.icon3;
+        var i2 = selected["2轴"] ? self.icon2 : self.icon3;
+        var i3 = selected["3轴"] ? self.icon1 : self.icon3;
+        var i4 = selected["4轴"] ? self.icon2 : self.icon3;
+        myChart.setOption({
+          legend: {
+            data: [
+              {
+                name: "1轴",
+                icon: i1
+              },
+              {
+                name: "2轴",
+                icon: i2
+              },
+              {
+                name: "3轴",
+                icon: i3
+              },
+              {
+                name: "4轴",
+                icon: i4
+              }
+            ]
+          }
+        });
+      });
+
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -376,9 +425,9 @@ export default {
           // icon:
           //   "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAlElEQVQokbXOLwrCcBjH4Wf+CTZ3A7EaxCwYPMOSN9DmURTEbt0NLHoCQTB6BQUtQxCUH2zF6LZPe8v3eaNPOpA3xgJ9tP3fAwesJZdnAcywQ7PE8G9nTBroYFPxeGiIZQBG6FY8XjQNQFzTeCgOwL1G4B6AE241AfsAvDDHu+Lx8PiqlR8prjnUQ1RiOMMRW8kl+wIJ9Rtl5pyxkAAAAABJRU5ErkJggg==",
           // itemWidth: 20,
-          itemHeight: 10,
+          itemHeight: 8,
           textStyle: {
-            color: "#B4B4B4"
+            color: "black"
           },
           selected: {
             "1轴": false,
@@ -389,24 +438,20 @@ export default {
             {
               name: "1轴",
 
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAlElEQVQokbXOLwrCcBjH4Wf+CTZ3A7EaxCwYPMOSN9DmURTEbt0NLHoCQTB6BQUtQxCUH2zF6LZPe8v3eaNPOpA3xgJ9tP3fAwesJZdnAcywQ7PE8G9nTBroYFPxeGiIZQBG6FY8XjQNQFzTeCgOwL1G4B6AE241AfsAvDDHu+Lx8PiqlR8prjnUQ1RiOMMRW8kl+wIJ9Rtl5pyxkAAAAABJRU5ErkJggg=="
+              icon: this.icon3
             },
             {
               name: "2轴",
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAvUlEQVQokbXSMUpDQRSF4S8z80ACNvYuQB6idhIiZCMuISLiMiQpsp2AYCFWFpJgo5WdjV1SBIJcTCR93jvFzJnL5f+b6Qwnayk5zsl9Ti5y1i2JkqnK5t70v3fnv8d8d68ky5y95WR0deoTCmo84Ugz6eP6eW7Qq70mPDQI3+YQ4+ghGDQM36b/8q4KwUFLgmB341i2JFhjEYJpS4LHyxOrENzhu2H4D26jxDf9wDlucIZqD/AKM0x6tS/4BRx1HPx+8r9CAAAAAElFTkSuQmCC"
+              icon: this.icon2
             },
             {
               name: "3轴",
 
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAlElEQVQokbXOLwrCcBjH4Wf+CTZ3A7EaxCwYPMOSN9DmURTEbt0NLHoCQTB6BQUtQxCUH2zF6LZPe8v3eaNPOpA3xgJ9tP3fAwesJZdnAcywQ7PE8G9nTBroYFPxeGiIZQBG6FY8XjQNQFzTeCgOwL1G4B6AE241AfsAvDDHu+Lx8PiqlR8prjnUQ1RiOMMRW8kl+wIJ9Rtl5pyxkAAAAABJRU5ErkJggg=="
+              icon: this.icon3
             },
             {
               name: "4轴",
-              icon:
-                "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAJCAYAAAAo/ezGAAAAvUlEQVQokbXSMUpDQRSF4S8z80ACNvYuQB6idhIiZCMuISLiMiQpsp2AYCFWFpJgo5WdjV1SBIJcTCR93jvFzJnL5f+b6Qwnayk5zsl9Ti5y1i2JkqnK5t70v3fnv8d8d68ky5y95WR0deoTCmo84Ugz6eP6eW7Qq70mPDQI3+YQ4+ghGDQM36b/8q4KwUFLgmB341i2JFhjEYJpS4LHyxOrENzhu2H4D26jxDf9wDlucIZqD/AKM0x6tS/4BRx1HPx+8r9CAAAAAElFTkSuQmCC"
+              icon: this.icon3
             }
           ]
         },
@@ -523,7 +568,7 @@ export default {
             //     }
             //   }
             // },
-            data: [ 4, 3, 8, 7, 15, 20]
+            data: this.right1
           },
           {
             name: "2轴",
@@ -561,7 +606,7 @@ export default {
             //     }
             //   }
             // },
-            data: [10, 15, 9, 5, 3, 7]
+            data: this.right2
           },
           {
             name: "3轴",
@@ -599,7 +644,7 @@ export default {
             //     }
             //   }
             // },
-            data: [ 14, 9, 6, 10, 13, 8]
+            data: this.right3
           },
           {
             name: "4轴",
@@ -637,15 +682,49 @@ export default {
             //     }
             //   }
             // },
-            data: [ 6, 16, 7, 3, 6, 6]
+            data: this.right4
           }
         ]
       };
       myChart.setOption(option);
+      var self = this;
+      myChart.on("legendselectchanged", function(params) {
+        let { selected } = params;
+        // console.log(selected["3轴"]);
+        // console.log(name);
+        // console.log(selected[name]);
+        var i1 = selected["1轴"] ? self.icon1 : self.icon3;
+        var i2 = selected["2轴"] ? self.icon2 : self.icon3;
+        var i3 = selected["3轴"] ? self.icon1 : self.icon3;
+        var i4 = selected["4轴"] ? self.icon2 : self.icon3;
+        myChart.setOption({
+          legend: {
+            data: [
+              {
+                name: "1轴",
+                icon: i1
+              },
+              {
+                name: "2轴",
+                icon: i2
+              },
+              {
+                name: "3轴",
+                icon: i3
+              },
+              {
+                name: "4轴",
+                icon: i4
+              }
+            ]
+          }
+        });
+      });
+
       window.addEventListener("resize", function() {
         myChart.resize();
       });
-    },
+    }
   }
 };
 </script>
@@ -688,7 +767,8 @@ export default {
   margin-bottom: 0.45rem;
   background-color: #fff;
   box-shadow: 1px 1px 2px 2px #e8e8e8;
-  #leftAxle,#rightAxle {
+  #leftAxle,
+  #rightAxle {
     height: 11.8rem;
     width: 94%;
     margin: 0 2%;
