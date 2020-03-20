@@ -204,13 +204,13 @@ export default {
 }
 
 #context {
-  margin-top: 0.4rem;
+  // margin-top: 0rem;
   height: 30.3rem;
-  margin-left: 0.5rem;
-  width: 86%;
-  border: 1px solid red;
+  // margin-left: 0.5rem;
+  width: 88%;
+  // border: 1px solid red;
   float: left;
-  box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+  // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
 }
 
 #headline {

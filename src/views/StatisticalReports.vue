@@ -4,28 +4,22 @@
       <div class="title_1">报表统计</div>
     </div>
     <div class="searchst">
-      <div class="station">
-        <el-select v-model="value"
-                   placeholder="请选择">
-          <el-option v-for="item in options"
-                     :key="item.value"
-                     :label="item.label"
-                     :value="item.value">
-          </el-option>
+      <div class="stationst">
+        <el-select v-model="value" filterable placeholder="日报表">
+          <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value"
+          ></el-option>
         </el-select>
       </div>
-      <div class="time">
-        <!-- <span class="demonstration">默认</span> -->
-        <el-date-picker v-model="value1"
-                        type="daterange"
-                        range-separator="--"
-                        start-placeholder="开始日期"
-                        end-placeholder="结束日期"></el-date-picker>
+      <div class="timest">
+        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <el-date-picker v-model="value1" type="date"></el-date-picker>
       </div>
-      <div class="bot">
-        <el-button size="small"
-                   type="danger"
-                   round>搜索</el-button>
+      <div class="botst">
+        <el-button type="danger" round>搜索</el-button>
       </div>
     </div>
     <div class="contentst">
@@ -670,6 +664,7 @@ export default {
   width: 100%;
   height: 1.5rem;
   background-color: #ffffff;
+  margin-top: -0.3%;
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
   .title_1 {
     font-size: 0.6rem;
@@ -681,28 +676,30 @@ export default {
 }
 .searchst {
   width: 98%;
-  height: 2rem;
+  height: 2.5rem;
   background-color: #ffffff;
   margin-top: 0.8%;
   transform: translate(1%, 0);
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
-  .station {
+  .stationst {
+    width: 15%;
+    height: inherit;
     float: left;
-    line-height: 1.8rem;
-    margin-left: 20px;
+    line-height: 2.3rem;
   }
-  .time {
-    line-height: 1.8rem;
+  .timest {
+    width: 35%;
     float: left;
-    margin-left: 20px;
+    line-height: 2.3rem;
+    margin-left: -4rem;
   }
-  .bot {
+  .botst {
+    width: 10%;
     float: left;
-    line-height: 1.8rem;
-    margin-left: 20px;
+    line-height: 2.3rem;
+    margin-left: -5rem;
   }
 }
-
 .contentst {
   width: 98%;
   height: 25.5rem;
