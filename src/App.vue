@@ -2,20 +2,19 @@
   <div id="app">
     <div id="header">
       <span class="title">热轴信息监测平台</span>
-      <i class="iconfont icon-caidan1" @click="collapse"></i>
+      <i class="iconfont icon-caidan1"
+         @click="collapse"></i>
       <!-- <span class="hello">您好，欢迎来到热轴检测平台！</span> -->
       <span class="date">2020年03月12日 星期四</span>
     </div>
     <div>
       <div id="nav">
-        <el-menu
-          :default-active="this.$router.path"
-          router
-          class="el-menu-vertical-demo"
-          @open="handleOpen"
-          @close="handleClose"
-          :collapse="isCollapse"
-        >
+        <el-menu :default-active="this.$router.path"
+                 router
+                 class="el-menu-vertical-demo"
+                 @open="handleOpen"
+                 @close="handleClose"
+                 :collapse="isCollapse">
           <el-menu-item index="/">
             <i class="el-icon-menu"></i>
             <span slot="title">首页</span>
@@ -24,13 +23,23 @@
             <i class="el-icon-menu"></i>
             <span slot="title">数据浏览</span>
           </el-menu-item>
-          <el-submenu index="/hotshaftwarning">
+          <el-submenu index="">
             <template slot="title">
               <i class="el-icon-document"></i>
-              <span slot="title">热轴预警</span>
+              <span slot="title">热轴报警</span>
             </template>
-            <el-menu-item index="/hotshaftwarning">选项1</el-menu-item>
-            <el-menu-item index="/hotshaftwarning">选项2</el-menu-item>
+            <el-menu-item index="">
+              <i class="el-icon-menu"></i>
+              <span slot="title">温升查询</span>
+            </el-menu-item>
+            <el-menu-item index="/hotshaftwarning">
+              <i class="el-icon-menu"></i>
+              <span slot="title">历史热轴报警</span>
+            </el-menu-item>
+            <el-menu-item index="/temperatureriseforecast">
+              <i class="el-icon-menu"></i>
+              <span slot="title">温升预测</span>
+            </el-menu-item>
           </el-submenu>
           <el-menu-item index="/statisticalreports">
             <i class="el-icon-setting"></i>
@@ -40,20 +49,17 @@
             <i class="el-icon-setting"></i>
             <span slot="title">维护服务</span>
           </el-menu-item>
-          <el-menu-item index="/temperatureriseforecast">
-            <i class="el-icon-setting"></i>
-            <span slot="title">温升预测</span>
-          </el-menu-item>
         </el-menu>
       </div>
       <div v-if="this.$router['app']['_route'].path=='/temperatureriseforecast'">
         <div id="headline"><strong>温升预测</strong></div>
         <div id="context1">
           <router-view />
-          </div>
+        </div>
       </div>
 
-      <div id="context" v-else>
+      <div id="context"
+           v-else>
         <router-view />
       </div>
     </div>
@@ -63,16 +69,16 @@
 <script>
 export default {
   name: "Home",
-  data() {
+  data () {
     return {
       isCollapse: false
     };
   },
-  created() {
+  created () {
     // 页面初始化时触发
     this.placeholderPic();
   },
-  mounted() {
+  mounted () {
     // 检测屏幕尺寸变化同步font-size
     window.onresize = () => {
       this.placeholderPic();
@@ -80,17 +86,17 @@ export default {
   },
   methods: {
     // 自适应页面字体大小
-    placeholderPic() {
+    placeholderPic () {
       document.documentElement.style.fontSize =
         document.documentElement.offsetWidth / 60 + "px";
     },
-    handleOpen(key, keyPath) {
+    handleOpen (key, keyPath) {
       console.log(key, keyPath);
     },
-    handleClose(key, keyPath) {
+    handleClose (key, keyPath) {
       console.log(key, keyPath);
     },
-    collapse() {
+    collapse () {
       if (this.isCollapse == true) {
         this.isCollapse = false;
       } else {
@@ -98,7 +104,7 @@ export default {
       }
     },
 
-    
+
   }
 };
 </script>
@@ -155,80 +161,44 @@ export default {
   background: #fff;
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
 
-  .el-submenu:hover {
-    background: #ecf5ff;
-  }
-  .el-submenu {
-    height: 1rem !important;
-  }
-  .el-submenu__title {
-    height: 1rem;
-  }
-  .el-submenu [class^="el-icon-"] {
-    margin-left: -0.5rem;
-    margin-top: -1rem;
-  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    .el-menu-item,
-    .el-submenu {
-      color: #888f97;
-      font-family: SourceHanSansCN-Light;
+    color: #888f97;
+    font-family: SourceHanSansCN-Light;
+    padding-left: 0.5 !important;
 
-      i {
-        float: left;
-        margin-left: 0.4rem;
-        font-size: 1rem;
-      }
-
-      span {
-        float: left;
-        margin-left: 0.5rem;
-        font-size: 0.5rem;
-        line-height: 1rem;
-      }
-    }
-
-    .el-submenu {
-      height: 1rem;
-    }
-    .el-submenu [class^="el-icon-"] {
+    i {
+      float: left;
       margin-left: 0.4rem;
-      margin-top: 0;
+      font-size: 1rem;
+      line-height: 2rem;
     }
-    .el-submenu__title {
-      padding: 0 !important;
-      height: 1rem;
-      color: #888f97;
+    span {
+      float: left;
+      margin-left: 0.5rem;
+      font-size: 0.5rem;
+    }
+
+    .el-submenu .el-menu-item {
+      padding: 0 0.1rem;
     }
     .el-submenu__icon-arrow {
-      top: 20%;
-      display: none;
-    }
-    .el-submenu [class^="el-icon-"] {
-      margin-right: 1rem;
-      width: 0px;
-    }
-    .el-submenu:hover {
-      outline: 0;
-      background-color: #ecf5ff;
+      position: absolute;
+      line-height: 2rem;
+      top: 0;
+      right: 0.5rem;
+      margin-top: 0;
+      font-size: 0.5rem;
     }
 
-    .el-menu-item [class^="el-icon-"] {
-      margin-right: 1rem;
-      width: 0px;
+    .el-menu-item {
+      height: 2rem;
+      line-height: 2rem;
+      min-width: 12%;
     }
+
     .is-active {
       background-color: #018eed;
       color: #ffffff;
-    }
-  }
-  ul {
-    padding-inline-start: 0px;
-    margin-block-start: 0em;
-    margin-block-end: 0px;
-    li {
-      height: 2rem;
-      padding: 0.5rem !important;
     }
   }
 }
