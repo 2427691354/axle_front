@@ -15,14 +15,8 @@
         </el-select>
       </div>
       <div class="timest">
-        <!-- <span class="demonstration">默认</span> -->
-        <el-date-picker
-          v-model="value1"
-          type="daterange"
-          range-separator="--"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-        ></el-date-picker>
+        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <el-date-picker v-model="value1" type="date"></el-date-picker>
       </div>
       <div class="botst">
         <el-button type="danger" round>搜索</el-button>
@@ -690,48 +684,22 @@ export default {
   .stationst {
     width: 15%;
     height: inherit;
-    position: absolute;
-    padding-top: 1%;
+    float: left;
+    line-height: 2.3rem;
   }
   .timest {
     width: 35%;
-    position: absolute;
-    padding-left: 5%;
-    padding-top: 0.99%;
-    .el-input__inner {
-      -webkit-appearance: none;
-      background-color: #fff;
-      background-image: none;
-      border-radius: 0px;
-      border: 1px solid #5282c8;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      color: #606266;
-      display: inline-block;
-      font-size: 0.5rem;
-      height: 1.2rem;
-      line-height: 0.3rem;
-      outline: 0;
-      padding: 0 5%;
-      -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-      transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
-      width: 55%;
-    }
-    .el-date-editor .el-range__icon {
-      font-size: 0.5rem;
-      margin-left: -5px;
-      color: #c0c4cc;
-      float: left;
-    }
+    float: left;
+    line-height: 2.3rem;
+    margin-left: -4rem;
   }
   .botst {
     width: 10%;
-    position: absolute;
-    padding-left: 32%;
-    padding-top: 1%;
+    float: left;
+    line-height: 2.3rem;
+    margin-left: -5rem;
   }
 }
-
 .contentst {
   width: 98%;
   height: 25.5rem;
