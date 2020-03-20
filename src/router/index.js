@@ -6,6 +6,7 @@ import HotShaftWarning from '../views/HotShaftWarning.vue'
 import StatisticalReports from '../views/StatisticalReports.vue'
 import MaintenanceServices from '../views/MaintenanceServices.vue'
 import TemperatureRiseForecast from '../views/TemperatureRiseForecast.vue'
+import TemperatureRiseSearch from '../views/TemperatureRiseSearch.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
     path: '/temperatureriseforecast',
     name: 'TemperatureRiseForecast',
     component: TemperatureRiseForecast
+  },
+  {
+    path: '/temperaturerisesearch',
+    name: 'TemperatureRiseSearch',
+    component: TemperatureRiseSearch
   },
 
 ]
