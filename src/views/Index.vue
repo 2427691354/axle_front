@@ -142,7 +142,7 @@
               <template slot-scope="props" style="padding:0">
                 <table class="detail" style="width:100%;font-size: 0.43rem;" cellspacing="0">
                   <tr v-for="item in props.row.detail" :key="item.num" style="text-align: center;">
-                    <td style="width:1.5%;text-align: center;"></td>
+                    <td style="width:1%;text-align: center;"></td>
                     <td style="width:2%;text-align: center;">{{item.num}}</td>
                     <td style="width:12%;">
                       <div style="width:35%;float:left;text-align: center;color:#224d9a">探测</div>
