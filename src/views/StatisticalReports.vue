@@ -4,8 +4,8 @@
       <div class="title_1">报表统计</div>
     </div>
     <div class="searchst">
-      <div class="station">
-        <el-select v-model="value" filterable placeholder="请选择">
+      <div class="stationst">
+        <el-select v-model="value" filterable placeholder="日报表">
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -14,7 +14,7 @@
           ></el-option>
         </el-select>
       </div>
-      <div class="time">
+      <div class="timest">
         <!-- <span class="demonstration">默认</span> -->
         <el-date-picker
           v-model="value1"
@@ -24,8 +24,8 @@
           end-placeholder="结束日期"
         ></el-date-picker>
       </div>
-      <div class="bot">
-        <el-button size="small" type="danger" round>搜索</el-button>
+      <div class="botst">
+        <el-button type="danger" round>搜索</el-button>
       </div>
     </div>
     <div class="contentst">
@@ -670,6 +670,7 @@ export default {
   width: 100%;
   height: 1.5rem;
   background-color: #ffffff;
+  margin-top: -0.3%;
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
   .title_1 {
     font-size: 0.6rem;
@@ -681,28 +682,53 @@ export default {
 }
 .searchst {
   width: 98%;
-  height: 2rem;
+  height: 2.5rem;
   background-color: #ffffff;
   margin-top: 0.8%;
   transform: translate(1%, 0);
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
-  .station {
-    width: 20%;
+  .stationst {
+    width: 15%;
     height: inherit;
     position: absolute;
-    padding-top: 0.5%;
+    padding-top: 1%;
   }
-  .time {
-    width: 50%;
+  .timest {
+    width: 35%;
     position: absolute;
-    padding-left: 8%;
-    padding-top: 0.5%;
+    padding-left: 5%;
+    padding-top: 0.99%;
+    .el-input__inner {
+      -webkit-appearance: none;
+      background-color: #fff;
+      background-image: none;
+      border-radius: 0px;
+      border: 1px solid #5282c8;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      color: #606266;
+      display: inline-block;
+      font-size: 0.5rem;
+      height: 1.2rem;
+      line-height: 0.3rem;
+      outline: 0;
+      padding: 0 5%;
+      -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+      width: 55%;
+    }
+    .el-date-editor .el-range__icon {
+      font-size: 0.5rem;
+      margin-left: -5px;
+      color: #c0c4cc;
+      float: left;
+    }
   }
-  .bot {
+  .botst {
     width: 10%;
     position: absolute;
-    padding-left: 45%;
-    padding-top: 0.5%;
+    padding-left: 32%;
+    padding-top: 1%;
   }
 }
 
