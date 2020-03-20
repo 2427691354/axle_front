@@ -28,23 +28,115 @@ a:hover {
   text-decoration: none;
 }
 
-.el-table{
+.hotshaftwarning .el-table{
   font-size: 0.5rem;
 }
-.el-table thead {
+.hotshaftwarning .el-table thead {
   color: #fff !important;
   background-color: #3971C4 !important;
 }
 
-.el-table td, .el-table th{
+.hotshaftwarning .el-table td, .el-table th{
   padding: 1% 0;
 }
-.el-table th, .el-table tr {
+.hotshaftwarning .el-table th, .el-table tr {
   background-color:transparent;
 }
-.el-table__body{
+.hotshaftwarning .el-table__body{
   background-color: #BDE5FF;
 }
-.el-table__row--level-1{
+.hotshaftwarning .el-table__row--level-1{
   background-color: #fff!important;
+}
+.hotshaftwarning .el-table td, .el-table th.is-leaf {
+  border-bottom: 0px solid #EBEEF5;
+}
+/* .el-checkbox__input.is-checked:nth-child(1) .el-checkbox__inner:nth-child(1), .el-checkbox__input.is-indeterminate:nth-child(1) .el-checkbox__inner:nth-child(1){
+  background-color: #2FD2E5;
+  border-color: #2FD2E5;
+}
+.el-checkbox__input.is-checked:nth-child(2) .el-checkbox__inner:nth-child(2), .el-checkbox__input.is-indeterminate:nth-child(2) .el-checkbox__inner:nth-child(2){
+  background-color: #FE9F20;
+  border-color: #FE9F20;
+}
+.el-checkbox__input.is-checked .el-checkbox__inner, .el-checkbox__input.is-indeterminate .el-checkbox__inner:nth-child(3){
+  background-color: #FB90B5;
+  border-color: #FB90B5;
+} */
+.el-input--suffix .el-input__inner {
+  padding-right: 30px;
+}
+.el-select .el-input__inner {
+  cursor: pointer;
+  padding-right: 1.1rem;
+}
+.el-input__inner {
+  -webkit-appearance: none;
+  background-color: #fff;
+  background-image: none;
+  border-radius: 0px;
+  border: 1px solid #5282c8;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  color: #606266;
+  display: inline-block;
+  font-size: 0.5rem;
+  height: 1.2rem;
+  line-height: 0.3rem;
+  outline: 0;
+  padding: 0 5%;
+  -webkit-transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition: border-color 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
+  width: 55%;
+}
+.el-input__suffix {
+  right: 25%;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+.el-input__prefix,
+.el-input__suffix {
+  position: absolute;
+  top: 0;
+  -webkit-transition: all 0.3s;
+  height: 100%;
+  color: #909191;
+  text-align: center;
+}
+.el-input__icon {
+  height: 65%;
+  width: 8%;
+  text-align: center;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  line-height: 0.3rem;
+}
+.el-date-editor--daterange.el-input,
+.el-date-editor--daterange.el-input__inner,
+.el-date-editor--timerange.el-input,
+.el-date-editor--timerange.el-input__inner {
+  width: 70%;
+}
+.el-date-editor .el-range__icon {
+  font-size: 0.5rem;
+  margin-left: -5px;
+  color: #c0c4cc;
+  float: left;
+  line-height: 0.2rem;
+}
+.el-button {
+  height: 1rem;
+  font-size: 0.5rem;
+  line-height: 0;
+}
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+  background-color: #327AB7;
+  color: #FFF;
+  border: 1px solid #f4f4f5;
+}
+.el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
+  margin: 0 0;
+  background-color: #fff;
+  border-radius: 0px;
+  border: 1px solid #f4f4f5;
 }
