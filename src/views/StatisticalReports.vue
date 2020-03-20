@@ -57,7 +57,7 @@
 <script>
 import echarts from "echarts";
 export default {
-  data() {
+  data () {
     return {
       options: [
         {
@@ -82,18 +82,18 @@ export default {
         }
       ],
       value: "",
-      value1: ""
+      value1: "",
     };
   },
-  created() {},
-  mounted() {
+  created () { },
+  mounted () {
     this.trainNum();
     this.carNum();
     this.axleNum();
     this.thermalNum();
   },
   methods: {
-    trainNum() {
+    trainNum () {
       var myChart = echarts.init(document.getElementById("trainnum"));
       var option = {
         xAxis: [
@@ -226,11 +226,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     },
-    carNum() {
+    carNum () {
       var myChart = echarts.init(document.getElementById("carnum"));
       var option = {
         legend: {
@@ -257,7 +257,7 @@ export default {
             color: "#3c3c3c",
             fontSize: 16
           },
-          formatter: function(p) {
+          formatter: function (p) {
             return p.seriesName + "<br>" + "车辆数量：" + p.value;
           },
           extraCssText: "box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)"
@@ -265,7 +265,7 @@ export default {
         xAxis: {
           axisLabel: {
             show: false,
-            formatter: function(v) {
+            formatter: function (v) {
               return v;
             }
           },
@@ -333,7 +333,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function(v) {
+                formatter: function (v) {
                   return v.value;
                 },
                 textStyle: {
@@ -372,7 +372,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function(v) {
+                formatter: function (v) {
                   return v.value;
                 },
                 textStyle: {
@@ -403,11 +403,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     },
-    axleNum() {
+    axleNum () {
       var myChart = echarts.init(document.getElementById("axlenum"));
       var option = {
         grid: {
@@ -558,11 +558,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     },
-    thermalNum() {
+    thermalNum () {
       var myChart = echarts.init(document.getElementById("thermalnum"));
       var option = {
         tooltip: {
@@ -652,7 +652,7 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function() {
+      window.addEventListener("resize", function () {
         myChart.resize();
       });
     }
