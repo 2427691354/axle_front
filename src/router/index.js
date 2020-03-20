@@ -5,7 +5,7 @@ import DataBrowsing from '../views/DataBrowsing.vue'
 import HotShaftWarning from '../views/HotShaftWarning.vue'
 import StatisticalReports from '../views/StatisticalReports.vue'
 import MaintenanceServices from '../views/MaintenanceServices.vue'
-
+import TemperatureRiseForecast from '../views/TemperatureRiseForecast.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -33,7 +33,13 @@ const routes = [
     path: '/maintenanceservices',
     name: 'MaintenanceServices',
     component: MaintenanceServices
-  }
+  },
+  {
+    path: '/temperatureriseforecast',
+    name: 'TemperatureRiseForecast',
+    component: TemperatureRiseForecast
+  },
+
 ]
 
 const router = new VueRouter({

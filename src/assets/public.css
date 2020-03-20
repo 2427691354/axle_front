@@ -27,3 +27,141 @@ a:hover {
   color: red;
   text-decoration: none;
 }
+
+
+.TemperatureRiseForecast .el-input{
+  top: -0.25rem;
+}
+.TemperatureRiseForecast .el-button{
+  top: -0.25rem;
+  display: block;
+  
+}
+.TemperatureRiseForecast .el-button--mini, .el-button--mini.is-round{
+  padding: 0.25rem 20px;
+  box-shadow: 2px 2px 4px #fdd7d8;
+}
+.TemperatureRiseForecast .el-input__inner{
+  border: 1px #abc2e8 solid;
+}
+.TemperatureRiseForecast .el-input--mini{
+  font-size: 0.45rem;
+}
+.TemperatureRiseForecast .el-input--mini .el-input__inner{
+  height: 1rem;
+}
+.TemperatureRiseForecast .el-button--mini, .el-button--small{
+  font-size: 0.45rem;
+}
+
+.index .el-table .cell{
+  line-height: inherit;
+  font-size: 0.43rem;
+  text-align: center;
+  
+}
+.index .el-table{
+  color: #000;
+  
+}
+.index .el-table__expand-icon>.el-icon{
+ margin-left: -40%;
+ margin-top: -0.3rem;
+ 
+}
+.index .el-table td{
+  padding: 0.2rem 0;
+}
+.index .el-table th{
+  padding: 0.3rem 0;
+}
+.index  .el-table tr{
+  background-color: #e6efff;
+}
+.index .el-table__body-wrapper{
+  background-color: #e6efff;
+}
+.index .el-table tbody tr:hover>td { 
+  background-color: #c2d5f8;
+  color: #555555;
+}
+.index .el-table th{
+  background-color: #018eed;
+  color: #fff;
+}
+.index .el-table td.gutter, .el-table th.gutter{
+  display: block;
+  width: 100% !important;
+}
+.index .el-table .cell{
+  padding-left: 10%;
+  padding-right: 10%;
+}
+.index .el-table__expanded-cell{
+  padding: 0 !important;
+}
+.index .el-table__expanded-cell table tr{
+  background-color: #f9f9f9;
+  padding: 0.35rem 0;
+}
+.index .el-table__expanded-cell table tr:hover>td{
+  background-color: #dedede;
+  
+}
+.index .el-table__expanded-cell table tr:nth-child(2n){
+  background-color: #fff;
+}
+.index .el-table__body, .el-table__footer, .el-table__header {
+  width: 100% !important;
+}
+.index .el-table__footer-wrapper, .el-table__header-wrapper {
+  background-color: #018eed;
+}
+.index .el-table__expand-icon {
+  display: none;
+}
+
+
+.index .el-pagination .el-icon-arrow-left:before {
+  content: "\00AB";
+}
+.index .el-pagination .el-icon-arrow-right:before {
+  content: "\00BB";
+}
+.index .el-pagination .btn-prev{
+  border-radius: 3px 0 0 3px;
+  padding: 0;
+  height: 1.05rem;
+  min-width: 27px;
+  border: 1px #dddddd solid;
+}
+.index .el-pagination button{
+  padding: 0;
+}
+.index .el-pagination .btn-next {
+  border-radius: 0 3px 3px 0 ;
+  padding: 0;
+  height: 1.05rem;
+  min-width: 27px;
+  border-top: 1px #dddddd solid;
+  border-right: 1px #dddddd solid;
+  border-bottom: 1px #dddddd solid;
+}
+.index .el-pager li {
+  padding: 0 ;
+  font-size: 0.45rem;
+  min-width: 27px;
+  height: 1.05rem;
+  line-height: 1.05rem;
+  border-top: 1px #dddddd solid;
+  border-right: 1px #dddddd solid;
+  border-bottom: 1px #dddddd solid;
+}
+.index .el-pager li.active {
+  background-color: #337ab7;
+  color:#fff;
+}
+.index .el-pagination {
+  padding: 0.08rem 0;
+  color: #337ab7;
+}
