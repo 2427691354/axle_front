@@ -57,6 +57,18 @@
           <router-view />
         </div>
       </div>
+      <div v-else-if="this.$router['app']['_route'].path=='/temperaturerisesearch'">
+        <div id="headline"><strong>温升查询</strong></div>
+        <div id="context1">
+          <router-view />
+        </div>
+      </div>
+      <div v-else-if="this.$router['app']['_route'].path=='/databrowsing'">
+        <div id="headline"><strong>数据预览</strong></div>
+        <div id="context1">
+          <router-view />
+        </div>
+      </div>
 
       <div id="context"
            v-else>
