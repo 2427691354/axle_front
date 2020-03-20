@@ -4,7 +4,7 @@
       <span class="title">热轴信息监测平台</span>
       <i class="iconfont icon-caidan1" @click="collapse"></i>
       <!-- <span class="hello">您好，欢迎来到热轴检测平台！</span> -->
-      <span class="date"> 2020年03月12日 星期四</span>
+      <span class="date">2020年03月12日 星期四</span>
     </div>
     <div>
       <div id="nav">
@@ -25,8 +25,8 @@
             <span slot="title">数据浏览</span>
           </el-menu-item>
           <el-menu-item index="/hotshaftwarning">
-            <i class="el-icon-document"></i>
-            <span slot="title">热轴预警</span>
+              <i class="el-icon-document"></i>
+              <span slot="title">热轴预警</span>
           </el-menu-item>
           <el-menu-item index="/statisticalreports">
             <i class="el-icon-setting"></i>
@@ -36,9 +36,20 @@
             <i class="el-icon-setting"></i>
             <span slot="title">维护服务</span>
           </el-menu-item>
+          <el-menu-item index="/temperatureriseforecast">
+            <i class="el-icon-setting"></i>
+            <span slot="title">温升预测</span>
+          </el-menu-item>
         </el-menu>
       </div>
-      <div id="context">
+      <div v-if="this.$router['app']['_route'].path=='/temperatureriseforecast'">
+        <div id="headline"><strong>温升预测</strong></div>
+        <div id="context1">
+          <router-view />
+          </div>
+      </div>
+
+      <div id="context" v-else>
         <router-view />
       </div>
     </div>
@@ -47,43 +58,45 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: "Home",
   data() {
     return {
       isCollapse: false
-    }
+    };
   },
   created() {
     // 页面初始化时触发
-    this.placeholderPic()
+    this.placeholderPic();
   },
   mounted() {
     // 检测屏幕尺寸变化同步font-size
     window.onresize = () => {
-      this.placeholderPic()
-    }
+      this.placeholderPic();
+    };
   },
   methods: {
     // 自适应页面字体大小
     placeholderPic() {
       document.documentElement.style.fontSize =
-        document.documentElement.offsetWidth / 60 + 'px'
+        document.documentElement.offsetWidth / 60 + "px";
     },
     handleOpen(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
     handleClose(key, keyPath) {
-      console.log(key, keyPath)
+      console.log(key, keyPath);
     },
     collapse() {
       if (this.isCollapse == true) {
-        this.isCollapse = false
+        this.isCollapse = false;
       } else {
-        this.isCollapse = true
+        this.isCollapse = true;
       }
-    }
+    },
+
+    
   }
-}
+};
 </script>
 
 <style lang="less">
@@ -138,8 +151,22 @@ export default {
   background: #fff;
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
 
+  .el-submenu:hover {
+    background: #ecf5ff;
+  }
+  .el-submenu {
+    height: 1rem !important;
+  }
+  .el-submenu__title {
+    height: 1rem;
+  }
+  .el-submenu [class^="el-icon-"] {
+    margin-left: -0.5rem;
+    margin-top: -1rem;
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
-    .el-menu-item {
+    .el-menu-item,
+    .el-submenu {
       color: #888f97;
       font-family: SourceHanSansCN-Light;
 
@@ -157,7 +184,32 @@ export default {
       }
     }
 
-    .el-menu-item [class^='el-icon-'] {
+    .el-submenu {
+      height: 1rem;
+    }
+    .el-submenu [class^="el-icon-"] {
+      margin-left: 0.4rem;
+      margin-top: 0;
+    }
+    .el-submenu__title {
+      padding: 0 !important;
+      height: 1rem;
+      color: #888f97;
+    }
+    .el-submenu__icon-arrow {
+      top: 20%;
+      display: none;
+    }
+    .el-submenu [class^="el-icon-"] {
+      margin-right: 1rem;
+      width: 0px;
+    }
+    .el-submenu:hover {
+      outline: 0;
+      background-color: #ecf5ff;
+    }
+
+    .el-menu-item [class^="el-icon-"] {
       margin-right: 1rem;
       width: 0px;
     }
@@ -185,5 +237,23 @@ export default {
   // border: 1px solid red;
   float: left;
   // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+}
+
+#headline {
+  font-size: 0.6rem;
+  height: 1rem;
+  padding: 0.3rem 13%;
+  text-align: left;
+  background-color: #fff;
+  box-shadow: 0px 0px 2px 2px #e8e8e8;
+}
+#context1 {
+  margin-top: 0.4rem;
+  height: 28.9rem;
+  margin-left: 0.5rem;
+  width: 86%;
+  border: 1px solid red;
+  float: left;
+  box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
 }
 </style>
