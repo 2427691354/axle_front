@@ -44,10 +44,26 @@
             <i class="el-icon-setting"></i>
             <span slot="title">温升预测</span>
           </el-menu-item>
+          <el-menu-item index="/temperaturerisesearch">
+            <i class="el-icon-setting"></i>
+            <span slot="title">温升查询</span>
+          </el-menu-item>
         </el-menu>
       </div>
       <div v-if="this.$router['app']['_route'].path=='/temperatureriseforecast'">
         <div id="headline"><strong>温升预测</strong></div>
+        <div id="context1">
+          <router-view />
+          </div>
+      </div>
+      <div v-else-if="this.$router['app']['_route'].path=='/temperaturerisesearch'">
+        <div id="headline"><strong>温升查询</strong></div>
+        <div id="context1">
+          <router-view />
+          </div>
+      </div>
+      <div v-else-if="this.$router['app']['_route'].path=='/databrowsing'">
+        <div id="headline"><strong>数据预览</strong></div>
         <div id="context1">
           <router-view />
           </div>
