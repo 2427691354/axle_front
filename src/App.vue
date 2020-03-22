@@ -28,7 +28,7 @@
               <i class="el-icon-document"></i>
               <span slot="title">热轴报警</span>
             </template>
-            <el-menu-item index="">
+            <el-menu-item index="/temperaturerisesearch">
               <i class="el-icon-menu"></i>
               <span slot="title">温升查询</span>
             </el-menu-item>
