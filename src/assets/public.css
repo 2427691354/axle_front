@@ -53,6 +53,9 @@ a:hover {
 .TemperatureRiseForecast .el-button--mini, .el-button--small{
   font-size: 0.45rem;
 }
+.TemperatureRiseForecast .el-input__inner {
+  border-radius: 2px;
+}
 
 .index .el-table .cell{
   line-height: inherit;
@@ -75,17 +78,18 @@ a:hover {
 .index .el-table th{
   padding: 0.3rem 0;
 }
-.index .el-table tr{
+.index .el-table tr,.TemperatureRiseSearch .el-table tr,.databrowsing .el-table tr{
   background-color: #e6efff;
 }
 .index .el-table__body-wrapper{
   background-color: #e6efff;
 }
+
 .index .el-table tbody tr:hover>td { 
   background-color: #c2d5f8;
   color: #555555;
 }
-.index .el-table th{
+.index .el-table th,.TemperatureRiseSearch .el-table th,.databrowsing .el-table th{
   background-color: #018eed;
   color: #fff;
 }
@@ -114,7 +118,10 @@ a:hover {
 .index .el-table__body, .el-table__footer, .el-table__header {
   width: 100% !important;
 }
-.index .el-table__footer-wrapper, .el-table__header-wrapper {
+.index .el-table__footer-wrapper,.index .el-table__header-wrapper,
+.TemperatureRiseSearch .el-table__footer-wrapper,.TemperatureRiseSearch .el-table__header-wrapper,
+.databrowsing .el-table__footer-wrapper,.databrowsing .el-table__header-wrapper
+ {
   background-color: #018eed;
 }
 .el-table__expand-icon {
@@ -126,17 +133,20 @@ a:hover {
 .el-pagination .el-icon-arrow-right:before {
   content: "\00BB";
 }
-.index .el-pagination .btn-prev{
+.index .el-pagination .btn-prev,
+.TemperatureRiseSearch .el-pagination .btn-prev{
   border-radius: 3px 0 0 3px;
   padding: 0;
   height: 1.05rem;
   min-width: 27px;
   border: 1px #dddddd solid;
 }
-.index .el-pagination button{
+.index .el-pagination button,
+.TemperatureRiseSearch .el-pagination button{
   padding: 0;
 }
-.index .el-pagination .btn-next {
+.index .el-pagination .btn-next,
+.TemperatureRiseSearch .el-pagination .btn-next {
   border-radius: 0 3px 3px 0 ;
   padding: 0;
   height: 1.05rem;
@@ -145,7 +155,8 @@ a:hover {
   border-right: 1px #dddddd solid;
   border-bottom: 1px #dddddd solid;
 }
-.index .el-pager li {
+.index .el-pager li,
+.TemperatureRiseSearch .el-pager li {
   padding: 0 ;
   font-size: 0.45rem;
   min-width: 27px;
@@ -155,7 +166,8 @@ a:hover {
   border-right: 1px #dddddd solid;
   border-bottom: 1px #dddddd solid;
 }
-.index .el-pager li.active {
+.index .el-pager li.active,
+.TemperatureRiseSearch .el-pager li.active{
   background-color: #337ab7;
   color:#fff;
 }
@@ -246,8 +258,10 @@ a:hover {
   border-left: 0;
   border-top: 0;
 }
-.el-date-editor.el-input, .el-date-editor.el-input__inner {
-  width: 30%;
+.hotshaftwarning .el-date-editor.el-input, .el-date-editor.el-input__inner,
+.StatisticalReports .el-date-editor.el-input, .el-date-editor.el-input__inner
+ {
+  width: 30% !important;
 }
 .StatisticalReports .el-input, .hotshaftwarning .el-input{
   font-size: 0.5rem;
@@ -267,19 +281,166 @@ a:hover {
     color: #fff;
     line-height: 20%;
 }
-.StatisticalReports .timest .el-input__suffix,.hotshaftwarning .time .el-input__suffix {
+.StatisticalReports .timest .el-input__suffix,
+.hotshaftwarning .time .el-input__suffix {
   right: 18px;
   -webkit-transition: all .3s;
   transition: all .3s;
 }
 
-.StatisticalReports .timest .el-input__prefix,.hotshaftwarning .time .el-input__prefix, .el-input__suffix {
+.StatisticalReports .timest .el-input__prefix,
+.hotshaftwarning .time .el-input__prefix, .el-input__suffix {
   width: 20%;
 }
-.StatisticalReports .stationst .el-input__icon,.hotshaftwarning .station .el-input__icon{
+.StatisticalReports .stationst .el-input__icon,
+.hotshaftwarning .station .el-input__icon{
   line-height: 20%;
   margin-left: -3rem;
 }
-.StatisticalReports .stationst .el-input__inner,.hotshaftwarning .station .el-input__inner{
+.StatisticalReports .stationst .el-input__inner,
+.hotshaftwarning .station .el-input__inner{
   width: 55%;
+}
+
+.TemperatureRiseSearch .el-date-editor.el-input,
+.TemperatureRiseSearch .el-date-editor.el-input__inner{
+  width: 100%;
+}
+.TemperatureRiseSearch .el-input__inner{
+  height: 1rem;
+}
+.TemperatureRiseSearch .el-input{
+  font-size: 0.5rem;
+}
+.TemperatureRiseSearch .el-input-number.is-controls-right .el-input-number__decrease,
+.TemperatureRiseSearch .el-input-number.is-controls-right .el-input-number__increase {
+  height: 0.5rem;
+  line-height: 0.5rem;
+}
+.TemperatureRiseSearch .el-input-number__decrease, 
+.TemperatureRiseSearch .el-input-number__increase {
+  width: 15%;
+}
+.TemperatureRiseSearch .el-input-number {
+  line-height: 0;
+}
+.TemperatureRiseSearch .el-radio__label{
+  font-size: 0.5rem;
+}
+.TemperatureRiseSearch .el-radio__input.is-checked+.el-radio__label{
+  color: #3970C3;
+}
+.TemperatureRiseSearch .el-radio__input.is-checked .el-radio__inner {
+  border-color: #3970C3;
+  background: #3970C3;
+}
+.TemperatureRiseSearch .el-input-number.is-controls-right .el-input__inner {
+  padding-left: 10%;
+  padding-right: 23%;
+}
+.TemperatureRiseSearch .el-input--prefix .el-input__inner {
+  padding-left: 11%;
+  padding-right: 20%;
+}
+.TemperatureRiseSearch .el-input__inner,
+.databrowsing .el-input__inner{
+  border-radius: 2px;
+  border:1px #abc2e8 solid;
+}
+.TemperatureRiseSearch .el-date-editor .el-input__icon{
+  background-color: #3970C3;
+  margin-left: 3.8rem;
+  border-radius: 0 2px 2px 0;
+  height: 1rem;
+  width: 1rem;
+  color: #fff;
+  line-height: 20%;
+}
+.TemperatureRiseSearch .el-cascader--mini {
+  font-size: 0.5rem;
+  line-height: 0;
+}
+.TemperatureRiseSearch .el-input--mini .el-input__icon,
+.databrowsing  .el-input--mini .el-input__icon{
+  line-height: 0;
+}
+.TemperatureRiseSearch .el-cascader .el-input .el-icon-arrow-down {
+  font-size: 0.5rem;
+}
+
+.TemperatureRiseSearch .el-table .cell,
+.databrowsing .el-table .cell{
+  line-height: inherit;
+  font-size: 0.5rem;
+  text-align: center;
+  
+}
+.TemperatureRiseSearch .el-table tbody tr:hover>td { 
+  background-color: #c2d5f8;
+  color: #555555;
+}
+.TemperatureRiseSearch .el-date-editor .el-input__suffix,.TemperatureRiseSearch .el-date-editor .el-input__prefix  {
+  width: 0%;
+}
+
+
+.databrowsing .el-tree {
+  color: #000;
+  font-size: 0.5rem;
+}
+.databrowsing .el-icon-sort-down, .el-icon-sort-up {
+  transform: rotate(90deg);
+}
+.databrowsing .el-tabs__item {
+  padding: 0 12%;
+  height: 1.5rem;
+ 
+  line-height: 1.5rem;
+ 
+  font-size: 0.55rem;
+ 
+}
+.databrowsing .el-tabs__item:hover {
+  color: #036fb8;
+ 
+}
+.databrowsing .el-tabs__item.is-active {
+  color: #036fb8;
+}
+.databrowsing .el-tabs__active-bar{
+  background: #036fb8;
+}
+.databrowsing .el-table tbody tr:hover>td { 
+  background-color: #e6efff;
+
+}
+.databrowsing .el-table td{
+  padding: 0.2rem 0;
+}
+.databrowsing .el-button{
+  height: 1.1rem;
+}
+.databrowsing .el-timeline{
+  text-align: left;
+  font-size: 0.55rem;
+
+}
+.databrowsing .el-timeline-item__content{
+  font-weight: 700;
+}
+.databrowsing .el-timeline-item {
+  padding-bottom: 0;
+} 
+.databrowsing .el-timeline-item__timestamp {
+  font-size: 0.5rem;
+}
+.databrowsing .el-timeline-item__timestamp.is-bottom {
+  margin-top: 0.2rem;
+}
+.databrowsing .el-input--suffix .el-input__inner {
+  padding-right: 20%;
+}
+.databrowsing .el-input--mini .el-input__inner {
+  height: 1rem;
+  line-height: 1rem;
 }
