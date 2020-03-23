@@ -24,7 +24,7 @@
             <i class="el-icon-menu"><span class="iconfont">&#xe71d;</span></i>
             <span slot="title">数据浏览</span>
           </el-menu-item>
-          <el-submenu index>
+          <el-submenu index="3">
             <template slot="title">
               <i class="el-icon-menu"><span class="iconfont">&#xe662;</span></i>
               <span slot="title">热轴报警</span>
@@ -33,9 +33,9 @@
               <!-- <i class="el-icon-menu"></i> -->
               <span slot="title" class="subitem">温升查询</span>
             </el-menu-item>
-            <el-menu-item index="/hotshaftwarning">
+            <el-menu-item index="/historicalHotAxisAlarm">
               <!-- <i class="el-icon-menu"></i> -->
-              <span slot="title" class="subitem">历史热轴报警</span>
+              <span slot="title">历史热轴报警</span>
             </el-menu-item>
             <el-menu-item index="/temperatureriseforecast">
               <!-- <i class="el-icon-menu"></i> -->
@@ -46,10 +46,29 @@
             <i class="el-icon-menu"><span class="iconfont">&#xe621;</span></i>
             <span slot="title">统计报表</span>
           </el-menu-item>
-          <el-menu-item index="/maintenanceservices">
-            <i class="el-icon-menu"><span class="iconfont">&#xe63b;</span></i>
+        
+          <el-submenu index="5">
+            <template slot="title">
+              <i class="el-icon-menu"><span class="iconfont">&#xe63b;</span></i>
             <span slot="title">维护服务</span>
-          </el-menu-item>
+            </template>
+            <el-menu-item index="/maintenanceReminder">
+              <!-- <i class="el-icon-setting"></i> -->
+              <span slot="title">维护提醒</span>
+            </el-menu-item>
+            <el-menu-item index="/accumulatedMileageQuery">
+              <!-- <i class="el-icon-setting"></i> -->
+              <span slot="title">累计里程提醒</span>
+            </el-menu-item>
+            <el-menu-item index="/vehicleTemAnaysis">
+              <!-- <i class="el-icon-setting"></i> -->
+              <span slot="title">车型温升统计分析</span>
+            </el-menu-item>
+             <el-menu-item index="/axleTemAnaysis">
+              <!-- <i class="el-icon-setting"></i> -->
+              <span slot="title">车型轴温统计分析</span>
+            </el-menu-item>
+          </el-submenu>
         </el-menu>
       </div>
       <div v-if="this.$router['app']['_route'].path=='/temperatureriseforecast'">
