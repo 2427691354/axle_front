@@ -688,7 +688,7 @@ export default {
     line-height: 2.3rem;
   }
   .timest {
-    width: 35%;
+    width: 50%;
     float: left;
     line-height: 2.3rem;
     margin-left: -4rem;

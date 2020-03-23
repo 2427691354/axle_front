@@ -2009,6 +2009,9 @@ export default {
       expands: [] // 要展开的行，数值的元素是row的key值
     };
   },
+  mounted(){
+    this.get();
+  },
   methods: {
     handleCurrentChange (currentPage) {
       this.currentPage = currentPage;
@@ -2029,6 +2032,19 @@ export default {
       } else {
         this.expands.remove(row.id);
       }
+    },
+    get(){
+      var self = this;
+      self.$http
+        .get("http://139.196.78.182:8620/indexStatistics")
+        .then(function (response) {
+          
+          var res = response.data;
+          console.log(res)
+         
+          
+         
+        });
     }
   }
 };
