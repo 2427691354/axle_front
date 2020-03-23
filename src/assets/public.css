@@ -78,19 +78,26 @@ a:hover {
 .index .el-table th{
   padding: 0.3rem 0;
 }
-.index .el-table tr,.TemperatureRiseSearch .el-table tr,.databrowsing .el-table tr{
-  background-color: #e6efff;
+.index .el-table tr,
+.TemperatureRiseSearch .el-table tr,
+.databrowsing .el-table tr{
+  background-color: #f9f9f9;
+}
+.index .el-table tr:nth-child(2n),
+.TemperatureRiseSearch .el-table tr:nth-child(2n),
+.databrowsing .el-table tr:nth-child(2n){
+  background-color: #fff;
 }
 .index .el-table__body-wrapper{
-  background-color: #e6efff;
+  background-color: #fff;
 }
 
 .index .el-table tbody tr:hover>td { 
-  background-color: #c2d5f8;
+  background-color: #bde5ff;
   color: #555555;
 }
 .index .el-table th,.TemperatureRiseSearch .el-table th,.databrowsing .el-table th{
-  background-color: #018eed;
+  background-color: #3971c4;
   color: #fff;
 }
 .index .el-table td.gutter, .el-table th.gutter{
@@ -120,9 +127,10 @@ a:hover {
 }
 .index .el-table__footer-wrapper,.index .el-table__header-wrapper,
 .TemperatureRiseSearch .el-table__footer-wrapper,.TemperatureRiseSearch .el-table__header-wrapper,
-.databrowsing .el-table__footer-wrapper,.databrowsing .el-table__header-wrapper
+.databrowsing .el-table__footer-wrapper,.databrowsing .el-table__header-wrapper,
+.hotshaftwarning .el-table__footer-wrapper,.hotshaftwarning .el-table__header-wrapper
  {
-  background-color: #018eed;
+  background-color: #3971c4;
 }
 .el-table__expand-icon {
   display: none;
@@ -376,11 +384,15 @@ a:hover {
   
 }
 .TemperatureRiseSearch .el-table tbody tr:hover>td { 
-  background-color: #c2d5f8;
+  background-color: #bde5ff;
   color: #555555;
 }
 .TemperatureRiseSearch .el-date-editor .el-input__suffix,.TemperatureRiseSearch .el-date-editor .el-input__prefix  {
   width: 0%;
+}
+.TemperatureRiseSearch .el-table td, .el-table th {
+  padding: 0.3rem 0;
+  text-align: center;
 }
 
 
@@ -411,7 +423,7 @@ a:hover {
   background: #036fb8;
 }
 .databrowsing .el-table tbody tr:hover>td { 
-  background-color: #e6efff;
+  background-color: transparent;
 
 }
 .databrowsing .el-table td{
