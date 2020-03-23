@@ -2772,8 +2772,8 @@ export default {
   }
   .bottom {
     height: 23.5rem;
-    width: 90%;
-    padding: 0.5rem 5%;
+    width: 87%;
+    padding: 0.5rem 5% 0.5rem 8%;
     a {
       color: #000;
     }
