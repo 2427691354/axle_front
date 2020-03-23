@@ -269,12 +269,12 @@ export default {
     width: 35%;
     float: left;
     line-height: 2.3rem;
-    margin-left: -3%;
+    // margin-left: -3%;
   }
   .carnum {
     width: 15%;
     line-height: 2.3rem;
-    margin-left: -10%;
+    margin-left: -5%;
     float: left;
   }
   .bot_4 {
