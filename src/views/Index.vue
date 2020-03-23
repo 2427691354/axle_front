@@ -2001,14 +2001,12 @@ export default {
               trainId: "C64T 4904455"
             }
           ]
-        },
-
+        }
       ],
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
 
-
-      expands: []// 要展开的行，数值的元素是row的key值
+      expands: [] // 要展开的行，数值的元素是row的key值
     };
   },
   methods: {
@@ -2031,7 +2029,6 @@ export default {
       } else {
         this.expands.remove(row.id);
       }
-
     }
   }
 };
@@ -2039,6 +2036,7 @@ export default {
 <style lang="less" scoped>
 .topBox {
   height: 15rem;
+  margin: 0.5%;
   .left {
     width: 77.7%;
     height: 14.5rem;
@@ -2102,6 +2100,7 @@ export default {
 
 .bottomBox {
   height: 15rem;
+
   margin-bottom: 0.3rem;
   .title {
     height: 0.9rem;
@@ -2112,9 +2111,10 @@ export default {
     border-bottom: 1px #dddddd solid;
   }
   .table {
-    width: 99%;
+    width: 98%;
     height: 13rem;
-    margin: 0.3rem 0.5%;
+    margin: 0.3rem 1%;
+
     .tableBody {
       height: 11.5rem;
       width: 100%;
