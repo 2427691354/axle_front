@@ -784,7 +784,7 @@ export default {
   transform: translate(1%, 0);
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
   .time {
-    width: 35%;
+    width: 50%;
     height: inherit;
     font-size: 0.5rem;
     color: #9b9b9b;
@@ -792,7 +792,7 @@ export default {
     line-height: 2.5rem;
     span {
       width: 20%;
-      margin-right: 3%;
+      margin-right: 2%;
     }
   }
   .station {
