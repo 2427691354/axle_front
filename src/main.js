@@ -6,6 +6,7 @@ import store from './store'
 import 'element-ui/lib/theme-chalk/index.css'
 import ElementUI from 'element-ui'
 
+require('echarts-wordcloud')
 
 import './assets/public.css'
 import './assets/icon/iconfont.css'
