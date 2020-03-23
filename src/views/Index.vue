@@ -192,11 +192,12 @@
             <span>显示第{{this.pagesize*(this.currentPage-1)+1}}到第{{this.currentPage*this.pagesize}}条记录，总共{{this.tableData.length}}条记录</span>
           </div>
           <div class="pagination" align="right">
-            <el-pagination layout="prev, pager, next" 
-            :total="tableData.length"
-            :current-page="currentPage"
-            :page-size="pagesize"
-            @current-change="handleCurrentChange"
+            <el-pagination
+              layout="prev, pager, next"
+              :total="tableData.length"
+              :current-page="currentPage"
+              :page-size="pagesize"
+              @current-change="handleCurrentChange"
             ></el-pagination>
           </div>
         </div>
@@ -226,7 +227,7 @@ export default {
       //表格数据
       tableData: [
         {
-          id:1,
+          id: 1,
           //明细
           det: "序号",
           //过车时间
@@ -335,7 +336,7 @@ export default {
           ]
         },
         {
-          id:2,
+          id: 2,
           //明细
           det: "序号",
           //过车时间
@@ -444,1425 +445,7 @@ export default {
           ]
         },
         {
-          id:3,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-       
-        {
-          id:4,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:5,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:6,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:7,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:8,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:9,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:10,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:11,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:12,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:13,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:14,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:15,
-          //明细
-          det: "序号",
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //参测点
-          referenceAddress: "田柳上行",
-          //序号
-          number: "07557",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: "56辆",
-          //轴数
-          axleNum: "230轴",
-          //车速
-          speed: "46km/h",
-          //环温
-          ringTemp: "40.3 ℃",
-          //左平均温升
-          leftAvg: "40.3℃",
-          //右平均温升
-          rightAvg: "40.3℃",
-          //警报信息
-          alertMsg: "微热",
-          detail: [
-            {
-              //序号
-              num: 1,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 2,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 3,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 4,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            },
-            {
-              //序号
-              num: 5,
-              // 探测
-              probe: "下探",
-              //轴位
-              position: "0辆左4",
-              //温度
-              temp: 157.8,
-              //温升
-              tempRise: 140.3,
-              //报警
-              warning: "散热",
-              //车号
-              trainId: "C64T 4904455"
-            }
-          ]
-        },
-        {
-          id:16,
+          id: 3,
           //明细
           det: "序号",
           //过车时间
@@ -1971,48 +554,1464 @@ export default {
           ]
         },
 
+        {
+          id: 4,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 5,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 6,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 7,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 8,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 9,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 10,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 11,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 12,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 13,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 14,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 15,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        },
+        {
+          id: 16,
+          //明细
+          det: "序号",
+          //过车时间
+          passingTime: "2020-02-01 18:12:13",
+          //参测点
+          referenceAddress: "田柳上行",
+          //序号
+          number: "07557",
+          //车型
+          type: "货车",
+          //辆数
+          trainNum: "56辆",
+          //轴数
+          axleNum: "230轴",
+          //车速
+          speed: "46km/h",
+          //环温
+          ringTemp: "40.3 ℃",
+          //左平均温升
+          leftAvg: "40.3℃",
+          //右平均温升
+          rightAvg: "40.3℃",
+          //警报信息
+          alertMsg: "微热",
+          detail: [
+            {
+              //序号
+              num: 1,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 2,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 3,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 4,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            },
+            {
+              //序号
+              num: 5,
+              // 探测
+              probe: "下探",
+              //轴位
+              position: "0辆左4",
+              //温度
+              temp: 157.8,
+              //温升
+              tempRise: 140.3,
+              //报警
+              warning: "散热",
+              //车号
+              trainId: "C64T 4904455"
+            }
+          ]
+        }
       ],
       currentPage: 1, //初始页
       pagesize: 10, //    每页的数据
 
-      
-      expands: []// 要展开的行，数值的元素是row的key值
+      expands: [] // 要展开的行，数值的元素是row的key值
     };
   },
-  methods:{
-    handleCurrentChange(currentPage){
-                this.currentPage = currentPage;
-                //console.log(this.currentPage)  //点击第几页
-        },
-     //在<table>里，我们已经设置row的key值设置为每行数据id：row-key="id"
-            rowClick(row) {
-              // console.log(row.id)
-                Array.prototype.remove = function (val) {
-                    let index = this.indexOf(val);
-                    if (index > -1) {
-                        this.splice(index, 1);
-                    }
-                };
- 
-                if (this.expands.indexOf(row.id) < 0) {
-                    this.expands.push(row.id);
-                } else {
-                    this.expands.remove(row.id);
-                }
- 
-            }
+  methods: {
+    handleCurrentChange(currentPage) {
+      this.currentPage = currentPage;
+      //console.log(this.currentPage)  //点击第几页
+    },
+    //在<table>里，我们已经设置row的key值设置为每行数据id：row-key="id"
+    rowClick(row) {
+      // console.log(row.id)
+      Array.prototype.remove = function(val) {
+        let index = this.indexOf(val);
+        if (index > -1) {
+          this.splice(index, 1);
+        }
+      };
+
+      if (this.expands.indexOf(row.id) < 0) {
+        this.expands.push(row.id);
+      } else {
+        this.expands.remove(row.id);
+      }
+    }
   }
 };
 </script>
 <style lang="less" scoped>
 .topBox {
   height: 15rem;
+  margin: 0.5%;
   .left {
     width: 77.7%;
     height: 14.5rem;
     margin: 0 1% 0 0.5%;
     float: left;
-    background: url('../assets/img/indexLine.jpg') no-repeat;
+    background: url("../assets/img/indexLine.jpg") no-repeat;
     background-size: 100% 100%;
     box-shadow: 1px 1px 4px 2px #e8e8e8;
   }
@@ -2070,6 +2069,7 @@ export default {
 
 .bottomBox {
   height: 15rem;
+  
   margin-bottom: 0.3rem;
   .title {
     height: 0.9rem;
@@ -2080,9 +2080,10 @@ export default {
     border-bottom: 1px #dddddd solid;
   }
   .table {
-    width: 99%;
+    width: 98%;
     height: 13rem;
-    margin: 0.3rem 0.5%;
+    margin: 0.3rem 1%;
+    
     .tableBody {
       height: 11.5rem;
       width: 100%;
@@ -2101,7 +2102,7 @@ export default {
           background-color: #fff;
         }
       }
-     
+
       .pagination {
         width: 30%;
         height: 1.3rem;
