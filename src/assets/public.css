@@ -28,6 +28,30 @@ a:hover {
   text-decoration: none;
 }
 
+@font-face {
+  font-family: 'iconfont';
+  src: url('../assets/icon/iconfont.eot');
+  src: url('../assets/icon/iconfont.eot?#iefix') format('embedded-opentype'),
+      url('../assets/icon/iconfont.woff2') format('woff2'),
+      url('../assets/icon/iconfont.woff') format('woff'),
+      url('../assets/icon/iconfont.ttf') format('truetype'),
+      url('../assets/icon/iconfont.svg') format('svg');
+}
+.iconfont {
+  font-family: "iconfont" !important;
+  font-size: 0.9rem !important;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.el-menu--collapse>.el-menu-item span, .el-menu--collapse>.el-submenu>.el-submenu__title span{
+  height: 1rem;
+  width: 1rem;
+  visibility: inherit;
+}
+.el-menu--collapse>.el-submenu>.el-submenu__title span:nth-child(2){
+  width: 0;
+}
 
 .TemperatureRiseForecast .el-input{
   top: -0.25rem;
@@ -76,19 +100,26 @@ a:hover {
 .index .el-table th{
   padding: 0.3rem 0;
 }
-.index .el-table tr,.TemperatureRiseSearch .el-table tr,.databrowsing .el-table tr{
-  background-color: #e6efff;
+.index .el-table tr,
+.TemperatureRiseSearch .el-table tr,
+.databrowsing .el-table tr{
+  background-color: #f9f9f9;
+}
+.index .el-table tr:nth-child(2n),
+.TemperatureRiseSearch .el-table tr:nth-child(2n),
+.databrowsing .el-table tr:nth-child(2n){
+  background-color: #fff;
 }
 .index .el-table__body-wrapper{
-  background-color: #e6efff;
+  background-color: #fff;
 }
 
 .index .el-table tbody tr:hover>td { 
-  background-color: #c2d5f8;
+  background-color: #bde5ff;
   color: #555555;
 }
 .index .el-table th,.TemperatureRiseSearch .el-table th,.databrowsing .el-table th{
-  background-color: #018eed;
+  background-color: #3971c4;
   color: #fff;
 }
 .index .el-table td.gutter, .el-table th.gutter{
@@ -118,9 +149,10 @@ a:hover {
 }
 .index .el-table__footer-wrapper,.index .el-table__header-wrapper,
 .TemperatureRiseSearch .el-table__footer-wrapper,.TemperatureRiseSearch .el-table__header-wrapper,
-.databrowsing .el-table__footer-wrapper,.databrowsing .el-table__header-wrapper
+.databrowsing .el-table__footer-wrapper,.databrowsing .el-table__header-wrapper,
+.hotshaftwarning .el-table__footer-wrapper,.hotshaftwarning .el-table__header-wrapper
  {
-  background-color: #018eed;
+  background-color: #3971c4;
 }
 .el-table__expand-icon {
   display: none;
@@ -434,11 +466,15 @@ a:hover {
   
 }
 .TemperatureRiseSearch .el-table tbody tr:hover>td { 
-  background-color: #c2d5f8;
+  background-color: #bde5ff;
   color: #555555;
 }
 .TemperatureRiseSearch .el-date-editor .el-input__suffix,.TemperatureRiseSearch .el-date-editor .el-input__prefix  {
   width: 0%;
+}
+.TemperatureRiseSearch .el-table td, .el-table th {
+  padding: 0.3rem 0;
+  text-align: center;
 }
 
 
@@ -469,7 +505,7 @@ a:hover {
   background: #036fb8;
 }
 .databrowsing .el-table tbody tr:hover>td { 
-  background-color: #e6efff;
+  background-color: transparent;
 
 }
 .databrowsing .el-table td{
