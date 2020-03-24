@@ -34,6 +34,7 @@ export default {
   },
   mounted() {
     this.focusOn();
+    this.lineTem();
   },
   methods: {
     focusOn() {
@@ -103,6 +104,155 @@ export default {
       window.addEventListener("resize", function() {
         myChart.resize();
       });
+    },
+    lineTem() {
+      var myChart = echarts.init(document.getElementById("temChart"));
+      var option = {
+        tooltip: {
+          trigger: "axis"
+        },
+        legend: {
+          top:"10%",
+          right: "5%",
+          selectedMode: "single"
+        },
+        grid: {
+          top: "20%",
+          left: "8%",
+          right: "5%",
+          bottom: "30%",
+          containLabel: true
+        },
+        xAxis: {
+          type: "category",
+          data: ["昌邑上行", "寿光上行", "寿光上行"],
+          axisLine: {
+            lineStyle: {
+              color: "#999"
+            }
+          },
+          splitLine: {
+            show: true,
+            lineStyle: {
+              color: "#DDD"
+            }
+          }
+        },
+        yAxis: {
+          type: "value",
+          name:"温升|绿-右温升(875001)",
+          splitLine: {
+            lineStyle: {
+              color: "#DDD"
+            }
+          },
+          axisLine: {
+            show: true,
+            lineStyle: {
+              color: "#333"
+            }
+          },
+          nameTextStyle: {
+            color: "#999"
+          }
+        },
+        series: [
+          {
+            name: "1轴",
+            type: "line",
+            data: [5, 7, 2],
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#54DAC2",
+                shadowColor: "rgba(245,128,128, 0.5)",
+                shadowBlur: 10,
+                shadowOffsetY: 7
+              }
+            },
+            symbol: 'emptyCircle',
+            symbolSize: 8,
+            itemStyle: {
+              normal: {
+                color: "#54DAC2",
+              }
+            },
+            smooth: false
+          },
+          {
+            name: "1轴",
+            type: "line",
+            symbol: 'emptyCircle',
+            symbolSize: 8,
+            data: [1, 5, 2],
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#F9A589",
+                shadowColor: "rgba(249,165,137, 0.5)",
+                shadowBlur: 8,
+                shadowOffsetY: 5
+              }
+            },
+
+            itemStyle: {
+              normal: {
+                color: "#F9A589",
+              }
+            },
+            smooth: false
+          },
+          {
+            name: "2轴",
+            type: "line",
+            symbol: 'emptyCircle',
+            symbolSize: 8,
+            data: [8, 9, 1],
+            color: "#54DAC2",
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#54DAC2",
+                shadowColor: "rgba(245,128,128, 0.5)",
+                shadowBlur: 10,
+                shadowOffsetY: 7
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#54DAC2",
+              }
+            },
+            smooth: false
+          },
+          {
+            name: "2轴",
+            type: "line",
+            symbol: 'emptyCircle',
+            symbolSize: 8,
+            data: [5, 8, 5],
+            lineStyle: {
+              normal: {
+                width: 2,
+                color: "#F9A589",
+                shadowColor: "rgba(249,165,137, 0.5)",
+                shadowBlur: 10,
+                shadowOffsetY: 7
+              }
+            },
+            itemStyle: {
+              normal: {
+                color: "#F9A589",
+              }
+            },
+            smooth: false
+          }
+        ]
+      };
+      myChart.setOption(option);
+      window.addEventListener("resize", function() {
+        myChart.resize();
+      });
     }
   }
 };
@@ -158,7 +308,7 @@ export default {
   #temChart {
     width: 60%;
     height: inherit;
-    box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+    // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
     position: absolute;
     margin-left: 40%;
   }
