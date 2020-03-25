@@ -112,7 +112,7 @@ export default {
           trigger: "axis"
         },
         legend: {
-          top:"10%",
+          top: "10%",
           right: "5%",
           selectedMode: "single"
         },
@@ -140,7 +140,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name:"温升|绿-右温升(875001)",
+          name: "温升|绿-右温升(875001)",
           splitLine: {
             lineStyle: {
               color: "#DDD"
@@ -170,11 +170,11 @@ export default {
                 shadowOffsetY: 7
               }
             },
-            symbol: 'emptyCircle',
+            symbol: "emptyCircle",
             symbolSize: 8,
             itemStyle: {
               normal: {
-                color: "#54DAC2",
+                color: "#54DAC2"
               }
             },
             smooth: false
@@ -182,7 +182,7 @@ export default {
           {
             name: "1轴",
             type: "line",
-            symbol: 'emptyCircle',
+            symbol: "emptyCircle",
             symbolSize: 8,
             data: [1, 5, 2],
             lineStyle: {
@@ -197,7 +197,7 @@ export default {
 
             itemStyle: {
               normal: {
-                color: "#F9A589",
+                color: "#F9A589"
               }
             },
             smooth: false
@@ -205,7 +205,7 @@ export default {
           {
             name: "2轴",
             type: "line",
-            symbol: 'emptyCircle',
+            symbol: "emptyCircle",
             symbolSize: 8,
             data: [8, 9, 1],
             color: "#54DAC2",
@@ -220,7 +220,7 @@ export default {
             },
             itemStyle: {
               normal: {
-                color: "#54DAC2",
+                color: "#54DAC2"
               }
             },
             smooth: false
@@ -228,7 +228,7 @@ export default {
           {
             name: "2轴",
             type: "line",
-            symbol: 'emptyCircle',
+            symbol: "emptyCircle",
             symbolSize: 8,
             data: [5, 8, 5],
             lineStyle: {
@@ -242,7 +242,7 @@ export default {
             },
             itemStyle: {
               normal: {
-                color: "#F9A589",
+                color: "#F9A589"
               }
             },
             smooth: false
@@ -261,56 +261,56 @@ export default {
 .TrainNumTempRiseReminder {
   width: 96%;
   transform: translate(2%, 0);
-}
-.search_3 {
-  height: 2rem;
-  box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
-  //   margin-top: -1%;
-  span {
-    width: 10%;
-    height: inherit;
-    font-size: 0.5rem;
-    padding-top: 1.5%;
-    padding-left: 1%;
-    float: left;
-  }
+  .search_3 {
+    height: 2rem;
+    box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+    //   margin-top: -1%;
+    span {
+      width: 10%;
+      height: inherit;
+      font-size: 0.5rem;
+      padding-top: 1.5%;
+      padding-left: 1%;
+      float: left;
+    }
 
-  .tem {
-    width: 10%;
-    padding-top: 0.6%;
-    margin-left: -2%;
-    float: left;
-  }
-  .nums {
-    width: 10%;
-    padding-top: 0.6%;
-    margin-left: -2%;
-    float: left;
-  }
+    .tem {
+      width: 10%;
+      padding-top: 0.6%;
+      margin-left: -2%;
+      float: left;
+    }
+    .nums {
+      width: 10%;
+      padding-top: 0.6%;
+      margin-left: -2%;
+      float: left;
+    }
 
-  .bot_3 {
-    width: 6%;
-    padding-top: 0.6%;
-    margin-left: 2%;
-    float: left;
+    .bot_3 {
+      width: 6%;
+      padding-top: 0.6%;
+      margin-left: 2%;
+      float: left;
+    }
   }
-}
-.content_1 {
-  height: 22rem;
-  margin-top: 0.8%;
-  box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
-  #wordCloud {
-    width: 40%;
-    height: inherit;
-    // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
-    position: absolute;
-  }
-  #temChart {
-    width: 60%;
-    height: inherit;
-    // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
-    position: absolute;
-    margin-left: 40%;
+  .content_1 {
+    height: 22rem;
+    margin-top: 0.8%;
+    box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+    #wordCloud {
+      width: 40%;
+      height: inherit;
+      // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+      position: absolute;
+    }
+    #temChart {
+      width: 60%;
+      height: inherit;
+      // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+      position: absolute;
+      margin-left: 40%;
+    }
   }
 }
 </style>

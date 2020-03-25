@@ -67,8 +67,11 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.HotShaftReminder{
 .table_3 {
   width: 96%;
   transform: translate(2%, 0);
 }
+}
+
 </style>

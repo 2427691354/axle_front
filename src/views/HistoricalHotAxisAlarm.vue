@@ -39,7 +39,7 @@
           row-key="id"
           :expand-row-keys="expands"
           @row-click="rowClick"
-          max-height="20rem"
+          height="90%"
         >
           <el-table-column width="20%" type="expand">
             <template slot-scope="props" style="padding:0">
@@ -830,12 +830,15 @@ export default {
   transform: translate(1%, 0);
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
   .table_1 {
-    height: 17.8rem;
+    height: 21.3rem;
+    width: 98%;
+    transform: translate(1%, 0);
+    padding-top: 1%;
   }
   .foot {
     width: 100%;
     height: 2rem;
-    padding-top: 10%;
+    padding-top: 5%;
     .showinfo {
       width: 68%;
       text-align: left;
@@ -849,7 +852,7 @@ export default {
     .pages {
       width: 26%;
       position: absolute;
-      margin-left: 40.4rem;
+      margin-left: 38rem;
     }
   }
 }

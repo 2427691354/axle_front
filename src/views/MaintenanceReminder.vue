@@ -19,10 +19,10 @@
           <el-menu-item index="/trainNumTempRiseReminder">车次温升提醒</el-menu-item>
           <el-menu-item index="/vehicleTempRiseReminder">车辆温升提醒</el-menu-item>
         </el-menu>
-      </div>
-      <!-- 内容 -->
-      <div class="infos">
-        <router-view />
+        <!-- 内容 -->
+        <div class="infos">
+          <router-view />
+        </div>
       </div>
     </div>
   </div>
@@ -31,7 +31,7 @@
 export default {
   data() {
     return {
-      activeIndex: "/cumulativeReminder",
+      activeIndex: "/cumulativeReminder"
     };
   },
   methods: {
@@ -66,13 +66,13 @@ export default {
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
   .navs {
     width: 96%;
-    height: 2.3rem;
+    height: 27.3rem;
     transform: translate(2%, 0);
-  }
-  .infos {
-    height: 25rem;
-    margin-top: 1rem;
-    // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+    .infos {
+      height: 25rem;
+      margin-top: 1rem;
+      // box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+    }
   }
 }
 </style>
