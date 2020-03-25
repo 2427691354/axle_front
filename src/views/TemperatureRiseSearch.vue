@@ -7,6 +7,7 @@
         <div class="date1">
           <el-date-picker v-model="inputs.startDate" type="date" size="mini"></el-date-picker>
         </div>
+        <div class="text">--</div>
         <div class="date2">
           <el-date-picker v-model="inputs.endDate" type="date" size="mini"></el-date-picker>
         </div>
@@ -503,7 +504,11 @@ export default {
       float: left;
     }
     .date1 {
-      margin-right: 4%;
+      
+    }
+    .text{
+      margin-top: 0.25rem;
+      margin-left: 1%;
     }
   }
   .station {

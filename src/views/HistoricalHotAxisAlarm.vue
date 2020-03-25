@@ -6,8 +6,13 @@
     <div class="search">
       <div class="time">
         <span>起止时间</span>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
+        <div class="text">--</div>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
       </div>
       <div class="station">
         <el-select v-model="value1" filterable placeholder="选择探测站">
@@ -793,6 +798,18 @@ export default {
     span {
       width: 20%;
       margin-right: 2%;
+      float: left;
+    }
+    .date {
+      width: 22%;
+      height: 1rem;
+      float: left;
+    }
+    .text {
+      width: 2%;
+      float: left;
+      font-size: 0.5rem;
+      color: #036fb8;
     }
   }
   .station {

@@ -7,8 +7,13 @@
     <div class="search_7">
       <div class="time_4">
         <span>起止时间</span>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
+        <div class="text">--</div>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
       </div>
     </div>
     <!-- 图表 -->
@@ -1359,6 +1364,19 @@ export default {
     span {
       width: 20%;
       margin-right: 3%;
+      float: left;
+    }
+      .date {
+      width: 30%;
+      height: 1rem;
+      float: left;
+    }
+   .text {
+      width: 4%;
+      float: left;
+      height: 2rem;
+      font-size: 0.5rem;
+      color: #036fb8;
     }
   }
 }

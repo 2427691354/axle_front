@@ -309,20 +309,35 @@ a:hover {
   border-left: 0;
   border-top: 0;
 }
-.hotshaftwarning .el-date-editor.el-input, .el-date-editor.el-input__inner,
-.StatisticalReports .el-date-editor.el-input, .el-date-editor.el-input__inner
- {
-  width: 30% !important;
+
+
+
+.hotshaftwarning  .el-input__inner{
+  height: 1rem;
 }
+.hotshaftwarning .el-date-editor .el-input__inner,
+.StatisticalReports .el-date-editor.el-input,
+.StatisticalReports .el-date-editor .el-input__inner{
+  width: 100% !important;
+}
+
 .StatisticalReports .el-input, .hotshaftwarning .el-input{
   font-size: 0.5rem;
 }
-.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.MileageDetails .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner,.hotshaftwarning .el-input__inner {
+.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.MileageDetails .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner {
   border-radius: 0px;
   border: 1px solid #5282c8;
   color: #606266;
   height: 1rem;
   width: 70%;
+}
+.el-date-editor.el-input, .el-date-editor .el-input__inner{
+  width: 100% !important;
+}
+.AccumulatedMileageQuery .el-input__prefix,
+.VehicleTemAnaysis .el-input__prefix,
+.AxleTemAnaysis .el-input__prefix{
+  margin-top: -1px;
 }
 .VehicleTemAnaysis .el-input__icon,.AxleTemAnaysis .el-input__icon,.MileageDetails .el-input__icon,.AccumulatedMileageQuery .el-input__icon,.StatisticalReports .timest .el-input__icon,.hotshaftwarning .time .el-input__icon{
     height: 1rem;
@@ -331,6 +346,9 @@ a:hover {
     margin-left: 4.2rem;
     color: #fff;
     line-height: 20%;
+}
+.StatisticalReports .el-input__icon{
+  margin-left: 4.5rem !important;
 }
 .StatisticalReports .timest .el-input__suffix,
 .hotshaftwarning .time .el-input__suffix {
@@ -393,7 +411,9 @@ a:hover {
 }
 
 .TemperatureRiseSearch .el-date-editor.el-input,
-.TemperatureRiseSearch .el-date-editor.el-input__inner{
+.TemperatureRiseSearch .el-date-editor.el-input__inner,
+.hotshaftwarning .el-date-editor.el-input,
+.hotshaftwarning .el-date-editor.el-input__inner{
   width: 100%;
 }
 .TemperatureRiseSearch .el-input__inner{
@@ -433,11 +453,13 @@ a:hover {
   padding-right: 20%;
 }
 .TemperatureRiseSearch .el-input__inner,
-.databrowsing .el-input__inner{
+.databrowsing .el-input__inner,
+.hotshaftwarning .el-input__inner{
   border-radius: 2px;
   border:1px #abc2e8 solid;
 }
-.TemperatureRiseSearch .el-date-editor .el-input__icon{
+.TemperatureRiseSearch .el-date-editor .el-input__icon,
+.hotshaftwarning .el-date-editor .el-input__icon{
   background-color: #3970C3;
   margin-left: 3.8rem;
   border-radius: 0 2px 2px 0;
@@ -445,6 +467,9 @@ a:hover {
   width: 1rem;
   color: #fff;
   line-height: 20%;
+}
+.hotshaftwarning .el-date-editor .el-input__icon{
+  margin-left: 4.5rem;
 }
 .TemperatureRiseSearch .el-cascader--mini {
   font-size: 0.5rem;
