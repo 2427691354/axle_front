@@ -1367,12 +1367,12 @@ export default {
       float: left;
     }
      .date {
-      width: 29.5%;
+      width: 30%;
       height: 1rem;
       float: left;
     }
     .text {
-      width: 5%;
+      width: 4%;
       float: left;
       height: 2rem;
       text-align: center;
