@@ -5,8 +5,13 @@
     </div>
     <div class="search_5">
       <div class="time_3">
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
+        <div class="text">--</div>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
       </div>
       <div class="carnum">
         <el-input v-model="input_1" placeholder="车厢编号"></el-input>
@@ -269,12 +274,25 @@ export default {
     width: 35%;
     float: left;
     line-height: 2.3rem;
-    // margin-left: -3%;
+    margin-left: 3%;
+     .date {
+      width: 30%;
+      height: 1rem;
+      float: left;
+    }
+    .text {
+      width: 4%;
+      float: left;
+      margin-top: 0.1rem;
+      height: 2rem;
+      font-size: 0.5rem;
+      color: #036fb8;
+    }
   }
   .carnum {
     width: 15%;
     line-height: 2.3rem;
-    margin-left: -5%;
+    margin-left: -10%;
     float: left;
   }
   .bot_4 {

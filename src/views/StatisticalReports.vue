@@ -15,8 +15,13 @@
         </el-select>
       </div>
       <div class="timest">
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
+        <div class="text">--</div>
+        <div class="date">
+          <el-date-picker v-model="value1" type="date"></el-date-picker>
+        </div>
       </div>
       <div class="botst">
         <el-button type="danger" round>搜索</el-button>
@@ -57,7 +62,7 @@
 <script>
 import echarts from "echarts";
 export default {
-  data () {
+  data() {
     return {
       options: [
         {
@@ -82,18 +87,18 @@ export default {
         }
       ],
       value: "",
-      value1: "",
+      value1: ""
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.trainNum();
     this.carNum();
     this.axleNum();
     this.thermalNum();
   },
   methods: {
-    trainNum () {
+    trainNum() {
       var myChart = echarts.init(document.getElementById("trainnum"));
       var option = {
         xAxis: [
@@ -226,11 +231,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
     },
-    carNum () {
+    carNum() {
       var myChart = echarts.init(document.getElementById("carnum"));
       var option = {
         legend: {
@@ -257,7 +262,7 @@ export default {
             color: "#3c3c3c",
             fontSize: 16
           },
-          formatter: function (p) {
+          formatter: function(p) {
             return p.seriesName + "<br>" + "车辆数量：" + p.value;
           },
           extraCssText: "box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)"
@@ -265,7 +270,7 @@ export default {
         xAxis: {
           axisLabel: {
             show: false,
-            formatter: function (v) {
+            formatter: function(v) {
               return v;
             }
           },
@@ -333,7 +338,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function (v) {
+                formatter: function(v) {
                   return v.value;
                 },
                 textStyle: {
@@ -372,7 +377,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function (v) {
+                formatter: function(v) {
                   return v.value;
                 },
                 textStyle: {
@@ -403,11 +408,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
     },
-    axleNum () {
+    axleNum() {
       var myChart = echarts.init(document.getElementById("axlenum"));
       var option = {
         grid: {
@@ -558,11 +563,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
     },
-    thermalNum () {
+    thermalNum() {
       var myChart = echarts.init(document.getElementById("thermalnum"));
       var option = {
         tooltip: {
@@ -652,7 +657,7 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
     }
@@ -691,13 +696,25 @@ export default {
     width: 50%;
     float: left;
     line-height: 2.3rem;
-    margin-left: -4rem;
+    .date {
+      width: 22%;
+      height: 1rem;
+      float: left;
+    }
+    .text {
+      width: 4%;
+      float: left;
+      margin-top: 0.1rem;
+      height: 2rem;
+      font-size: 0.5rem;
+      color: #036fb8;
+    }
   }
   .botst {
     width: 10%;
     float: left;
     line-height: 2.3rem;
-    margin-left: -5rem;
+    margin-left: -13rem;
   }
 }
 .contentst {
