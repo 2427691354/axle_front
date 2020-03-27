@@ -34,32 +34,6 @@ export default {
           left: "40.3℃",
           right: "40.3℃",
           info: "微热"
-        },
-        {
-          time: "2016-05-02",
-          detection: "田柳下行",
-          car: "07557",
-          type: "货车",
-          num: "56辆",
-          axle: "230轴",
-          speed: "46Km/h",
-          tem: "40.3℃",
-          left: "40.3℃",
-          right: "40.3℃",
-          info: "微热"
-        },
-        {
-          time: "2016-05-02",
-          detection: "田柳下行",
-          car: "07557",
-          type: "货车",
-          num: "56辆",
-          axle: "230轴",
-          speed: "46Km/h",
-          tem: "40.3℃",
-          left: "40.3℃",
-          right: "40.3℃",
-          info: "微热"
         }
       ]
     };

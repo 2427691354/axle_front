@@ -15,14 +15,7 @@
         </div>
       </div>
       <div class="station">
-        <el-select v-model="value1" filterable placeholder="选择探测站">
-          <el-option
-            v-for="item in options"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
+        <el-cascader placeholder="选择探测站" :options="options" filterable></el-cascader>
       </div>
       <div class="state">
         <div class="wei">
@@ -44,7 +37,7 @@
           row-key="id"
           :expand-row-keys="expands"
           @row-click="rowClick"
-          height="90%"
+          height="89%"
         >
           <el-table-column width="20%" type="expand">
             <template slot-scope="props" style="padding:0">
@@ -711,24 +704,92 @@ export default {
       value: "",
       options: [
         {
-          value: "选项1",
-          label: "黄金糕"
+          value: "station",
+          label: "所有探测站"
         },
         {
-          value: "选项2",
-          label: "双皮奶"
+          value: "top",
+          label: "测试线上行",
+          children: [
+            {
+              value: "xiangkou",
+              label: "羊口上行"
+            },
+            {
+              value: "tianliu",
+              label: "田柳上行"
+            },
+            {
+              value: "huatai",
+              label: "华泰上行"
+            },
+            {
+              value: "shouguang",
+              label: "寿光上行"
+            },
+            {
+              value: "dajiawa",
+              label: "大家洼上行"
+            },
+            {
+              value: "changyi",
+              label: "昌邑上行"
+            },
+            {
+              value: "laizhou",
+              label: "莱州上行"
+            },
+            {
+              value: "zhaoyuan",
+              label: "招远上行"
+            },
+            {
+              value: "pingdu",
+              label: "平度上行"
+            }
+          ]
         },
         {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
+          value: "bottom",
+          label: "测试线下行",
+          children: [
+            {
+              value: "xiangkou",
+              label: "羊口下行"
+            },
+            {
+              value: "tianliu",
+              label: "田柳下行"
+            },
+            {
+              value: "huatai",
+              label: "华泰下行"
+            },
+            {
+              value: "shouguang",
+              label: "寿光下行"
+            },
+            {
+              value: "dajiawa",
+              label: "大家洼下行"
+            },
+            {
+              value: "changyi",
+              label: "昌邑下行"
+            },
+            {
+              value: "laizhou",
+              label: "莱州下行"
+            },
+            {
+              value: "zhaoyuan",
+              label: "招远下行"
+            },
+            {
+              value: "pingdu",
+              label: "平度下行"
+            }
+          ]
         }
       ],
       value1: "",
@@ -739,7 +800,9 @@ export default {
       // infoList:[]
     };
   },
-  created() {},
+  created() {
+    
+  },
   methods: {
     rowClick(row) {
       Array.prototype.remove = function(val) {
@@ -817,7 +880,7 @@ export default {
     height: inherit;
     float: left;
     padding-top: 1%;
-    margin-left: -5rem;
+    margin-left: -8rem;
   }
   .state {
     width: 25%;

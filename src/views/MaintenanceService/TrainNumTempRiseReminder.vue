@@ -28,15 +28,47 @@ import echarts from "echarts";
 export default {
   data() {
     return {
-      input_1: "40",
-      input_2: "2"
+      input_1: "20",
+      input_2: "2",
+      focusonInfo: [{name:'DFSGD',value:2345}]
     };
   },
   mounted() {
-    this.focusOn();
+    // this.focusOn();
     this.lineTem();
+    this.focusData();
   },
   methods: {
+    focusData() {
+      var self = this;
+      self.$http
+        .get("http://139.196.78.182:8620/updateLcYz", {
+          params: {
+            lcyz: "2000",
+            lxcs: this.input_2,
+            wsyz: this.input_1
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          // console.log(res);
+          if (res == 1) {
+            self.$http
+              .get("http://139.196.78.182:8620/TempRiseReMind")
+              .then(function(response) {
+                var res2 = response.data;
+                for (var i = 0; i < res2.length; i++) {
+                  self.focusonInfo.push({
+                    name: res2[i].CLXX_CHDD
+                  });
+                }
+                // console.log(res2)
+              });
+              
+          }
+          self.focusOn();
+        });
+    },
     focusOn() {
       var myChart = echarts.init(document.getElementById("wordCloud"));
       var option = {
@@ -93,14 +125,12 @@ export default {
                 shadowColor: "#333"
               }
             },
-            data: [
-              { name: "875011", value: 5902 },
-              { name: "875011", value: 10927 }
-            ]
+            data: this.focusonInfo
           }
         ]
       };
       myChart.setOption(option);
+      console.log(this.focusonInfo)
       window.addEventListener("resize", function() {
         myChart.resize();
       });
