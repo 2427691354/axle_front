@@ -143,6 +143,22 @@ export default {
             {
               value: "大家洼上行",
               label: "大家洼上行"
+            },
+             {
+              value: "昌邑上行",
+              label: "昌邑上行"
+            },
+            {
+              value: "莱州上行",
+              label: "莱州上行"
+            },
+            {
+              value: "招远上行",
+              label: "招远上行"
+            },
+            {
+              value: "平度上行",
+              label: "平度上行"
             }
           ]
         },
