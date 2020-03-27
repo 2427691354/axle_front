@@ -7,12 +7,12 @@
     <div class="search_7">
       <div class="time_4">
         <span>起止时间</span>
-          <div class="date">
+        <div class="date">
           <el-date-picker v-model="value1" type="date"></el-date-picker>
         </div>
         <div class="text">--</div>
         <div class="date">
-          <el-date-picker v-model="value1" type="date"></el-date-picker>
+          <el-date-picker v-model="value2" type="date"></el-date-picker>
         </div>
       </div>
     </div>
@@ -34,12 +34,35 @@
 import echarts from "echarts";
 export default {
   data() {
-    return {};
+    return {
+      value1: "2019-02-01",
+      value2: "2019-03-31",
+      //标签
+      labels: [],
+
+      //左平均轴温
+      avgz: [],
+      //右均轴温
+      avgy: [],
+      //左方差
+      fcz: [],
+      //右方差
+      fcy: [],
+
+      //上行x轴
+      xlabels:[],
+      tavgz:[],
+      tavgy:[],
+      tfcz:[],
+      tfcy:[]
+
+    };
   },
   mounted() {
     this.cartemBar();
     this.cartemTop();
     this.cartemBottom();
+    this.dataInfo();
   },
   methods: {
     cartemBar() {
@@ -73,133 +96,9 @@ export default {
         "P64GK",
         "P64K",
         "P70",
-        "X70"
+        "X70",
+        "Y"
       ];
-      var databeast = [
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        392,
-        392,
-        153,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297
-      ];
-      var databeauty = [
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        291,
-        185,
-        203,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196
-      ];
-      var databeast1 = [
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        392,
-        392,
-        153,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297
-      ];
-      var databeauty1 = [
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        291,
-        185,
-        203,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196
-      ];
-
       var option = {
         baseOption: {
           title: {
@@ -437,7 +336,7 @@ export default {
                   color: "#FD5916"
                 }
               },
-              data: databeast
+              data: this.avgz
             },
             {
               name: "右均轴温",
@@ -464,9 +363,8 @@ export default {
                   color: "#01A4F7"
                 }
               },
-              data: databeauty1
+              data: this.avgy
             },
-
             {
               name: "左方差",
               type: "bar",
@@ -494,7 +392,7 @@ export default {
                   color: "#7E47FF"
                 }
               },
-              data: databeauty
+              data: this.fcz
             },
             {
               name: "右方差",
@@ -523,7 +421,7 @@ export default {
                   color: "#2EDDCD"
                 }
               },
-              data: databeast1
+              data: this.fcy
             }
           ]
         }
@@ -762,38 +660,7 @@ export default {
                 color: "#f8f106"
               }
             },
-            data: [
-              28,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              11
-            ]
+            data: this.tavgz
           },
           {
             name: "右均温升",
@@ -805,38 +672,7 @@ export default {
                 color: "#fe7576"
               }
             },
-            data: [
-              45,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              13
-            ]
+            data: this.tavgy
           },
           {
             name: "左方差",
@@ -848,38 +684,7 @@ export default {
                 color: "#A9B0D3"
               }
             },
-            data: [
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              47,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              15
-            ]
+            data: this.tfcz
           },
           {
             name: "右方差",
@@ -891,38 +696,7 @@ export default {
                 color: "#4E74D5"
               }
             },
-            data: [
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              47,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              8
-            ]
+            data: this.tfcy
           }
         ]
       };
@@ -1328,6 +1102,53 @@ export default {
       window.addEventListener("resize", function() {
         myChart.resize();
       });
+    },
+    dataInfo() {
+      var self = this;
+      self.$http
+        .get("http://139.196.78.182:8620/TempRiseStatisticalAnalysis", {
+          params: {
+            s: this.value1,
+            e: this.value2
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          self.labels = res.CLXX_CXCHAR;
+          self.avgz = res.avgz;
+          self.avgy = res.avgy;
+          self.fcz = res.fcz;
+          self.fcy = res.fcy;
+          // console.log(self.labels);
+
+          self.cartemBar();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+        self.$http
+        .get("http://139.196.78.182:8620/TempRiseStatisticalAnalysisBySX", {
+          params: {
+            s: this.value1,
+            e: this.value2,
+            fx:'%E4%B8%8B%E8%A1%8C'
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          self.xlabels = res.CLXX_CXCHAR;
+          self.tavgz = res.avgz;
+          self.tavgy = res.avgz;
+          self.tfcz = res.fcz;
+          self.tfcy = res.fcy;
+          console.log(self.tavgz);
+
+          self.cartemTop();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };
@@ -1366,7 +1187,7 @@ export default {
       margin-right: 3%;
       float: left;
     }
-     .date {
+    .date {
       width: 30%;
       height: 1rem;
       float: left;
