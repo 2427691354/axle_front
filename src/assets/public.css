@@ -217,14 +217,14 @@ a:hover {
   color: #fff !important;
   background-color: #3971C4 !important;
 }
-.hotshaftwarning .el-table__expanded-cell table tr{
+.hotshaftwarning .el-table__expanded-cell table tr,.el-table tbody tr{
   background-color: #f9f9f9;
   padding: 0.35rem 0;
 }
 .hotshaftwarning .el-table__expanded-cell table tr:hover>td{
   background-color: #dedede;
 }
-.hotshaftwarning .el-table__expanded-cell table tr:nth-child(2n){
+.hotshaftwarning .el-table__expanded-cell table tr:nth-child(2n),.el-table tbody tr:nth-child(2n){
   background-color: #fff;
 }
 .hotshaftwarning .el-table__expanded-cell{
@@ -237,15 +237,18 @@ a:hover {
 .MileageDetails .el-table th, .el-table tr,.MaintenanceReminder .el-table th, .el-table tr,.CumulativeReminder .el-table th, .el-table tr, .hotshaftwarning .el-table th, .el-table tr {
   background-color:transparent;
 }
-.MileageDetails .el-table__body,.MaintenanceReminder .el-table__body,.CumulativeReminder .el-table__body,.hotshaftwarning .el-table__body{
+.MileageDetails .el-table tbody tr:hover>td,
+.MaintenanceReminder .el-table tbody tr:hover>td,
+.CumulativeReminder .el-table tbody tr:hover>td,
+.hotshaftwarning .el-table tbody tr:hover>td{
   background-color: #BDE5FF;
-  /* font-size: 0.5rem; */
+  color: #555555;
 }
 .hotshaftwarning .el-table__row--level-1{
   background-color: #fff!important;
 }
 .hotshaftwarning .el-table td, .el-table th.is-leaf {
-  border-bottom: 0px solid #EBEEF5;
+  border-bottom: 1px solid #EBEEF5;
 }
 .VehicleTempRiseReminder .el-table__footer-wrapper, .el-table__header-wrapper,
 .MaintenanceReminder .el-table__footer-wrapper, .el-table__header-wrapper,
