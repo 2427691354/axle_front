@@ -18,7 +18,7 @@
       </div>
       <!-- 搜索按钮 -->
       <div class="search">
-        <el-button type="danger" size="mini" round>搜索</el-button>
+        <el-button type="danger" size="mini" round @click="initEchartDate">搜索</el-button>
       </div>
     </div>
     <!-- 图表 -->
@@ -38,9 +38,9 @@ export default {
   data() {
     return {
       // 车厢编号输入框
-      carriageNumber: "",
+      carriageNumber: "89013",
       // 环境温度输入框
-      ambientTemperature: "",
+      ambientTemperature: "2",
       //左轴数据
       left1: [4, 3, 8, 7, 15, 20],
       left2: [10, 15, 9, 5, 3, 7],
@@ -61,9 +61,9 @@ export default {
     };
   },
   mounted() {
-    this.drawLeft();
-    this.drawRight();
+    this.initEchartDate();
   },
+  created() {},
   methods: {
     //左轴图
     drawLeft() {
@@ -166,11 +166,7 @@ export default {
               lineStyle: {
                 color: "#e8e7e7"
               }
-            },
-            min: 0,
-            max: 25,
-            splitNumber: 5,
-            interval: 25 / 5
+            }
           },
           {
             show: true,
@@ -193,17 +189,57 @@ export default {
               lineStyle: {
                 color: "#e8e7e7"
               }
-            },
-            min: 0,
-            max: 25,
-            splitNumber: 5,
-            interval: 25 / 5
+            }
+
+            // min: 0,
+            // max: 25,
+            // splitNumber: 5,
+            // interval: 25 / 5
           }
         ],
         series: [
           {
             name: "1轴",
             type: "line",
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADH0lEQVRIia2WzU8TQRTA3+yUtlDAUojVAySQeCCoLcQDhsSbidEbCYmpnwc/OBnjxYNnD/4L6gElqSYkxKOJZwIHo0CAGI0S2wPW0FJp+eh2d8fMdikzb2eXNfElk83Ovvd++97MezME/k289FlQLyHJambIpUAmVkXIkT/IZoYkOJlY9QZ6gMQnnmPCk4kADPYFOjDRuba7lr0WJvvXqbmTBqsWt79okbJJY4s6RLNtg5lpALDEyFRQKUU8pQLMHsXP02Px8M4Lzaic8soGFyvU8a2sx+52D9+YEyJmeH3xmogwrbKSvdrOCi/BMsJ+sKZoIb1Kknc6TmfeOtG6oHhDNGGFj1Njx8Ol98DMSCBY0wut/dYTl5Lnbs+poKo1JKOp/lBP694UGAi2kwfYWgXYLzbeo90AXUMAsd5DHWZGuO1oqn9wYWm97pVSMTpaXnp96xgUnkuwzU8ApWV1VImzAD0j0tQfSN6Lp26+AgBTjFJDpvxdi7XUM67IvGBc+DeuI4jjQ3OGBBCjtQe1dlOS9ZZcvEpBOo4PgurXBhK8YYhV65SsD9bMT5CO48PlH6fU+aCZRxMCCcGlh1NqCyMtFckb341HCdJhWmRb5RtHaIuhtX6VJrrcTd0lSMcgrV9UaiKwWS/FKryRtHid8a3vJfybWIsNH1mVb2mz8M3Fm0HfyUT4x4eni9Ss9kleqnmAMi/8zcZ7tMdd+LzwaHtu4OKTdG6jpPNgnVq0u05IccRYuY2Sufxz7/5wL30ntbb23sbwE0JrK7naJPehaG0Mp7QJHbnyaGG93PYACNX9CYIQqnOb9OWH817NG28ayxn878yBC5MzC9/r4yaN5b0Yh2mM5bkutzmwF/w1RXVaHKwldZo7TXZ3tMzPPsuc6AqNR0ntDLH0TiBgmiSyrbPw2q8tY/b8+ONsoVipOyADQQ9vBAogEXogFYaGOoe07mJmUHSex5N4jFhongkw1TIwAWh5wTBQBRUNiADFNhaKNPAVA6cXEAj3RldJqW5yQYCAgKqfUAHxnKdTPwlyERad+97C+e77HxLsqg8AfwGjFUzzzBIlRAAAAABJRU5ErkJggg==",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#ffab2b",
+                lineStyle: {
+                  color: "#ffab2b",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(255,247,253,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(255,209,139,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.left1
+          },
+          {
+            name: "1轴",
+            type: "line",
+            yAxisIndex: 1,
             symbol:
               "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADH0lEQVRIia2WzU8TQRTA3+yUtlDAUojVAySQeCCoLcQDhsSbidEbCYmpnwc/OBnjxYNnD/4L6gElqSYkxKOJZwIHo0CAGI0S2wPW0FJp+eh2d8fMdikzb2eXNfElk83Ovvd++97MezME/k289FlQLyHJambIpUAmVkXIkT/IZoYkOJlY9QZ6gMQnnmPCk4kADPYFOjDRuba7lr0WJvvXqbmTBqsWt79okbJJY4s6RLNtg5lpALDEyFRQKUU8pQLMHsXP02Px8M4Lzaic8soGFyvU8a2sx+52D9+YEyJmeH3xmogwrbKSvdrOCi/BMsJ+sKZoIb1Kknc6TmfeOtG6oHhDNGGFj1Njx8Ol98DMSCBY0wut/dYTl5Lnbs+poKo1JKOp/lBP694UGAi2kwfYWgXYLzbeo90AXUMAsd5DHWZGuO1oqn9wYWm97pVSMTpaXnp96xgUnkuwzU8ApWV1VImzAD0j0tQfSN6Lp26+AgBTjFJDpvxdi7XUM67IvGBc+DeuI4jjQ3OGBBCjtQe1dlOS9ZZcvEpBOo4PgurXBhK8YYhV65SsD9bMT5CO48PlH6fU+aCZRxMCCcGlh1NqCyMtFckb341HCdJhWmRb5RtHaIuhtX6VJrrcTd0lSMcgrV9UaiKwWS/FKryRtHid8a3vJfybWIsNH1mVb2mz8M3Fm0HfyUT4x4eni9Ss9kleqnmAMi/8zcZ7tMdd+LzwaHtu4OKTdG6jpPNgnVq0u05IccRYuY2Sufxz7/5wL30ntbb23sbwE0JrK7naJPehaG0Mp7QJHbnyaGG93PYACNX9CYIQqnOb9OWH817NG28ayxn878yBC5MzC9/r4yaN5b0Yh2mM5bkutzmwF/w1RXVaHKwldZo7TXZ3tMzPPsuc6AqNR0ntDLH0TiBgmiSyrbPw2q8tY/b8+ONsoVipOyADQQ9vBAogEXogFYaGOoe07mJmUHSex5N4jFhongkw1TIwAWh5wTBQBRUNiADFNhaKNPAVA6cXEAj3RldJqW5yQYCAgKqfUAHxnKdTPwlyERad+97C+e77HxLsqg8AfwGjFUzzzBIlRAAAAABJRU5ErkJggg==",
             smooth: true,
@@ -278,6 +314,45 @@ export default {
             data: this.left2
           },
           {
+            name: "2轴",
+            type: "line",
+            yAxisIndex: 1,
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADBklEQVRIia2Wy2sTYRDA59vdJNvGPonk1kNBLyJWT9Wi4M0HihTUWkUPWi0U/At67L8giHrwAbVQkKKg3gSlVm9FQURFpD5D0ybpc5PsfiuTbNbZybfJCh34SHZ2Zn478833EPB/EmbvRo1i0IehCVlnMDWuUUjTDxyakAH41LgWDgwB0V+uc8mvSwEc3BDowWhw7dnc+vmym7hglbS+sg2d+CJmQN6My/mYVpo82t/6AAAkiaGEBkqEJSWwynj8Mjtgi67bG0WxI6waKK0J97Ph5kZOHkrNkoxdPr98TihMe/p6dahgJe84EuKNYDXRNSh1mOtXjh1om/KyrYPyhvBhMy8yAxty+3PpQiIKrCaagGKrtnjk1OH0rAqqKXzEzl39hqOn7nLYugXwYxHgy8/qwP+oo4I+6IsxVF3NOxCH/uRV7lKh2HGLGmZXAJZX1Fl1twOk2oO6jkTh6omDXfcAwKFZ8gzxWZMiOcwzC4Oh4Lu6TKsxNF5F+uBnWbSNPdQotxoOC7PxYgi2fitAwRumbEOgQFapOZDbeDHq4vOSVpRCVOq+FSJ44/CSVsTQ3UCBzAirkNvEDKCzHihpncR15xPVdbU1B3KbuG5/VNlRoL8b2NbSQ2qUNKutHyb4Dm2o2MWlSVXsQLPgGsSKptI98ZvTX+etktZDg6xtAuTX/jUIlhEz4zAzLhdGT/f2ZTMLaGl7a7Gy6xiKI0ZmMwtO7ve7a8lU3wzdbba1VEcjwa2t8Of9KMZQbG0uL6kPHTm7742wvl3XBERYFFVBW/S5fGbvXNjmzZtGegO/zjl3vHc6/+vtoBlzvjeDoQ3aok/Nn8TzRXVa1OZS9w5ovbM7Hbtxf264pS09aLvm7rIt2kGAE9PliiGKHzZXM4/GLu6fzC9nyh7IZlA/y9DjiYF1oqOL2Z8CWhmWXaCs9IpBT2bJ9C6BqabBJUAZBuNAFZQ6CALlPpJlGvmKwcsLDMT3xrolpbrJRQECA6o+QgXkutCgjSTKRZgGb3gLx+7bCol21QeAvwXlUBnMZP4DAAAAAElFTkSuQmCC",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#7ea0fe",
+                lineStyle: {
+                  color: "#4f7dfb",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(242,246,255,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(164,188,254,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.left2
+          },
+          {
             name: "3轴",
             type: "line",
             symbol:
@@ -316,8 +391,86 @@ export default {
             data: this.left3
           },
           {
+            name: "3轴",
+            type: "line",
+            yAxisIndex: 1,
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADH0lEQVRIia2WzU8TQRTA3+yUtlDAUojVAySQeCCoLcQDhsSbidEbCYmpnwc/OBnjxYNnD/4L6gElqSYkxKOJZwIHo0CAGI0S2wPW0FJp+eh2d8fMdikzb2eXNfElk83Ovvd++97MezME/k289FlQLyHJambIpUAmVkXIkT/IZoYkOJlY9QZ6gMQnnmPCk4kADPYFOjDRuba7lr0WJvvXqbmTBqsWt79okbJJY4s6RLNtg5lpALDEyFRQKUU8pQLMHsXP02Px8M4Lzaic8soGFyvU8a2sx+52D9+YEyJmeH3xmogwrbKSvdrOCi/BMsJ+sKZoIb1Kknc6TmfeOtG6oHhDNGGFj1Njx8Ol98DMSCBY0wut/dYTl5Lnbs+poKo1JKOp/lBP694UGAi2kwfYWgXYLzbeo90AXUMAsd5DHWZGuO1oqn9wYWm97pVSMTpaXnp96xgUnkuwzU8ApWV1VImzAD0j0tQfSN6Lp26+AgBTjFJDpvxdi7XUM67IvGBc+DeuI4jjQ3OGBBCjtQe1dlOS9ZZcvEpBOo4PgurXBhK8YYhV65SsD9bMT5CO48PlH6fU+aCZRxMCCcGlh1NqCyMtFckb341HCdJhWmRb5RtHaIuhtX6VJrrcTd0lSMcgrV9UaiKwWS/FKryRtHid8a3vJfybWIsNH1mVb2mz8M3Fm0HfyUT4x4eni9Ss9kleqnmAMi/8zcZ7tMdd+LzwaHtu4OKTdG6jpPNgnVq0u05IccRYuY2Sufxz7/5wL30ntbb23sbwE0JrK7naJPehaG0Mp7QJHbnyaGG93PYACNX9CYIQqnOb9OWH817NG28ayxn878yBC5MzC9/r4yaN5b0Yh2mM5bkutzmwF/w1RXVaHKwldZo7TXZ3tMzPPsuc6AqNR0ntDLH0TiBgmiSyrbPw2q8tY/b8+ONsoVipOyADQQ9vBAogEXogFYaGOoe07mJmUHSex5N4jFhongkw1TIwAWh5wTBQBRUNiADFNhaKNPAVA6cXEAj3RldJqW5yQYCAgKqfUAHxnKdTPwlyERad+97C+e77HxLsqg8AfwGjFUzzzBIlRAAAAABJRU5ErkJggg==",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#ffab2b",
+                lineStyle: {
+                  color: "#ffab2b",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(255,247,253,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(255,209,139,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.left3
+          },
+          {
             name: "4轴",
             type: "line",
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADBklEQVRIia2Wy2sTYRDA59vdJNvGPonk1kNBLyJWT9Wi4M0HihTUWkUPWi0U/At67L8giHrwAbVQkKKg3gSlVm9FQURFpD5D0ybpc5PsfiuTbNbZybfJCh34SHZ2Zn478833EPB/EmbvRo1i0IehCVlnMDWuUUjTDxyakAH41LgWDgwB0V+uc8mvSwEc3BDowWhw7dnc+vmym7hglbS+sg2d+CJmQN6My/mYVpo82t/6AAAkiaGEBkqEJSWwynj8Mjtgi67bG0WxI6waKK0J97Ph5kZOHkrNkoxdPr98TihMe/p6dahgJe84EuKNYDXRNSh1mOtXjh1om/KyrYPyhvBhMy8yAxty+3PpQiIKrCaagGKrtnjk1OH0rAqqKXzEzl39hqOn7nLYugXwYxHgy8/qwP+oo4I+6IsxVF3NOxCH/uRV7lKh2HGLGmZXAJZX1Fl1twOk2oO6jkTh6omDXfcAwKFZ8gzxWZMiOcwzC4Oh4Lu6TKsxNF5F+uBnWbSNPdQotxoOC7PxYgi2fitAwRumbEOgQFapOZDbeDHq4vOSVpRCVOq+FSJ44/CSVsTQ3UCBzAirkNvEDKCzHihpncR15xPVdbU1B3KbuG5/VNlRoL8b2NbSQ2qUNKutHyb4Dm2o2MWlSVXsQLPgGsSKptI98ZvTX+etktZDg6xtAuTX/jUIlhEz4zAzLhdGT/f2ZTMLaGl7a7Gy6xiKI0ZmMwtO7ve7a8lU3wzdbba1VEcjwa2t8Of9KMZQbG0uL6kPHTm7742wvl3XBERYFFVBW/S5fGbvXNjmzZtGegO/zjl3vHc6/+vtoBlzvjeDoQ3aok/Nn8TzRXVa1OZS9w5ovbM7Hbtxf264pS09aLvm7rIt2kGAE9PliiGKHzZXM4/GLu6fzC9nyh7IZlA/y9DjiYF1oqOL2Z8CWhmWXaCs9IpBT2bJ9C6BqabBJUAZBuNAFZQ6CALlPpJlGvmKwcsLDMT3xrolpbrJRQECA6o+QgXkutCgjSTKRZgGb3gLx+7bCol21QeAvwXlUBnMZP4DAAAAAElFTkSuQmCC",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#7ea0fe",
+                lineStyle: {
+                  color: "#4f7dfb",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(242,246,255,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(164,188,254,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.left4
+          },
+          {
+            name: "4轴",
+            type: "line",
+            yAxisIndex: 1,
             symbol:
               "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADBklEQVRIia2Wy2sTYRDA59vdJNvGPonk1kNBLyJWT9Wi4M0HihTUWkUPWi0U/At67L8giHrwAbVQkKKg3gSlVm9FQURFpD5D0ybpc5PsfiuTbNbZybfJCh34SHZ2Zn478833EPB/EmbvRo1i0IehCVlnMDWuUUjTDxyakAH41LgWDgwB0V+uc8mvSwEc3BDowWhw7dnc+vmym7hglbS+sg2d+CJmQN6My/mYVpo82t/6AAAkiaGEBkqEJSWwynj8Mjtgi67bG0WxI6waKK0J97Ph5kZOHkrNkoxdPr98TihMe/p6dahgJe84EuKNYDXRNSh1mOtXjh1om/KyrYPyhvBhMy8yAxty+3PpQiIKrCaagGKrtnjk1OH0rAqqKXzEzl39hqOn7nLYugXwYxHgy8/qwP+oo4I+6IsxVF3NOxCH/uRV7lKh2HGLGmZXAJZX1Fl1twOk2oO6jkTh6omDXfcAwKFZ8gzxWZMiOcwzC4Oh4Lu6TKsxNF5F+uBnWbSNPdQotxoOC7PxYgi2fitAwRumbEOgQFapOZDbeDHq4vOSVpRCVOq+FSJ44/CSVsTQ3UCBzAirkNvEDKCzHihpncR15xPVdbU1B3KbuG5/VNlRoL8b2NbSQ2qUNKutHyb4Dm2o2MWlSVXsQLPgGsSKptI98ZvTX+etktZDg6xtAuTX/jUIlhEz4zAzLhdGT/f2ZTMLaGl7a7Gy6xiKI0ZmMwtO7ve7a8lU3wzdbba1VEcjwa2t8Of9KMZQbG0uL6kPHTm7742wvl3XBERYFFVBW/S5fGbvXNjmzZtGegO/zjl3vHc6/+vtoBlzvjeDoQ3aok/Nn8TzRXVa1OZS9w5ovbM7Hbtxf264pS09aLvm7rIt2kGAE9PliiGKHzZXM4/GLu6fzC9nyh7IZlA/y9DjiYF1oqOL2Z8CWhmWXaCs9IpBT2bJ9C6BqabBJUAZBuNAFZQ6CALlPpJlGvmKwcsLDMT3xrolpbrJRQECA6o+QgXkutCgjSTKRZgGb3gLx+7bCol21QeAvwXlUBnMZP4DAAAAAElFTkSuQmCC",
             smooth: true,
@@ -497,11 +650,11 @@ export default {
               lineStyle: {
                 color: "#e8e7e7"
               }
-            },
-            min: 0,
-            max: 25,
-            splitNumber: 5,
-            interval: 25 / 5
+            }
+            // min: 0,
+            // max: 25,
+            // splitNumber: 5,
+            // interval: 25 / 5
           },
           {
             show: true,
@@ -524,11 +677,7 @@ export default {
               lineStyle: {
                 color: "#e8e7e7"
               }
-            },
-            min: 0,
-            max: 25,
-            splitNumber: 5,
-            interval: 25 / 5
+            }
           }
         ],
         series: [
@@ -683,6 +832,162 @@ export default {
             //   }
             // },
             data: this.right4
+          },
+          {
+            name: "1轴",
+            type: "line",
+            yAxisIndex: 1,
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADH0lEQVRIia2WzU8TQRTA3+yUtlDAUojVAySQeCCoLcQDhsSbidEbCYmpnwc/OBnjxYNnD/4L6gElqSYkxKOJZwIHo0CAGI0S2wPW0FJp+eh2d8fMdikzb2eXNfElk83Ovvd++97MezME/k289FlQLyHJambIpUAmVkXIkT/IZoYkOJlY9QZ6gMQnnmPCk4kADPYFOjDRuba7lr0WJvvXqbmTBqsWt79okbJJY4s6RLNtg5lpALDEyFRQKUU8pQLMHsXP02Px8M4Lzaic8soGFyvU8a2sx+52D9+YEyJmeH3xmogwrbKSvdrOCi/BMsJ+sKZoIb1Kknc6TmfeOtG6oHhDNGGFj1Njx8Ol98DMSCBY0wut/dYTl5Lnbs+poKo1JKOp/lBP694UGAi2kwfYWgXYLzbeo90AXUMAsd5DHWZGuO1oqn9wYWm97pVSMTpaXnp96xgUnkuwzU8ApWV1VImzAD0j0tQfSN6Lp26+AgBTjFJDpvxdi7XUM67IvGBc+DeuI4jjQ3OGBBCjtQe1dlOS9ZZcvEpBOo4PgurXBhK8YYhV65SsD9bMT5CO48PlH6fU+aCZRxMCCcGlh1NqCyMtFckb341HCdJhWmRb5RtHaIuhtX6VJrrcTd0lSMcgrV9UaiKwWS/FKryRtHid8a3vJfybWIsNH1mVb2mz8M3Fm0HfyUT4x4eni9Ss9kleqnmAMi/8zcZ7tMdd+LzwaHtu4OKTdG6jpPNgnVq0u05IccRYuY2Sufxz7/5wL30ntbb23sbwE0JrK7naJPehaG0Mp7QJHbnyaGG93PYACNX9CYIQqnOb9OWH817NG28ayxn878yBC5MzC9/r4yaN5b0Yh2mM5bkutzmwF/w1RXVaHKwldZo7TXZ3tMzPPsuc6AqNR0ntDLH0TiBgmiSyrbPw2q8tY/b8+ONsoVipOyADQQ9vBAogEXogFYaGOoe07mJmUHSex5N4jFhongkw1TIwAWh5wTBQBRUNiADFNhaKNPAVA6cXEAj3RldJqW5yQYCAgKqfUAHxnKdTPwlyERad+97C+e77HxLsqg8AfwGjFUzzzBIlRAAAAABJRU5ErkJggg==",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#ffab2b",
+                lineStyle: {
+                  color: "#ffab2b",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(255,247,253,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(255,209,139,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.right1
+          },
+          {
+            name: "2轴",
+            type: "line",
+            yAxisIndex: 1,
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADBklEQVRIia2Wy2sTYRDA59vdJNvGPonk1kNBLyJWT9Wi4M0HihTUWkUPWi0U/At67L8giHrwAbVQkKKg3gSlVm9FQURFpD5D0ybpc5PsfiuTbNbZybfJCh34SHZ2Zn478833EPB/EmbvRo1i0IehCVlnMDWuUUjTDxyakAH41LgWDgwB0V+uc8mvSwEc3BDowWhw7dnc+vmym7hglbS+sg2d+CJmQN6My/mYVpo82t/6AAAkiaGEBkqEJSWwynj8Mjtgi67bG0WxI6waKK0J97Ph5kZOHkrNkoxdPr98TihMe/p6dahgJe84EuKNYDXRNSh1mOtXjh1om/KyrYPyhvBhMy8yAxty+3PpQiIKrCaagGKrtnjk1OH0rAqqKXzEzl39hqOn7nLYugXwYxHgy8/qwP+oo4I+6IsxVF3NOxCH/uRV7lKh2HGLGmZXAJZX1Fl1twOk2oO6jkTh6omDXfcAwKFZ8gzxWZMiOcwzC4Oh4Lu6TKsxNF5F+uBnWbSNPdQotxoOC7PxYgi2fitAwRumbEOgQFapOZDbeDHq4vOSVpRCVOq+FSJ44/CSVsTQ3UCBzAirkNvEDKCzHihpncR15xPVdbU1B3KbuG5/VNlRoL8b2NbSQ2qUNKutHyb4Dm2o2MWlSVXsQLPgGsSKptI98ZvTX+etktZDg6xtAuTX/jUIlhEz4zAzLhdGT/f2ZTMLaGl7a7Gy6xiKI0ZmMwtO7ve7a8lU3wzdbba1VEcjwa2t8Of9KMZQbG0uL6kPHTm7742wvl3XBERYFFVBW/S5fGbvXNjmzZtGegO/zjl3vHc6/+vtoBlzvjeDoQ3aok/Nn8TzRXVa1OZS9w5ovbM7Hbtxf264pS09aLvm7rIt2kGAE9PliiGKHzZXM4/GLu6fzC9nyh7IZlA/y9DjiYF1oqOL2Z8CWhmWXaCs9IpBT2bJ9C6BqabBJUAZBuNAFZQ6CALlPpJlGvmKwcsLDMT3xrolpbrJRQECA6o+QgXkutCgjSTKRZgGb3gLx+7bCol21QeAvwXlUBnMZP4DAAAAAElFTkSuQmCC",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#7ea0fe",
+                lineStyle: {
+                  color: "#4f7dfb",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(242,246,255,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(164,188,254,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.right2
+          },
+          {
+            name: "3轴",
+            type: "line",
+            yAxisIndex: 1,
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADH0lEQVRIia2WzU8TQRTA3+yUtlDAUojVAySQeCCoLcQDhsSbidEbCYmpnwc/OBnjxYNnD/4L6gElqSYkxKOJZwIHo0CAGI0S2wPW0FJp+eh2d8fMdikzb2eXNfElk83Ovvd++97MezME/k289FlQLyHJambIpUAmVkXIkT/IZoYkOJlY9QZ6gMQnnmPCk4kADPYFOjDRuba7lr0WJvvXqbmTBqsWt79okbJJY4s6RLNtg5lpALDEyFRQKUU8pQLMHsXP02Px8M4Lzaic8soGFyvU8a2sx+52D9+YEyJmeH3xmogwrbKSvdrOCi/BMsJ+sKZoIb1Kknc6TmfeOtG6oHhDNGGFj1Njx8Ol98DMSCBY0wut/dYTl5Lnbs+poKo1JKOp/lBP694UGAi2kwfYWgXYLzbeo90AXUMAsd5DHWZGuO1oqn9wYWm97pVSMTpaXnp96xgUnkuwzU8ApWV1VImzAD0j0tQfSN6Lp26+AgBTjFJDpvxdi7XUM67IvGBc+DeuI4jjQ3OGBBCjtQe1dlOS9ZZcvEpBOo4PgurXBhK8YYhV65SsD9bMT5CO48PlH6fU+aCZRxMCCcGlh1NqCyMtFckb341HCdJhWmRb5RtHaIuhtX6VJrrcTd0lSMcgrV9UaiKwWS/FKryRtHid8a3vJfybWIsNH1mVb2mz8M3Fm0HfyUT4x4eni9Ss9kleqnmAMi/8zcZ7tMdd+LzwaHtu4OKTdG6jpPNgnVq0u05IccRYuY2Sufxz7/5wL30ntbb23sbwE0JrK7naJPehaG0Mp7QJHbnyaGG93PYACNX9CYIQqnOb9OWH817NG28ayxn878yBC5MzC9/r4yaN5b0Yh2mM5bkutzmwF/w1RXVaHKwldZo7TXZ3tMzPPsuc6AqNR0ntDLH0TiBgmiSyrbPw2q8tY/b8+ONsoVipOyADQQ9vBAogEXogFYaGOoe07mJmUHSex5N4jFhongkw1TIwAWh5wTBQBRUNiADFNhaKNPAVA6cXEAj3RldJqW5yQYCAgKqfUAHxnKdTPwlyERad+97C+e77HxLsqg8AfwGjFUzzzBIlRAAAAABJRU5ErkJggg==",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#ffab2b",
+                lineStyle: {
+                  color: "#ffab2b",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(255,247,253,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(255,209,139,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.right3
+          },
+          {
+            name: "4轴",
+            type: "line",
+            yAxisIndex: 1,
+            symbol:
+              "image://data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAcCAYAAAByDd+UAAADBklEQVRIia2Wy2sTYRDA59vdJNvGPonk1kNBLyJWT9Wi4M0HihTUWkUPWi0U/At67L8giHrwAbVQkKKg3gSlVm9FQURFpD5D0ybpc5PsfiuTbNbZybfJCh34SHZ2Zn478833EPB/EmbvRo1i0IehCVlnMDWuUUjTDxyakAH41LgWDgwB0V+uc8mvSwEc3BDowWhw7dnc+vmym7hglbS+sg2d+CJmQN6My/mYVpo82t/6AAAkiaGEBkqEJSWwynj8Mjtgi67bG0WxI6waKK0J97Ph5kZOHkrNkoxdPr98TihMe/p6dahgJe84EuKNYDXRNSh1mOtXjh1om/KyrYPyhvBhMy8yAxty+3PpQiIKrCaagGKrtnjk1OH0rAqqKXzEzl39hqOn7nLYugXwYxHgy8/qwP+oo4I+6IsxVF3NOxCH/uRV7lKh2HGLGmZXAJZX1Fl1twOk2oO6jkTh6omDXfcAwKFZ8gzxWZMiOcwzC4Oh4Lu6TKsxNF5F+uBnWbSNPdQotxoOC7PxYgi2fitAwRumbEOgQFapOZDbeDHq4vOSVpRCVOq+FSJ44/CSVsTQ3UCBzAirkNvEDKCzHihpncR15xPVdbU1B3KbuG5/VNlRoL8b2NbSQ2qUNKutHyb4Dm2o2MWlSVXsQLPgGsSKptI98ZvTX+etktZDg6xtAuTX/jUIlhEz4zAzLhdGT/f2ZTMLaGl7a7Gy6xiKI0ZmMwtO7ve7a8lU3wzdbba1VEcjwa2t8Of9KMZQbG0uL6kPHTm7742wvl3XBERYFFVBW/S5fGbvXNjmzZtGegO/zjl3vHc6/+vtoBlzvjeDoQ3aok/Nn8TzRXVa1OZS9w5ovbM7Hbtxf264pS09aLvm7rIt2kGAE9PliiGKHzZXM4/GLu6fzC9nyh7IZlA/y9DjiYF1oqOL2Z8CWhmWXaCs9IpBT2bJ9C6BqabBJUAZBuNAFZQ6CALlPpJlGvmKwcsLDMT3xrolpbrJRQECA6o+QgXkutCgjSTKRZgGb3gLx+7bCol21QeAvwXlUBnMZP4DAAAAAElFTkSuQmCC",
+            smooth: true,
+            symbolSize: 16,
+            itemStyle: {
+              normal: {
+                color: "#7ea0fe",
+                lineStyle: {
+                  color: "#4f7dfb",
+                  width: 1
+                },
+                areaStyle: {
+                  //color: '#94C9EC'
+                  color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
+                    {
+                      offset: 0,
+                      color: "rgba(242,246,255,0.1)"
+                    },
+                    {
+                      offset: 1,
+                      color: "rgba(164,188,254,0.5)"
+                    }
+                  ])
+                }
+              }
+            },
+            // markPoint: {
+            //   itemStyle: {
+            //     normal: {
+            //       color: "red"
+            //     }
+            //   }
+            // },
+            data: this.right4
           }
         ]
       };
@@ -724,6 +1029,60 @@ export default {
       window.addEventListener("resize", function() {
         myChart.resize();
       });
+    },
+    initEchartDate() {
+      var self = this;
+      self.$http
+        .get(this.baseUrl + "/predict?chdd=" + self.carriageNumber + "&hw=10.5")
+        .then(function(response) {
+          var res = response.data;
+          // console.log(response);
+          if (res.length != 0) {
+            self.left1 = res[0].zzw.slice(-6);
+            self.left2 = res[1].zzw.slice(-6);
+            self.left3 = res[2].zzw.slice(-6);
+            self.left4 = res[3].zzw.slice(-6);
+            self.right1 = res[0].yzw.slice(-6);
+            self.right2 = res[1].yzw.slice(-6);
+            self.right3 = res[2].yzw.slice(-6);
+            self.right4 = res[3].yzw.slice(-6);
+            for (var i = 0; i < 6; i++) {
+              // console.log(self.left1[i].toFixed(1))
+              self.left1[i] = (self.left1[i] - self.ambientTemperature).toFixed(
+                1
+              );
+              self.left2[i] = (self.left2[i] - self.ambientTemperature).toFixed(
+                1
+              );
+              self.left3[i] = (self.left3[i] - self.ambientTemperature).toFixed(
+                1
+              );
+              self.left4[i] = (self.left4[i] - self.ambientTemperature).toFixed(
+                1
+              );
+              self.right1[i] = (
+                self.right1[i] - self.ambientTemperature
+              ).toFixed(1);
+              self.right2[i] = (
+                self.right2[i] - self.ambientTemperature
+              ).toFixed(1);
+              self.right3[i] = (
+                self.right3[i] - self.ambientTemperature
+              ).toFixed(1);
+              self.right4[i] = (
+                self.right4[i] - self.ambientTemperature
+              ).toFixed(1);
+            }
+            // console.log(res);
+            self.drawLeft();
+            self.drawRight();
+          } else {
+            self.$message({
+              message: "未查询到该条记录！",
+              type: "warning"
+            });
+          }
+        });
     }
   }
 };
