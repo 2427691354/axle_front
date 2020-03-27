@@ -15,6 +15,8 @@ Vue.config.productionTip = false
 Vue.use(ElementUI)
 Vue.prototype.$http = Axios;
 
+Vue.prototype.baseUrl = "http://139.196.78.182:8620";
+
 new Vue({
   router,
   store,
