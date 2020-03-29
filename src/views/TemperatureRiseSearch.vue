@@ -70,9 +70,9 @@
         <el-table
           :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
           style="width: 100%"
-          height="13.75rem"
+          height="20.1rem"
         >
-          <el-table-column label="过车时间" prop="lcxxGcsj" width="160%"></el-table-column>
+          <el-table-column label="过车时间" prop="lcxxGcsj" width="180%"></el-table-column>
           <el-table-column label="车号" prop="lcxxCh"></el-table-column>
           <el-table-column label="轴位" prop="zxxxZw"></el-table-column>
           <el-table-column label="左温度" prop="zxxxZwd"></el-table-column>
@@ -84,7 +84,9 @@
         </el-table>
       </div>
       <!-- 分页 -->
+      <span class="total" align="right">共{{this.tableData.length}}条</span>
       <div class="pagination" align="right">
+        
         <el-pagination
           layout="prev, pager, next"
           :total="tableData.length"
@@ -92,6 +94,7 @@
           :page-size="pagesize"
           @current-change="handleCurrentChange"
         ></el-pagination>
+        
       </div>
     </div>
   </div>
@@ -208,7 +211,7 @@ export default {
       //表格数据
       tableData: [],
       currentPage: 1, //初始页
-      pagesize: 10 //    每页的数据
+      pagesize: 15 //    每页的数据
     };
   },
   mounted() {
@@ -261,7 +264,7 @@ export default {
             self.inputs.temp2 +
             "&wsyz=0&tiaojian=" +
             self.inputs.radio +
-            "&currentPage=1&size=1100"
+            "&currentPage=1&size=100000"
         )
         .then(function(response) {
           var res = response.data;
@@ -316,7 +319,7 @@ export default {
             self.inputs.temp2 +
             "&wsyz=0&tiaojian=" +
             self.inputs.radio +
-            "&currentPage=1&size=1100"
+            "&currentPage=1&size=100000"
         )
         .then(function(response) {
           var res = response.data;
@@ -399,8 +402,6 @@ export default {
       height: 1rem;
       float: left;
     }
-    .date1 {
-    }
     .text {
       margin-top: 0.25rem;
       margin-left: 1%;
@@ -451,11 +452,30 @@ export default {
   }
 }
 .table {
+  width: 100%;
   height: 26rem;
   .tableBody {
     width: 100%;
-    height: 18rem;
-    margin-bottom: 5.5rem;
+    height: 20rem;
+    margin-bottom: 3rem;
   }
+   .pagination{
+    width: 25%;
+    float: left;
+    
+   
+    
+  }
+  .total{
+    width: 74%;
+    float: left;
+    margin-top: 0.1rem;
+    font-size: 0.65rem;
+
+    
+  }
+ 
+ 
+ 
 }
 </style>

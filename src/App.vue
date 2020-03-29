@@ -30,9 +30,7 @@
           </el-menu-item>
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-menu">
-                <span class="iconfont">&#xe662;</span>
-              </i>
+              <i class="el-icon-menu"><span class="iconfont">&#xe662;</span></i>
               <span slot="title">热轴报警</span>
             </template>
             <el-menu-item index="/temperaturerisesearch">
@@ -57,10 +55,8 @@
 
           <el-submenu index="5">
             <template slot="title">
-              <i class="el-icon-menu">
-                <span class="iconfont">&#xe63b;</span>
-              </i>
-              <span slot="title">维护服务</span>
+              <i class="el-icon-menu"><span class="iconfont">&#xe63b;</span></i>
+            <span slot="title">维护服务</span>
             </template>
             <el-menu-item index="/maintenanceReminder">
               <!-- <i class="el-icon-setting"></i> -->
@@ -223,9 +219,7 @@ export default {
       font-size: 1rem;
       line-height: 2rem;
     }
-    .subitem {
-      margin-left: 1.3rem;
-    }
+    
     span {
       float: left;
       margin-left: 0.4rem;
