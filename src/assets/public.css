@@ -213,7 +213,7 @@ a:hover {
   height: inherit;
 }
 
-.MileageDetails .el-table thead,.MaintenanceReminder .el-table thead, .CumulativeReminder .el-table thead, .hotshaftwarning .el-table thead {
+.AccumulatedMileageQuery .el-table thead,.MaintenanceReminder .el-table thead, .CumulativeReminder .el-table thead, .hotshaftwarning .el-table thead {
   color: #fff !important;
   background-color: #3971C4 !important;
 }
@@ -234,10 +234,10 @@ a:hover {
   padding: 1% 0;
   text-align: center;
 }
-.MileageDetails .el-table th, .el-table tr,.MaintenanceReminder .el-table th, .el-table tr,.CumulativeReminder .el-table th, .el-table tr, .hotshaftwarning .el-table th, .el-table tr {
+.AccumulatedMileageQuery .el-table th, .el-table tr,.MaintenanceReminder .el-table th, .el-table tr,.CumulativeReminder .el-table th, .el-table tr, .hotshaftwarning .el-table th, .el-table tr {
   background-color:transparent;
 }
-.MileageDetails .el-table tbody tr:hover>td,
+.AccumulatedMileageQuery .el-table tbody tr:hover>td,
 .MaintenanceReminder .el-table tbody tr:hover>td,
 .CumulativeReminder .el-table tbody tr:hover>td,
 .hotshaftwarning .el-table tbody tr:hover>td{
@@ -327,7 +327,7 @@ a:hover {
 .StatisticalReports .el-input, .hotshaftwarning .el-input{
   font-size: 0.5rem;
 }
-.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.MileageDetails .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner {
+.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner {
   border-radius: 0px;
   border: 1px solid #5282c8;
   color: #606266;
@@ -342,7 +342,7 @@ a:hover {
 .AxleTemAnaysis .el-input__prefix{
   margin-top: -1px;
 }
-.VehicleTemAnaysis .el-input__icon,.AxleTemAnaysis .el-input__icon,.MileageDetails .el-input__icon,.AccumulatedMileageQuery .el-input__icon,.StatisticalReports .timest .el-input__icon,.hotshaftwarning .time .el-input__icon{
+.VehicleTemAnaysis .el-input__icon,.AxleTemAnaysis .el-input__icon,.AccumulatedMileageQuery .el-input__icon,.StatisticalReports .timest .el-input__icon,.hotshaftwarning .time .el-input__icon{
     height: 1rem;
     width: 1rem;
     background-color: #3970C3;
@@ -385,7 +385,7 @@ a:hover {
   padding: 0.8% 0;
   text-align: center;
 }
-.MileageDetails .botton_2 .el-button,.CumulativeReminder .botton_1 .el-button{
+.AccumulatedMileageQuery .botton_2 .el-button,.CumulativeReminder .botton_1 .el-button{
   height: 1.5rem;
   font-size: 0.5rem;
   line-height: 0;
@@ -409,7 +409,7 @@ a:hover {
   line-height: 20%;
 }
 
-.MileageDetails .table_5 .el-table td, .el-table th{
+.AccumulatedMileageQuery .table_5 .el-table td, .el-table th{
   text-align: center;
 }
 
