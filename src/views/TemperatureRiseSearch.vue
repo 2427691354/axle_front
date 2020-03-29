@@ -5,11 +5,11 @@
       <div class="text">筛选:</div>
       <div class="date">
         <div class="date1">
-          <el-date-picker v-model="inputs.startDate" type="date" size="mini"></el-date-picker>
+          <el-date-picker v-model="inputs.startDate" type="date" size="mini" value-format="yyyy-MM-dd"></el-date-picker>
         </div>
         <div class="text">--</div>
         <div class="date2">
-          <el-date-picker v-model="inputs.endDate" type="date" size="mini"></el-date-picker>
+          <el-date-picker v-model="inputs.endDate" type="date" size="mini" value-format="yyyy-MM-dd"></el-date-picker>
         </div>
       </div>
 
@@ -144,7 +144,7 @@ export default {
               value: "大家洼上行",
               label: "大家洼上行"
             },
-            {
+             {
               value: "昌邑上行",
               label: "昌邑上行"
             },
@@ -218,6 +218,8 @@ export default {
     inputs: {
       //深度监听，可监听到对象、数组的变化
       handler(oldVal) {
+        console.log(oldVal.startDate);
+        console.log(oldVal.endDate)
         if (oldVal.station[1] == undefined) {
           this.searchAll();
         } else {
