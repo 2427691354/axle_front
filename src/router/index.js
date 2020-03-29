@@ -8,10 +8,6 @@ import MaintenanceServices from '../views/MaintenanceServices.vue'
 import TemperatureRiseForecast from '../views/TemperatureRiseForecast.vue'
 import TemperatureRiseSearch from '../views/TemperatureRiseSearch.vue'
 import MaintenanceReminder from '../views/MaintenanceReminder.vue'
-import CumulativeReminder from '../views/MaintenanceService/CumulativeReminder.vue'
-import HotShaftReminder from '../views/MaintenanceService/HotShaftReminder.vue'
-import TrainNumTempRiseReminder from '../views/MaintenanceService/TrainNumTempRiseReminder.vue'
-import VehicleTempRiseReminder from '../views/MaintenanceService/VehicleTempRiseReminder.vue'
 import AccumulatedMileageQuery from '../views/AccumulatedMileageQuery.vue'
 import MileageDetails from '../views/AccumulatedMileageQuerys/MileageDetails.vue'
 import VehicleTemAnaysis from '../views/VehicleTemAnaysis.vue'
@@ -59,28 +55,6 @@ const routes = [
     path: '/maintenanceReminder',
     name: 'MaintenanceReminder',
     component: MaintenanceReminder,
-    children: [
-      {
-        path: '/cumulativeReminder',
-        name: 'CumulativeReminder',
-        component: CumulativeReminder,
-      },
-      {
-        path: '/hotShaftReminder',
-        name: 'HotShaftReminder',
-        component: HotShaftReminder
-      },
-      {
-        path: '/trainNumTempRiseReminder',
-        name: 'TrainNumTempRiseReminder',
-        component: TrainNumTempRiseReminder
-      },
-      {
-        path: '/vehicleTempRiseReminder',
-        name: 'VehicleTempRiseReminder',
-        component: VehicleTempRiseReminder
-      }
-    ]
   },
   {
     path: '/accumulatedMileageQuery',
