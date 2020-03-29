@@ -4,7 +4,6 @@ import Index from '../views/Index.vue'
 import DataBrowsing from '../views/DataBrowsing.vue'
 import HistoricalHotAxisAlarm from '../views/HistoricalHotAxisAlarm.vue'
 import StatisticalReports from '../views/StatisticalReports.vue'
-import MaintenanceServices from '../views/MaintenanceServices.vue'
 import TemperatureRiseForecast from '../views/TemperatureRiseForecast.vue'
 import TemperatureRiseSearch from '../views/TemperatureRiseSearch.vue'
 import MaintenanceReminder from '../views/MaintenanceReminder.vue'
@@ -35,11 +34,6 @@ const routes = [
     path: '/statisticalreports',
     name: 'StatisticalReports',
     component: StatisticalReports
-  },
-  {
-    path: '/maintenanceservices',
-    name: 'MaintenanceServices',
-    component: MaintenanceServices
   },
   {
     path: '/temperatureriseforecast',
