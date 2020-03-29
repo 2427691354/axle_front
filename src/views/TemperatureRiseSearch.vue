@@ -70,7 +70,7 @@
         <el-table
           :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
           style="width: 100%"
-          height="20rem"
+          height="20.1rem"
         >
           <el-table-column label="过车时间" prop="lcxxGcsj" width="180%"></el-table-column>
           <el-table-column label="车号" prop="lcxxCh"></el-table-column>
@@ -84,10 +84,9 @@
         </el-table>
       </div>
       <!-- 分页 -->
-      <div class="total"  align="right">
-        共{{this.tableData.length}}条
-      </div>
+      <span class="total" align="right">共{{this.tableData.length}}条</span>
       <div class="pagination" align="right">
+        
         <el-pagination
           layout="prev, pager, next"
           :total="tableData.length"
@@ -95,6 +94,7 @@
           :page-size="pagesize"
           @current-change="handleCurrentChange"
         ></el-pagination>
+        
       </div>
     </div>
   </div>
@@ -452,22 +452,30 @@ export default {
   }
 }
 .table {
+  width: 100%;
   height: 26rem;
   .tableBody {
     width: 100%;
-    height: 18rem;
-    margin-bottom: 5.5rem;
+    height: 20rem;
+    margin-bottom: 3rem;
   }
    .pagination{
-    width: 24%;
+    width: 25%;
     float: left;
+    
+   
+    
   }
   .total{
-    margin-top: 0.1rem;
-    font-size: 0.7rem;
     width: 74%;
     float: left;
+    margin-top: 0.1rem;
+    font-size: 0.65rem;
+
+    
   }
+ 
+ 
  
 }
 </style>
