@@ -327,7 +327,7 @@ a:hover {
 .StatisticalReports .el-input, .hotshaftwarning .el-input{
   font-size: 0.5rem;
 }
-.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner {
+.hotshaftwarning .el-input__inner,.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner {
   border-radius: 0px;
   border: 1px solid #5282c8;
   color: #606266;
@@ -362,16 +362,15 @@ a:hover {
 
 .StatisticalReports .timest .el-input__prefix,
 .hotshaftwarning .time .el-input__prefix, .el-input__suffix {
-  width: 20%;
+  width: 15%;
 }
 .StatisticalReports .stationst .el-input__icon,
 .hotshaftwarning .station .el-input__icon{
   line-height: 20%;
   margin-left: -3rem;
 }
-.StatisticalReports .stationst .el-input__inner,
-.hotshaftwarning .station .el-input__inner{
-  width: 55%;
+.StatisticalReports .stationst .el-input__inner{
+  width: 70%;
 }
 .CumulativeReminder .box .el-input__inner{
   border-radius: 0px;
@@ -456,8 +455,8 @@ a:hover {
   padding-right: 20%;
 }
 .TemperatureRiseSearch .el-input__inner,
-.databrowsing .el-input__inner,
-.hotshaftwarning .el-input__inner{
+.databrowsing .el-input__inner
+{
   border-radius: 2px;
   border:1px #abc2e8 solid;
 }
@@ -477,6 +476,9 @@ a:hover {
 .TemperatureRiseSearch .el-cascader--mini {
   font-size: 0.5rem;
   line-height: 0;
+}
+.hotshaftwarning .el-cascader{
+  line-height: 20%;
 }
 .TemperatureRiseSearch .el-input--mini .el-input__icon,
 .databrowsing  .el-input--mini .el-input__icon{
