@@ -26,7 +26,7 @@
           </el-menu-item>
           <el-submenu index="3">
             <template slot="title">
-              <i class="el-icon-menu"><span class="iconfont">&#xe662;</span></i>
+              <!-- <span class="el-icon-menu"><span class="iconfont">&#xe662;</span></i> -->
               <span slot="title">热轴报警</span>
             </template>
             <el-menu-item index="/temperaturerisesearch">
@@ -49,7 +49,7 @@
         
           <el-submenu index="5">
             <template slot="title">
-              <i class="el-icon-menu"><span class="iconfont">&#xe63b;</span></i>
+              <!-- <span class="el-icon-menu"><span class="iconfont">&#xe63b;</span></i> -->
             <span slot="title">维护服务</span>
             </template>
             <el-menu-item index="/maintenanceReminder">

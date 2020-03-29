@@ -6,23 +6,58 @@
     <div class="search_5">
       <div class="time_3">
         <div class="date">
-          <el-date-picker v-model="value1" type="date"></el-date-picker>
+          <el-date-picker v-model="start" type="date" value-format="yyyy-MM-dd"></el-date-picker>
         </div>
         <div class="text">--</div>
         <div class="date">
-          <el-date-picker v-model="value1" type="date"></el-date-picker>
+          <el-date-picker v-model="end" type="date" value-format="yyyy-MM-dd"></el-date-picker>
         </div>
       </div>
       <div class="carnum">
-        <el-input v-model="input_1" placeholder="车厢编号"></el-input>
+        <el-input v-model="cars" placeholder="车厢编号"></el-input>
       </div>
       <div class="bot_4">
-        <el-button type="danger" round>搜索</el-button>
+        <el-button type="danger" round @click="mileageDate">搜索</el-button>
+      </div>
+      <div class="boxblock" v-if="showblock">
+        <span class="demonstration">里程范围</span>
+        <div class="block">
+          <el-slider v-model="inputs.rangeblock" :step="1000" :max="20000" show-stops range :marks="marks"></el-slider>
+        </div>
       </div>
     </div>
-    <div class="content_3">
+    <div class="content_3" v-show="showfun">
       <!-- 漏斗图 -->
       <div id="funnel"></div>
+    </div>
+    <div class="content_4" v-if="showtable">
+      <div class="table_5">
+        <el-table
+          :data="tableData.slice((currentpage-1)*pagesize,currentpage*pagesize)"
+          height="21rem"
+          :summary-method="getSummaries"
+          show-summary
+          style="width: 100%; margin-top: 20px"
+        >
+          <el-table-column prop="car" label="车型"></el-table-column>
+          <el-table-column prop="number" label="车厢编号"></el-table-column>
+          <el-table-column prop="total" label="行驶累计里程"></el-table-column>
+        </el-table>
+      </div>
+      <div class="botton_2">
+        <el-button type="danger" @click="backIndex">返回</el-button>
+      </div>
+      <div class="pages_1">
+        <el-pagination
+          background
+          layout="prev, pager, next"
+          :total="this.sumnum"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          :current-page="currentpage"
+        ></el-pagination>
+        <span>共{{this.sumnum}}条</span>
+      </div>
     </div>
   </div>
 </template>
@@ -30,10 +65,52 @@
 import echarts from "echarts";
 export default {
   data() {
-    return {};
+    return {
+      start: "2019-2-1",
+      end: "2019-2-28",
+      cars: "",
+      cardata: [],
+      carlabel: [],
+      carname: "",
+      marks: {
+        0: "0",
+        5000: "5000km",
+        10000: "10000km",
+        20000: {
+          style: {
+            color: "#1989FA"
+          },
+          label: this.$createElement("strong", "20000km")
+        }
+      },
+      tableData: [],
+      currentpage: 1,
+      pagesize: 20,
+      showblock: false,
+      showtable: false,
+      showfun: true,
+      inputs: {
+        rangeblock: [0, 20000]
+      },
+      sumnum: ""
+    };
+  },
+  watch: {
+    inputs: {
+      //深度监听，可监听到对象、数组的变化
+      handler() {
+        this.mileageDate();
+      },
+      deep: true
+    }
   },
   mounted() {
+    //图表
     this.carQuery();
+    //图表数据
+    this.mileageDate();
+    //表格数据
+    this.tablesDate();
   },
   methods: {
     carQuery() {
@@ -66,18 +143,7 @@ export default {
             color: "#000"
           },
           itemHeight: 2,
-          data: [
-            "C64",
-            "C62G",
-            "C64K",
-            "GH70G",
-            "C70",
-            "CX64",
-            "GN70",
-            "G17K",
-            "G178K",
-            "C77"
-          ]
+          data: this.carlabel
         },
         grid: {
           top: 10,
@@ -101,48 +167,7 @@ export default {
               position: "inside",
               formatter: "{b}  ({c}km)"
             },
-            data: [
-              {
-                value: 702745,
-                name: "C64"
-              },
-              {
-                value: 608097,
-                name: "C62G"
-              },
-              {
-                value: 600234,
-                name: "C64K"
-              },
-              {
-                value: 539259,
-                name: "GH70G"
-              },
-              {
-                value: 451671,
-                name: "C70"
-              },
-              {
-                value: 309159,
-                name: "CX64"
-              },
-              {
-                value: 195804,
-                name: "GN70"
-              },
-              {
-                value: 98068,
-                name: "G17K"
-              },
-              {
-                value: 17578,
-                name: "G178K"
-              },
-              {
-                value: 6661,
-                name: "C77"
-              }
-            ]
+            data: this.cardata
           },
 
           {
@@ -187,63 +212,146 @@ export default {
                 opacity: 1
               }
             },
-            data: [
-              {
-                value: 702745,
-                name: "C64"
-              },
-              {
-                value: 608097,
-                name: "C62G"
-              },
-              {
-                value: 600234,
-                name: "C64K"
-              },
-              {
-                value: 539259,
-                name: "GH70G"
-              },
-              {
-                value: 451671,
-                name: "C70"
-              },
-              {
-                value: 309159,
-                name: "CX64"
-              },
-              {
-                value: 195804,
-                name: "GN70"
-              },
-              {
-                value: 98068,
-                name: "G17K"
-              },
-              {
-                value: 17578,
-                name: "G178K"
-              },
-              {
-                value: 6661,
-                name: "C77"
-              }
-            ]
+            data: this.cardata
           }
         ]
       };
       myChart.setOption(option);
+      var self = this;
       myChart.on("click", function(param) {
-        var name = param.name;
-        if (name == "C64") {
-          parent.location.href = "/#/mileageDetails";
-        } else if (name == "C62G") {
-          parent.location.href = "/#/mileageDetails";
-        }
+        self.carname = param.name;
+        self.tablesDate();
+        self.showblock = true;
+        self.showtable = true;
+        self.showfun = false;
+        self.carQuery();
       });
       window.addEventListener("resize", function() {
         myChart.resize();
       });
+    },
+    mileageDate() {
+      var self = this;
+      //漏斗图数据
+      self.$http
+        .get(this.baseUrl + "/sumGroupByCx", {
+          params: {
+            start: self.start,
+            end: self.end
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          self.cardata = res;
+          for (var i = 0; i < res.length; i++) {
+            self.carlabel.push(res[i].name);
+          }
+          // console.log(self.carlabel);
+          self.carQuery();
+        });
+
+      // console.log(self.inputs.rangeblock[1]);
+
+      //绑定里程范围查询表格数据
+      self.$http
+        .get(this.baseUrl + "/findByCxOrCh", {
+          params: {
+            clxx_chdd: self.cars,
+            currentPage: 1,
+            size: 20,
+            start: self.inputs.rangeblock[0],
+            end: self.inputs.rangeblock[1],
+            s: self.start,
+            e: self.end
+          }
+        })
+        .then(function(response) {
+          var res2 = response.data;
+          // console.log(res);
+          self.sumnum = res2.total;
+          // console.log(self.sumnum);
+          self.tableData = [];
+          for (var i = 0; i < res2.rows.length; i++) {
+            self.tableData.push({
+              car: res2.rows[i].CLXX_CXCHAR,
+              number: res2.rows[i].CLXX_CHDD,
+              total: res2.rows[i].sum
+            });
+          }
+        });
+    },
+    tablesDate() {
+      var self = this;
+      // console.log(self.carname)
+      self.$http
+        .get(this.baseUrl + "/findByCxOrCh", {
+          params: {
+            clxx_cx: self.carname,
+            currentPage: 1,
+            size: 200,
+            start: 0,
+            end: 20000,
+            s: self.start,
+            e: self.end
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          // console.log(res);
+          self.sumnum = res.total;
+          // console.log(self.sumnum);
+          self.tableData = [];
+          for (var i = 0; i < res.rows.length; i++) {
+            self.tableData.push({
+              car: res.rows[i].CLXX_CXCHAR,
+              number: res.rows[i].CLXX_CHDD,
+              total: res.rows[i].sum
+            });
+          }
+        });
+    },
+    getSummaries(param) {
+      //   const { columns, data } = param;
+      const { columns } = param;
+      const sums = [];
+      columns.forEach((column, index) => {
+        if (index === 0) {
+          sums[index] = "合计行驶里程";
+          return;
+        }
+        // const values = data.map(item => Number(item[column.property]));
+        // if (!values.every(value => isNaN(value))) {
+        //   sums[index] = values.reduce((prev, curr) => {
+        //     const value = Number(curr);
+        //     if (!isNaN(value)) {
+        //       return prev + curr;
+        //     } else {
+        //       return prev;
+        //     }
+        //   }, 0);
+        //   sums[index] += " 元";
+        // } else {
+        //   sums[index] = "N/A";
+        // }
+      });
+
+      return sums;
+    },
+    backIndex() {
+      // this.$router.push("/accumulatedMileageQuery");
+      var self = this;
+      self.showblock = false;
+      self.showtable = false;
+      self.showfun = true;
+    },
+    handleSizeChange: function(size) {
+      this.pagesize = size;
+      this.currentpage = 1;
+      console.log(this.pagesize); //每页下拉显示数据
+    },
+    handleCurrentChange: function(currentpage) {
+      this.currentpage = currentpage;
+      console.log(this.currentpage); //点击第几页
     }
   }
 };
@@ -275,7 +383,7 @@ export default {
     float: left;
     line-height: 2.3rem;
     margin-left: 3%;
-     .date {
+    .date {
       width: 30%;
       height: 1rem;
       float: left;
@@ -292,12 +400,26 @@ export default {
   .carnum {
     width: 15%;
     line-height: 2.3rem;
-    margin-left: -10%;
+    margin-left: -13%;
     float: left;
   }
   .bot_4 {
     width: 6%;
     line-height: 2.3rem;
+    margin-left: -1%;
+    float: left;
+  }
+  span {
+    width: 5%;
+    height: inherit;
+    font-size: 0.5rem;
+    padding-top: 1.8%;
+    float: left;
+  }
+  .block {
+    width: 45%;
+    padding-left: 1%;
+    padding-top: 1%;
     float: left;
   }
 }
@@ -311,6 +433,38 @@ export default {
   #funnel {
     width: 100%;
     height: 24rem;
+  }
+}
+.content_4 {
+  height: 25.5rem;
+  width: 98%;
+  background-color: #ffffff;
+  margin-top: 0.8%;
+  transform: translate(1%, 0);
+  box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
+  .table_5 {
+    height: 21.6rem;
+  }
+  .botton_2 {
+    width: 10%;
+    // height: 2rem;
+    position: absolute;
+    margin-top: 3%;
+  }
+
+  .pages_1 {
+    width: 40%;
+    margin-top: 3.2%;
+    position: absolute;
+    margin-left: 60%;
+    span {
+      width: 10%;
+      height: inherit;
+      font-size: 0.5rem;
+      position: absolute;
+      margin-left: 25%;
+      margin-top: -5%;
+    }
   }
 }
 </style>
