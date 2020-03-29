@@ -189,7 +189,7 @@ a:hover {
 .TemperatureRiseSearch .el-pager li {
   padding: 0 ;
   font-size: 0.45rem;
-  min-width: 27px;
+  min-width: 1rem;
   height: 1.05rem;
   line-height: 1.05rem;
   border-top: 1px #dddddd solid;
@@ -198,6 +198,7 @@ a:hover {
 }
 .index .el-pager li.active,
 .TemperatureRiseSearch .el-pager li.active{
+
   background-color: #337ab7;
   color:#fff;
 }
@@ -574,4 +575,7 @@ a:hover {
 }
 .MaintenanceReminder .el-tabs__header{
   padding: 1%;
+}
+.el-pager .more::before {
+  line-height: 0;
 }
