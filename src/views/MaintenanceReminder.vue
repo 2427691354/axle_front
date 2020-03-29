@@ -64,11 +64,11 @@
               <div class="search_3">
                 <span>温升阈值</span>
                 <div class="tem">
-                  <el-input v-model="temnum" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.temnum" placeholder="请输入内容"></el-input>
                 </div>
                 <span>达到次数</span>
                 <div class="nums">
-                  <el-input v-model="numbers" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.numbers" placeholder="请输入内容"></el-input>
                 </div>
                 <div class="bot_3">
                   <el-button type="danger" round @click="mRemind">搜索</el-button>
@@ -89,11 +89,11 @@
               <div class="search_4">
                 <span>温升阈值</span>
                 <div class="tem">
-                  <el-input v-model="temnum" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.temnum" placeholder="请输入内容"></el-input>
                 </div>
                 <span>达到次数</span>
                 <div class="nums">
-                  <el-input v-model="numbers" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.numbers" placeholder="请输入内容"></el-input>
                 </div>
                 <div class="bot_3">
                   <el-button type="danger" round @click="mRemind">搜索</el-button>
@@ -159,10 +159,12 @@ export default {
           info: "微热"
         }
       ],
-      //温升阈值
-      temnum: "10",
-      //达到次数
-      numbers: "2",
+      inputs: {
+        //温升阈值
+        temnum: "10",
+        //达到次数
+        numbers: "2"
+      },
       //词云数据
       focusonInfo: [],
       //车辆温升下拉数据
@@ -232,8 +234,8 @@ export default {
           label: "G60K"
         }
       ],
+      //车型选择
       carvalue: "",
-
       //车次温升提醒折线图数据
       //标签
       tlabels: [],
@@ -244,11 +246,11 @@ export default {
       //车辆温升表格数据
       tableInline: "",
       tableData2: [],
+      //车辆温升折线图
       //标签
       clabels: [],
       cseries: [],
-      clegend: [],
-
+      clegend: []
     };
   },
   watch: {
@@ -281,8 +283,8 @@ export default {
         .get(this.baseUrl + "/updateLcYz", {
           params: {
             lcyz: self.yuzhi,
-            lxcs: self.numbers,
-            wsyz: self.temnum
+            lxcs: self.inputs.numbers,
+            wsyz: self.inputs.temnum
           }
         })
         .then(function(response) {
@@ -492,11 +494,13 @@ export default {
           // console.log(self.carData);
         });
     },
+    //点击维护
     deleteRow(index) {
       //删除
       this.carData.splice(index, 1);
       // console.log(index);
     },
+    //点击全部维护
     deleteAll() {
       this.carData = [];
     },
@@ -578,7 +582,7 @@ export default {
           top: "10%",
           right: "5%",
           selectedMode: "single",
-          data:this.tlegend
+          data: this.tlegend
         },
         grid: {
           top: "20%",
@@ -607,7 +611,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "温升|绿-右温升("+this.focusonInfo[0].name+")",
+          name: "温升|绿-右温升(" + this.focusonInfo[0].name + ")",
           splitLine: {
             lineStyle: {
               color: "#DDD"
@@ -642,7 +646,7 @@ export default {
           top: "10%",
           right: "5%",
           selectedMode: "single",
-          data:this.clegend
+          data: this.clegend
         },
         grid: {
           top: "20%",
@@ -665,9 +669,6 @@ export default {
               color: "#DDD"
             }
           }
-          // axisLabel:{
-          //   interval:0
-          // }
         },
         yAxis: {
           type: "value",
@@ -762,9 +763,10 @@ export default {
             );
             self.clegend.push(res[i].ZXXX_ZW + "轴");
           }
-          // console.log(self.clegend);
+          console.log(self.cseries);
           self.lineTem2();
         });
+        row.carnumber[0]='';
     }
   }
 };
