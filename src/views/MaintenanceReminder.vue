@@ -9,8 +9,8 @@
       <!-- 导航栏 -->
       <div class="navs">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="里程提醒" name="first" >
-            <div class="CumulativeReminder" v-if="'first' === activeName">
+          <el-tab-pane label="里程提醒" name="first">
+            <div class="CumulativeReminder">
               <!-- 搜索里程维护阈值 -->
               <div class="search_2">
                 <span>修护里程维护阈值</span>
@@ -39,8 +39,8 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="热轴提醒" name="second" >
-            <div class="HotShaftReminder" v-if="'second' === activeName">
+          <el-tab-pane label="热轴提醒" name="second">
+            <div class="HotShaftReminder">
               <div class="table_3">
                 <el-table :data="tableData" style="width: 100%">
                   <el-table-column prop="time" label="过车时间"></el-table-column>
@@ -58,8 +58,8 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="车次温升提醒" name="third" >
-            <div class="TrainNumTempRiseReminder" v-if="'third' === activeName">
+          <el-tab-pane label="车次温升提醒" name="third">
+            <div class="TrainNumTempRiseReminder">
               <!-- 搜索框等 -->
               <div class="search_3">
                 <span>温升阈值</span>
@@ -75,7 +75,7 @@
                 </div>
               </div>
               <!-- 图表区 -->
-              <div class="content_1">
+              <div class="content_1" v-if="'third' === activeName">
                 <!-- 词云 -->
                 <div id="wordCloud"></div>
                 <!-- 折线图 -->
@@ -83,8 +83,8 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="车辆温升提醒" name="fourth" >
-            <div class="VehicleTempRiseReminder" v-if="'fourth' === activeName">
+          <el-tab-pane label="车辆温升提醒" name="fourth">
+            <div class="VehicleTempRiseReminder">
               <!-- 搜索框等 -->
               <div class="search_4">
                 <span>温升阈值</span>
@@ -110,7 +110,7 @@
                 </div>
               </div>
               <!-- 主体 -->
-              <div class="content_3">
+              <div class="content_3" v-if="'fourth' === activeName">
                 <!-- 表格 -->
                 <div class="table_4">
                   <el-table
@@ -1031,7 +1031,6 @@ export default {
           }
           console.log(self.clegend);
           if (res.length == 1) {
-
             self.cone.zlist = res[0].zzwlist.split(",");
             self.cone.ylist = res[0].yzwlist.split(",");
             self.ctwo.zlist = [];
