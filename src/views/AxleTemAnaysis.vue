@@ -4,20 +4,20 @@
       <div class="title_1">车型轴温统计分析</div>
     </div>
     <!-- 时间搜索 -->
-    <div class="search_7">
+     <div class="search_8">
       <div class="time_4">
         <span>起止时间</span>
         <div class="date">
-          <el-date-picker v-model="value1" type="date"></el-date-picker>
+          <el-date-picker v-model="inputs.value1" type="date"></el-date-picker>
         </div>
         <div class="text">--</div>
         <div class="date">
-          <el-date-picker v-model="value1" type="date"></el-date-picker>
+          <el-date-picker v-model="inputs.value2" type="date"></el-date-picker>
         </div>
       </div>
     </div>
     <!-- 图表 -->
-    <div class="content_4">
+    <div class="content_5">
       <!-- 车型温升统计分析柱形图 -->
       <div id="barcar"></div>
 
@@ -34,172 +34,57 @@
 import echarts from "echarts";
 export default {
   data() {
-    return {};
+    return {
+      inputs: {
+        value1: "2019-02-01",
+        value2: "2019-02-28"
+      },
+      //标签
+      labels: [],
+      //左平均轴温
+      avgz: [],
+      //右均轴温
+      avgy: [],
+      //左方差
+      fcz: [],
+      //右方差
+      fcy: [],
+
+      //上行
+      xlabels: [],
+      tavgz: [],
+      tavgy: [],
+      tfcz: [],
+      tfcy: [],
+
+      //下行
+      ylabels:[],
+      bavgz:[],
+      bavgy:[],
+      bfcz:[],
+      bfcy:[]
+    };
+  },
+  watch: {
+    inputs: {
+      //深度监听，可监听到对象、数组的变化
+      handler() {
+        this.dataInfo();
+      },
+      deep: true
+    }
   },
   mounted() {
     this.cartemBar();
     this.cartemTop();
     this.cartemBottom();
+    //后台数据获取
+    this.dataInfo();
   },
   methods: {
     cartemBar() {
       var myChart = echarts.init(document.getElementById("barcar"));
-      var myData = [
-        "C62A*K",
-        "C62A*T",
-        "C62AT",
-        "C62BK",
-        "C62BT",
-        "C64H",
-        "C64K",
-        "C64T",
-        "C70",
-        "C70E",
-        "C70EH",
-        "C70H",
-        "G17BK",
-        "G17BKY",
-        "G17BT",
-        "G17K",
-        "G17T",
-        "GN70",
-        "NX70",
-        "NX70A",
-        "P62K",
-        "P62NK",
-        "P63K",
-        "P64AK",
-        "P64AT",
-        "P64GK",
-        "P64K",
-        "P70",
-        "X70"
-      ];
-      var databeast = [
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        392,
-        392,
-        153,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297
-      ];
-      var databeauty = [
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        291,
-        185,
-        203,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196
-      ];
-      var databeast1 = [
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        392,
-        392,
-        153,
-        214,
-        133,
-        370,
-        268,
-        360,
-        185,
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297
-      ];
-      var databeauty1 = [
-        121,
-        388,
-        233,
-        309,
-        133,
-        308,
-        297,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        291,
-        185,
-        203,
-        283,
-        349,
-        273,
-        229,
-        238,
-        224,
-        389,
-        259,
-        262,
-        324,
-        232,
-        176,
-        196
-      ];
-
+      var myData = this.labels;
       var option = {
         baseOption: {
           title: {
@@ -437,7 +322,7 @@ export default {
                   color: "#FD5916"
                 }
               },
-              data: databeast
+              data: this.avgz
             },
             {
               name: "右均轴温",
@@ -464,9 +349,8 @@ export default {
                   color: "#01A4F7"
                 }
               },
-              data: databeauty1
+              data: this.avgy
             },
-
             {
               name: "左方差",
               type: "bar",
@@ -494,7 +378,7 @@ export default {
                   color: "#7E47FF"
                 }
               },
-              data: databeauty
+              data: this.fcz
             },
             {
               name: "右方差",
@@ -523,7 +407,7 @@ export default {
                   color: "#2EDDCD"
                 }
               },
-              data: databeast1
+              data: this.fcy
             }
           ]
         }
@@ -548,14 +432,6 @@ export default {
             }
           }
         },
-        // toolbox: {
-        //     feature: {
-        //         dataView: {show: true, readOnly: false},
-        //         magicType: {show: true, type: ['line', 'bar']},
-        //         restore: {show: true},
-        //         saveAsImage: {show: true}
-        //     }
-        // },
         grid: [
           {
             x: "7%",
@@ -590,41 +466,13 @@ export default {
               alignWithLabel: true
             },
             axisLabel: {
-              //interval:showNum,  //x轴显示的数量，我这里是动态算的
-              rotate: -40
+              interval: 0, //全部显示
+              rotate: -40,
+              textStyle: {
+                fontSize:'35%'
+              }
             },
-            data: [
-              "C62A*K",
-              "C62A*T",
-              "C62AT",
-              "C62BK",
-              "C62BT",
-              "C64H",
-              "C64K",
-              "C64T",
-              "C70",
-              "C70E",
-              "C70EH",
-              "C70H",
-              "G17BK",
-              "G17BKY",
-              "G17BT",
-              "G17K",
-              "G17T",
-              "GN70",
-              "NX70",
-              "NX70A",
-              "P62K",
-              "P62NK",
-              "P63K",
-              "P64AK",
-              "P64AT",
-              "P64GK",
-              "P64K",
-              "P70",
-              "X70",
-              "Y"
-            ]
+            data: this.xlabels
           },
           {
             type: "category",
@@ -633,47 +481,21 @@ export default {
               alignWithLabel: true
             },
             axisLabel: {
-              //interval:showNum,
-              rotate: -40
+              interval: 0,
+              rotate: -40,
+              textStyle: {
+                fontSize:'35%'
+              }
             },
-            data: [
-              "C62A*K",
-              "C62A*T",
-              "C62AT",
-              "C62BK",
-              "C62BT",
-              "C64H",
-              "C64K",
-              "C64T",
-              "C70",
-              "C70E",
-              "C70EH",
-              "C70H",
-              "G17BK",
-              "G17BKY",
-              "G17BT",
-              "G17K",
-              "G17T",
-              "GN70",
-              "NX70",
-              "NX70A",
-              "P62K",
-              "P62NK",
-              "P63K",
-              "P64AK",
-              "P64AT",
-              "P64GK",
-              "P64K",
-              "P70",
-              "X70",
-              "Y"
-            ]
+            data: this.xlabels
           }
         ],
         //y轴，不管有几个x轴，几个y轴，或者图，只要找到他对应的grid图的序号索引就可以精准匹配
         yAxis: [
           {
             type: "value",
+            min:0,
+            max:15,
             gridIndex: 1, //对应前面grid的索引位置（第二个）
             name: "左方差",
             //nameLocation:'end',
@@ -691,6 +513,8 @@ export default {
           },
           {
             type: "value",
+            min:0,
+            max:15,
             gridIndex: 1,
             nameLocation: "middle",
             name: "右方差",
@@ -748,7 +572,6 @@ export default {
             }
           }
         ],
-
         series: [
           {
             name: "左均温升",
@@ -762,38 +585,7 @@ export default {
                 color: "#f8f106"
               }
             },
-            data: [
-              28,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              11
-            ]
+            data: this.tavgz
           },
           {
             name: "右均温升",
@@ -805,38 +597,7 @@ export default {
                 color: "#fe7576"
               }
             },
-            data: [
-              45,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              13
-            ]
+            data: this.tavgy
           },
           {
             name: "左方差",
@@ -848,38 +609,7 @@ export default {
                 color: "#A9B0D3"
               }
             },
-            data: [
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              47,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              15
-            ]
+            data: this.tfcz
           },
           {
             name: "右方差",
@@ -891,38 +621,7 @@ export default {
                 color: "#4E74D5"
               }
             },
-            data: [
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              47,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              8
-            ]
+            data: this.tfcy
           }
         ]
       };
@@ -946,14 +645,6 @@ export default {
             }
           }
         },
-        // toolbox: {
-        //     feature: {
-        //         dataView: {show: true, readOnly: false},
-        //         magicType: {show: true, type: ['line', 'bar']},
-        //         restore: {show: true},
-        //         saveAsImage: {show: true}
-        //     }
-        // },
         grid: [
           {
             x: "7%",
@@ -988,41 +679,10 @@ export default {
               alignWithLabel: true
             },
             axisLabel: {
-              //interval:showNum,  //x轴显示的数量，我这里是动态算的
+              interval:0, 
               rotate: -40
             },
-            data: [
-              "C62A*K",
-              "C62A*T",
-              "C62AT",
-              "C62BK",
-              "C62BT",
-              "C64H",
-              "C64K",
-              "C64T",
-              "C70",
-              "C70E",
-              "C70EH",
-              "C70H",
-              "G17BK",
-              "G17BKY",
-              "G17BT",
-              "G17K",
-              "G17T",
-              "GN70",
-              "NX70",
-              "NX70A",
-              "P62K",
-              "P62NK",
-              "P63K",
-              "P64AK",
-              "P64AT",
-              "P64GK",
-              "P64K",
-              "P70",
-              "X70",
-              "Y"
-            ]
+            data: this.ylabels
           },
           {
             type: "category",
@@ -1031,41 +691,10 @@ export default {
               alignWithLabel: true
             },
             axisLabel: {
-              //interval:showNum,
+              interval:0,
               rotate: -40
             },
-            data: [
-              "C62A*K",
-              "C62A*T",
-              "C62AT",
-              "C62BK",
-              "C62BT",
-              "C64H",
-              "C64K",
-              "C64T",
-              "C70",
-              "C70E",
-              "C70EH",
-              "C70H",
-              "G17BK",
-              "G17BKY",
-              "G17BT",
-              "G17K",
-              "G17T",
-              "GN70",
-              "NX70",
-              "NX70A",
-              "P62K",
-              "P62NK",
-              "P63K",
-              "P64AK",
-              "P64AT",
-              "P64GK",
-              "P64K",
-              "P70",
-              "X70",
-              "Y"
-            ]
+            data: this.ylabels
           }
         ],
         //y轴，不管有几个x轴，几个y轴，或者图，只要找到他对应的grid图的序号索引就可以精准匹配
@@ -1160,38 +789,7 @@ export default {
                 color: "#f8f106"
               }
             },
-            data: [
-              28,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              11
-            ]
+            data: this.bavgz
           },
           {
             name: "右均温升",
@@ -1203,38 +801,7 @@ export default {
                 color: "#fe7576"
               }
             },
-            data: [
-              45,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              13
-            ]
+            data: this.bavgy
           },
           {
             name: "左方差",
@@ -1246,38 +813,7 @@ export default {
                 color: "#A9B0D3"
               }
             },
-            data: [
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              47,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              15
-            ]
+            data: this.bfcz
           },
           {
             name: "右方差",
@@ -1289,38 +825,7 @@ export default {
                 color: "#4E74D5"
               }
             },
-            data: [
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              47,
-              8,
-              13,
-              16,
-              18,
-              11,
-              25,
-              29,
-              13,
-              16,
-              18,
-              11,
-              28,
-              23,
-              8,
-              18,
-              17,
-              30,
-              22,
-              30,
-              43,
-              2,
-              10,
-              8
-            ]
+            data: this.bfcy
           }
         ]
       };
@@ -1328,6 +833,78 @@ export default {
       window.addEventListener("resize", function() {
         myChart.resize();
       });
+    },
+    dataInfo() {
+      var self = this;
+      self.$http
+        .get(this.baseUrl + "/TempStatisticalAnalysis", {
+          params: {
+            s: self.inputs.value1,
+            e: self.inputs.value2
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          console.log(res);
+          //转换为字符串并以逗号分隔split(",")
+          self.labels = res.CLXX_CXCHAR.split(",");
+          self.avgz = res.avgz.split(",");
+          self.avgy = res.avgy.split(",");
+          self.fcz = res.fcz.split(",");
+          self.fcy = res.fcy.split(",");
+          console.log(self.labels);
+
+          self.cartemBar();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+      self.$http
+        .get(this.baseUrl + "/TempStatisticalAnalysis", {
+          params: {
+            s: self.inputs.value1,
+            e: self.inputs.value2,
+            fx: "上行"
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          self.xlabels = res.CLXX_CXCHAR.split(",");
+          self.tavgz = res.avgz.split(",");
+          self.tavgy = res.avgz.split(",");
+          self.tfcz = res.fcz.split(",");
+          self.tfcy = res.fcy.split(",");
+          // console.log(self.tavgz);
+          // console.log(self.xlabels);
+          self.cartemTop();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+
+        self.$http
+        .get(this.baseUrl + "/TempStatisticalAnalysis", {
+          params: {
+            s: self.inputs.value1,
+            e: self.inputs.value2,
+            fx: "下行"
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          self.ylabels = res.CLXX_CXCHAR.split(",");
+          self.bavgz = res.avgz.split(",");
+          self.bavgy = res.avgz.split(",");
+          self.bfcz = res.fcz.split(",");
+          self.bfcy = res.fcy.split(",");
+          // console.log(self.tavgz);
+          // console.log(self.xlabels);
+          self.cartemBottom();
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };
@@ -1347,7 +924,7 @@ export default {
     padding-left: 2%;
   }
 }
-.search_7 {
+.search_8 {
   width: 98%;
   height: 2.5rem;
   background-color: #ffffff;
@@ -1380,7 +957,7 @@ export default {
     }
   }
 }
-.content_4 {
+.content_5 {
   width: 98%;
   height: 25.5rem;
   //div添加滚动条
