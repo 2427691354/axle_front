@@ -956,11 +956,14 @@ export default {
       var self = this;
       self.$http
         .get(
-          this.baseUrl + "/gcList?tczjd=" + tczJd + "&currentPage=1&size=400"
+          this.baseUrl + "/gcList?tczjd=" + tczJd + "&currentPage=1&size=4000"
         )
         .then(function(response) {
           var res = response.data;
           for (var i = 0; i < res.rows.length; i++) {
+            if(res.rows[i].LCXX_HBWJXH<10000){
+              res.rows[i].LCXX_HBWJXH = "0"+res.rows[i].LCXX_HBWJXH
+            }
             res.rows[i].LCXX_GCSJ = self.todate(res.rows[i].LCXX_GCSJ);
             // console.log(res.rows[i].LCXX_GCSJ);
           }
