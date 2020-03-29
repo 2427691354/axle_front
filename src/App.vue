@@ -213,9 +213,7 @@ export default {
       font-size: 1rem;
       line-height: 2rem;
     }
-    .subitem{
-      margin-left: 1.3rem;
-    }
+    
     span {
       float: left;
       margin-left: 0.4rem;
