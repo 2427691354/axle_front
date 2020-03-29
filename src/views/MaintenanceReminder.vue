@@ -34,7 +34,7 @@
                 </el-table>
 
                 <div class="botton_1">
-                  <el-button type="danger">全部维护</el-button>
+                  <el-button type="danger" @click="deleteAll">全部维护</el-button>
                 </div>
               </div>
             </div>
@@ -59,7 +59,7 @@
             </div>
           </el-tab-pane>
           <el-tab-pane label="车次温升提醒" name="third">
-            <div class="TrainNumTempRiseReminder">
+            <div class="TrainNumTempRiseReminder" v-if="'third' === activeName">
               <!-- 搜索框等 -->
               <div class="search_3">
                 <span>温升阈值</span>
@@ -75,7 +75,7 @@
                 </div>
               </div>
               <!-- 图表区 -->
-              <div class="content_1" v-if="'third' === activeName">
+              <div class="content_1">
                 <!-- 词云 -->
                 <div id="wordCloud"></div>
                 <!-- 折线图 -->
@@ -84,7 +84,7 @@
             </div>
           </el-tab-pane>
           <el-tab-pane label="车辆温升提醒" name="fourth">
-            <div class="VehicleTempRiseReminder">
+            <div class="VehicleTempRiseReminder" v-if="'fourth' === activeName">
               <!-- 搜索框等 -->
               <div class="search_4">
                 <span>温升阈值</span>
@@ -110,7 +110,7 @@
                 </div>
               </div>
               <!-- 主体 -->
-              <div class="content_3" v-if="'fourth' === activeName">
+              <div class="content_3">
                 <!-- 表格 -->
                 <div class="table_4">
                   <el-table
@@ -255,30 +255,14 @@ export default {
       tlabels: [],
       //图例名称
       tlegend: [],
+      tseries: [],
 
       //车辆温升表格数据
       tableInline: "",
       tableData2: [],
-      cone: {
-        zlist: [],
-        ylist: []
-      },
-      ctwo: {
-        zlist: [],
-        ylist: []
-      },
-      cthree: {
-        zlist: [],
-        ylist: []
-      },
-      cfour: {
-        zlist: [],
-        ylist: []
-      },
       //标签
       clabels: [],
-      //图例名称
-      clegend: []
+      cseries: []
     };
   },
   watch: {
@@ -292,14 +276,20 @@ export default {
         }
       },
       deep: true
+    },
+    cseries: {
+      handler() {
+        this.lineTem2();
+      },
+      deep: true
     }
   },
   mounted() {
     //搜索按钮点击更新数据
     this.mRemind();
-    this.focusOn();
-    this.lineTem();
-    this.lineTem2();
+    // this.focusOn();
+    // this.lineTem();
+    // this.lineTem2();
   },
   methods: {
     handleClick(tab, event) {
@@ -366,24 +356,55 @@ export default {
                     .then(function(response) {
                       var res = response.data;
                       self.tlabels = res[0].mclist.split(",");
-                      self.tlegend = [];
+                      self.tseries = [];
                       for (var i = 0; i < res.length; i++) {
-                        self.tlegend.push(res[i].ZXXX_ZW);
+                        self.tseries.push(
+                          {
+                            name: res[i].ZXXX_ZW + "轴",
+                            type: "line",
+                            data: res[i].zzwlist.split(","),
+                            lineStyle: {
+                              normal: {
+                                width: 2,
+                                color: "#54DAC2",
+                                shadowColor: "rgba(245,128,128, 0.5)",
+                                shadowBlur: 10,
+                                shadowOffsetY: 7
+                              }
+                            },
+                            symbol: "emptyCircle",
+                            symbolSize: 8,
+                            itemStyle: {
+                              normal: {
+                                color: "#54DAC2"
+                              }
+                            },
+                            smooth: false
+                          },
+                          {
+                            name: res[i].ZXXX_ZW + "轴",
+                            type: "line",
+                            symbol: "emptyCircle",
+                            symbolSize: 8,
+                            data: res[i].yzwlist.split(","),
+                            lineStyle: {
+                              normal: {
+                                width: 2,
+                                color: "#F9A589",
+                                shadowColor: "rgba(249,165,137, 0.5)",
+                                shadowBlur: 8,
+                                shadowOffsetY: 5
+                              }
+                            },
+                            itemStyle: {
+                              normal: {
+                                color: "#F9A589"
+                              }
+                            },
+                            smooth: false
+                          }
+                        );
                       }
-                      self.tlegend = self.tlegend.splice(",");
-                      // console.log(self.tlegend)
-                      self.tone.zlist = res[0].zzwlist.split(",");
-                      self.tone.ylist = res[0].yzwlist.split(",");
-
-                      self.tfour.zlist = res[1].zzwlist.split(",");
-                      self.tfour.ylist = res[1].yzwlist.split(",");
-
-                      self.ttwo.zlist = res[2].zzwlist.split(",");
-                      self.ttwo.ylist = res[2].yzwlist.split(",");
-
-                      self.tthree.zlist = res[3].zzwlist.split(",");
-                      self.tthree.ylist = res[3].yzwlist.split(",");
-
                       self.lineTem();
                     });
                 }
@@ -403,31 +424,67 @@ export default {
               });
 
             //车辆温升折线图
-            self.$http
-              .get(self.baseUrl + "/findWsBhByCh2", {
-                params: {
-                  clxx_ch: 211131
-                }
-              })
-              .then(function(response) {
-                var res = response.data;
-                self.clabels = res[0].gcsjlist.split(",");
-                // console.log(self.clabels);
-                self.clegend = [];
-                for (var i = 0; i < res.length; i++) {
-                  // if (res[i].ZXXX_ZW == "undefined") {
-                  //   res[i].ZXXX_ZW = "0";
-                  // }
-                  self.clegend.push(res[i].ZXXX_ZW);
-                }
-                self.cone.zlist = res[0].zzwlist.split(",");
-                self.cone.ylist = res[0].yzwlist.split(",");
-                self.ctwo.zlist = res[1].zzwlist.split(",");
-                self.ctwo.ylist = res[1].yzwlist.split(",");
-                self.cthree.zlist = res[2].zzwlist.split(",");
-                self.cthree.ylist = res[2].yzwlist.split(",");
-                self.lineTem2();
-              });
+            // self.$http
+            //   .get(self.baseUrl + "/findWsBhByCh2", {
+            //     params: {
+            //       clxx_ch: 211131
+            //     }
+            //   })
+            //   .then(function(response) {
+            //     var res = response.data;
+            //     self.clabels = res[0].gcsjlist.split(",");
+            //     self.cseries = [];
+            //     for (var i = 0; i < res.length; i++) {
+            //       self.cseries.push(
+            //         {
+            //           name: res[i].ZXXX_ZW + "轴",
+            //           type: "line",
+            //           data: res[i].zzwlist.split(","),
+            //           lineStyle: {
+            //             normal: {
+            //               width: 2,
+            //               color: "#54DAC2",
+            //               shadowColor: "rgba(245,128,128, 0.5)",
+            //               shadowBlur: 10,
+            //               shadowOffsetY: 7
+            //             }
+            //           },
+            //           symbol: "emptyCircle",
+            //           symbolSize: 8,
+            //           itemStyle: {
+            //             normal: {
+            //               color: "#54DAC2"
+            //             }
+            //           },
+            //           smooth: false
+            //         },
+            //         {
+            //           name: res[i].ZXXX_ZW + "轴",
+            //           type: "line",
+            //           symbol: "emptyCircle",
+            //           symbolSize: 8,
+            //           data: res[i].yzwlist.split(","),
+            //           lineStyle: {
+            //             normal: {
+            //               width: 2,
+            //               color: "#F9A589",
+            //               shadowColor: "rgba(249,165,137, 0.5)",
+            //               shadowBlur: 8,
+            //               shadowOffsetY: 5
+            //             }
+            //           },
+            //           itemStyle: {
+            //             normal: {
+            //               color: "#F9A589"
+            //             }
+            //           },
+            //           smooth: false
+            //         }
+            //       );
+            //     }
+
+            //     self.lineTem2();
+            //   });
           }
         });
     },
@@ -457,6 +514,9 @@ export default {
       //删除
       this.carData.splice(index, 1);
       // console.log(index);
+    },
+    deleteAll(){
+      this.carData = [];
     },
     //词云
     focusOn() {
@@ -580,188 +640,7 @@ export default {
             color: "#999"
           }
         },
-        series: [
-          {
-            name: this.tlegend[0] + "轴",
-            type: "line",
-            data: this.tone.zlist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.tlegend[0] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.tone.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 8,
-                shadowOffsetY: 5
-              }
-            },
-
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.tlegend[1] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.tfour.zlist,
-            color: "#54DAC2",
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.tlegend[1] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.tfour.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.tlegend[2] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.ttwo.zlist,
-            color: "#54DAC2",
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.tlegend[2] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.ttwo.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.tlegend[3] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.tthree.zlist,
-            color: "#54DAC2",
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.tlegend[3] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.tthree.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          }
-        ]
+        series: this.tseries
       };
       myChart.setOption(option);
       // console.log(this.tlegend[0]);
@@ -802,6 +681,9 @@ export default {
               color: "#DDD"
             }
           }
+          // axisLabel:{
+          //   interval:0
+          // }
         },
         yAxis: {
           type: "value",
@@ -821,191 +703,10 @@ export default {
             color: "#999"
           }
         },
-        series: [
-          {
-            name: this.clegend[0] + "轴",
-            type: "line",
-            data: this.cone.zlist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.clegend[0] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.cone.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 8,
-                shadowOffsetY: 5
-              }
-            },
-
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.clegend[1] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.ctwo.zlist,
-            color: "#54DAC2",
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.clegend[1] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.ctwo.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.clegend[2] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.cthree.zlist,
-            color: "#54DAC2",
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.clegend[2] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.cthree.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.clegend[3] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.cfour.zlist,
-            color: "#54DAC2",
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#54DAC2",
-                shadowColor: "rgba(245,128,128, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#54DAC2"
-              }
-            },
-            smooth: false
-          },
-          {
-            name: this.clegend[3] + "轴",
-            type: "line",
-            symbol: "emptyCircle",
-            symbolSize: 8,
-            data: this.cfour.ylist,
-            lineStyle: {
-              normal: {
-                width: 2,
-                color: "#F9A589",
-                shadowColor: "rgba(249,165,137, 0.5)",
-                shadowBlur: 10,
-                shadowOffsetY: 7
-              }
-            },
-            itemStyle: {
-              normal: {
-                color: "#F9A589"
-              }
-            },
-            smooth: false
-          }
-        ]
+        series: this.cseries
       };
       myChart.setOption(option);
-      console.log(this.clegend[0]);
+      // console.log(this.clegend[0]);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -1023,57 +724,60 @@ export default {
         })
         .then(function(response) {
           var res = response.data;
+          console.log(res);
           self.clabels = res[0].gcsjlist.split(",");
-          // console.log(self.clabels);
-          self.clegend = [];
+
+          self.cseries = [];
+
           for (var i = 0; i < res.length; i++) {
-            self.clegend.push(res[i].ZXXX_ZW);
+            self.cseries.push(
+              {
+                name: res[i].ZXXX_ZW + "轴",
+                type: "line",
+                data: res[i].zzwlist.split(","),
+                lineStyle: {
+                  normal: {
+                    width: 2,
+                    color: "#54DAC2",
+                    shadowColor: "rgba(245,128,128, 0.5)",
+                    shadowBlur: 10,
+                    shadowOffsetY: 7
+                  }
+                },
+                symbol: "emptyCircle",
+                symbolSize: 8,
+                itemStyle: {
+                  normal: {
+                    color: "#54DAC2"
+                  }
+                },
+                smooth: false
+              },
+              {
+                name: res[i].ZXXX_ZW + "轴",
+                type: "line",
+                symbol: "emptyCircle",
+                symbolSize: 8,
+                data: res[i].yzwlist.split(","),
+                lineStyle: {
+                  normal: {
+                    width: 2,
+                    color: "#F9A589",
+                    shadowColor: "rgba(249,165,137, 0.5)",
+                    shadowBlur: 8,
+                    shadowOffsetY: 5
+                  }
+                },
+                itemStyle: {
+                  normal: {
+                    color: "#F9A589"
+                  }
+                },
+                smooth: false
+              }
+            );
           }
-          console.log(self.clegend);
-          if (res.length == 1) {
-            self.cone.zlist = res[0].zzwlist.split(",");
-            self.cone.ylist = res[0].yzwlist.split(",");
-            self.ctwo.zlist = [];
-            self.ctwo.ylist = [];
-            self.cthree.zlist = [];
-            self.cthree.ylist = [];
-            self.cfour.zlist = [];
-            self.cfour.ylist = [];
-          }
-
-          if (res.length == 2) {
-            self.cone.zlist = res[0].zzwlist.split(",");
-            self.cone.ylist = res[0].yzwlist.split(",");
-            self.ctwo.zlist = res[1].zzwlist.split(",");
-            self.ctwo.ylist = res[1].yzwlist.split(",");
-            self.cthree.zlist = [];
-            self.cthree.ylist = [];
-            self.cfour.zlist = [];
-            self.cfour.ylist = [];
-          }
-
-          if (res.length == 3) {
-            self.cone.zlist = res[0].zzwlist.split(",");
-            self.cone.ylist = res[0].yzwlist.split(",");
-            self.ctwo.zlist = res[1].zzwlist.split(",");
-            self.ctwo.ylist = res[1].yzwlist.split(",");
-            self.cthree.zlist = res[2].zzwlist.split(",");
-            self.cthree.ylist = res[2].yzwlist.split(",");
-            self.cfour.zlist = [];
-            self.cfour.ylist = [];
-          }
-
-          if (res.length == 4) {
-            self.cone.zlist = res[0].zzwlist.split(",");
-            self.cone.ylist = res[0].yzwlist.split(",");
-            self.ctwo.zlist = res[1].zzwlist.split(",");
-            self.ctwo.ylist = res[1].yzwlist.split(",");
-            self.cthree.zlist = res[2].zzwlist.split(",");
-            self.cthree.ylist = res[2].yzwlist.split(",");
-            self.cfour.zlist = res[3].zzwlist.split(",");
-            self.cfour.ylist = res[3].yzwlist.split(",");
-          }
-          // console.log(res);
+          // console.log(self.cseries);
           self.lineTem2();
         });
     }
@@ -1114,7 +818,7 @@ export default {
     width: 96%;
     transform: translate(2%, 0);
     height: 2rem;
-    box-shadow: 0px 0px 6px 0px rgba(15, 6, 14, 0.15);
+    box-shadow: 1px 1px 6px 1px rgba(15, 6, 14, 0.15);
     span {
       width: 10%;
       height: inherit;

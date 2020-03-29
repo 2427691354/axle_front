@@ -58,11 +58,11 @@ export default {
       tfcy: [],
 
       //下行
-      ylabels:[],
-      bavgz:[],
-      bavgy:[],
-      bfcz:[],
-      bfcy:[]
+      ylabels: [],
+      bavgz: [],
+      bavgy: [],
+      bfcz: [],
+      bfcy: []
     };
   },
   watch: {
@@ -89,9 +89,11 @@ export default {
         baseOption: {
           title: {
             text: "车型温升统计分析",
+            top: "3%",
+            left: "3%",
             textStyle: {
               color: "#000",
-              fontSize: 16
+              // fontSize: 16
             }
           },
           legend: {
@@ -421,7 +423,9 @@ export default {
       var myChart = echarts.init(document.getElementById("toptem"));
       var option = {
         title: {
-          text: "车型上行温升统计分析"
+          text: "车型上行温升统计分析",
+          top: "3%",
+          left: "3%"
         },
         tooltip: {
           trigger: "axis",
@@ -436,15 +440,16 @@ export default {
           {
             x: "7%",
             y1: "7%",
-            height: "32%",
+            height: "30%",
             left: "12%",
-            right: "12%"
+            right: "12%",
+            top:'15%'
           },
 
           {
             x: "7%",
             y2: "7%",
-            height: "32%",
+            height: "30%",
             left: "12%",
             right: "12%",
             bottom: "12%"
@@ -455,7 +460,8 @@ export default {
           itemWidth: 15, // 设置宽度
           itemHeight: 15, // 设置高度
           itemGap: 10, // 设置间距
-          top: "5%",
+          top: "8%",
+          left:'7%',
           data: ["左均温升", "右均温升", "左方差", "右方差"]
         },
         xAxis: [
@@ -469,7 +475,7 @@ export default {
               interval: 0, //全部显示
               rotate: -40,
               textStyle: {
-                fontSize:'35%'
+                fontSize: "35%"
               }
             },
             data: this.xlabels
@@ -484,7 +490,7 @@ export default {
               interval: 0,
               rotate: -40,
               textStyle: {
-                fontSize:'35%'
+                fontSize: "35%"
               }
             },
             data: this.xlabels
@@ -494,8 +500,8 @@ export default {
         yAxis: [
           {
             type: "value",
-            min:0,
-            max:15,
+            min: 0,
+            max: 15,
             gridIndex: 1, //对应前面grid的索引位置（第二个）
             name: "左方差",
             //nameLocation:'end',
@@ -513,8 +519,8 @@ export default {
           },
           {
             type: "value",
-            min:0,
-            max:15,
+            min: 0,
+            max: 15,
             gridIndex: 1,
             nameLocation: "middle",
             name: "右方差",
@@ -634,7 +640,9 @@ export default {
       var myChart = echarts.init(document.getElementById("bottomtem"));
       var option = {
         title: {
-          text: "车型下行温升统计分析"
+          text: "车型下行温升统计分析",
+          top: "3%",
+          left: "3%"
         },
         tooltip: {
           trigger: "axis",
@@ -651,7 +659,8 @@ export default {
             y1: "7%",
             height: "32%",
             left: "12%",
-            right: "12%"
+            right: "12%",
+            top:'15%'
           },
 
           {
@@ -668,7 +677,8 @@ export default {
           itemWidth: 15, // 设置宽度
           itemHeight: 15, // 设置高度
           itemGap: 10, // 设置间距
-          top: "5%",
+          top: "8%",
+          left:'7%',
           data: ["左均温升", "右均温升", "左方差", "右方差"]
         },
         xAxis: [
@@ -679,8 +689,11 @@ export default {
               alignWithLabel: true
             },
             axisLabel: {
-              interval:0, 
-              rotate: -40
+              interval: 0,
+              rotate: -40,
+              textStyle: {
+                fontSize: "35%"
+              }
             },
             data: this.ylabels
           },
@@ -691,8 +704,11 @@ export default {
               alignWithLabel: true
             },
             axisLabel: {
-              interval:0,
-              rotate: -40
+              interval: 0,
+              rotate: -40,
+              textStyle: {
+                fontSize: "35%"
+              }
             },
             data: this.ylabels
           }
@@ -882,7 +898,7 @@ export default {
           console.log(error);
         });
 
-        self.$http
+      self.$http
         .get(this.baseUrl + "/TempRiseStatisticalAnalysis", {
           params: {
             s: self.inputs.value1,

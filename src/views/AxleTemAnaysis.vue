@@ -89,9 +89,11 @@ export default {
         baseOption: {
           title: {
             text: "车型轴温统计分析",
+            top: "3%",
+            left: "3%",
             textStyle: {
               color: "#000",
-              fontSize: 16
+              // fontSize: '90%'
             }
           },
           legend: {
@@ -421,7 +423,9 @@ export default {
       var myChart = echarts.init(document.getElementById("toptem"));
       var option = {
         title: {
-          text: "车型上行温升统计分析"
+          text: "车型上行温升统计分析",
+          top: "3%",
+          left: "3%"
         },
         tooltip: {
           trigger: "axis",
@@ -438,7 +442,8 @@ export default {
             y1: "7%",
             height: "32%",
             left: "12%",
-            right: "12%"
+            right: "12%",
+            top:'15%'
           },
 
           {
@@ -455,7 +460,8 @@ export default {
           itemWidth: 15, // 设置宽度
           itemHeight: 15, // 设置高度
           itemGap: 10, // 设置间距
-          top: "5%",
+          top: "8%",
+          left:'7%',
           data: ["左均温升", "右均温升", "左方差", "右方差"]
         },
         xAxis: [
@@ -634,7 +640,9 @@ export default {
       var myChart = echarts.init(document.getElementById("bottomtem"));
       var option = {
         title: {
-          text: "车型下行温升统计分析"
+          text: "车型下行温升统计分析",
+          top: "3%",
+          left: "3%"
         },
         tooltip: {
           trigger: "axis",
@@ -651,7 +659,8 @@ export default {
             y1: "7%",
             height: "32%",
             left: "12%",
-            right: "12%"
+            right: "12%",
+            top:'15%'
           },
 
           {
@@ -668,7 +677,8 @@ export default {
           itemWidth: 15, // 设置宽度
           itemHeight: 15, // 设置高度
           itemGap: 10, // 设置间距
-          top: "5%",
+          top: "8%",
+          left:'7%',
           data: ["左均温升", "右均温升", "左方差", "右方差"]
         },
         xAxis: [
