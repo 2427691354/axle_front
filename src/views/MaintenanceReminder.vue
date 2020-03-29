@@ -9,8 +9,8 @@
       <!-- 导航栏 -->
       <div class="navs">
         <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="里程提醒" name="first">
-            <div class="CumulativeReminder">
+          <el-tab-pane label="里程提醒" name="first" >
+            <div class="CumulativeReminder" v-if="'first' === activeName">
               <!-- 搜索里程维护阈值 -->
               <div class="search_2">
                 <span>修护里程维护阈值</span>
@@ -39,8 +39,8 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="热轴提醒" name="second">
-            <div class="HotShaftReminder">
+          <el-tab-pane label="热轴提醒" name="second" >
+            <div class="HotShaftReminder" v-if="'second' === activeName">
               <div class="table_3">
                 <el-table :data="tableData" style="width: 100%">
                   <el-table-column prop="time" label="过车时间"></el-table-column>
@@ -58,8 +58,8 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="车次温升提醒" name="third">
-            <div class="TrainNumTempRiseReminder">
+          <el-tab-pane label="车次温升提醒" name="third" >
+            <div class="TrainNumTempRiseReminder" v-if="'third' === activeName">
               <!-- 搜索框等 -->
               <div class="search_3">
                 <span>温升阈值</span>
@@ -83,8 +83,8 @@
               </div>
             </div>
           </el-tab-pane>
-          <el-tab-pane label="车辆温升提醒" name="fourth">
-            <div class="VehicleTempRiseReminder">
+          <el-tab-pane label="车辆温升提醒" name="fourth" >
+            <div class="VehicleTempRiseReminder" v-if="'fourth' === activeName">
               <!-- 搜索框等 -->
               <div class="search_4">
                 <span>温升阈值</span>
@@ -400,7 +400,33 @@ export default {
                     carnumber: res[i].LCXX_CH.split(",")
                   });
                 }
-                // console.log(self.carData);
+              });
+
+            //车辆温升折线图
+            self.$http
+              .get(self.baseUrl + "/findWsBhByCh2", {
+                params: {
+                  clxx_ch: 211131
+                }
+              })
+              .then(function(response) {
+                var res = response.data;
+                self.clabels = res[0].gcsjlist.split(",");
+                // console.log(self.clabels);
+                self.clegend = [];
+                for (var i = 0; i < res.length; i++) {
+                  // if (res[i].ZXXX_ZW == "undefined") {
+                  //   res[i].ZXXX_ZW = "0";
+                  // }
+                  self.clegend.push(res[i].ZXXX_ZW);
+                }
+                self.cone.zlist = res[0].zzwlist.split(",");
+                self.cone.ylist = res[0].yzwlist.split(",");
+                self.ctwo.zlist = res[1].zzwlist.split(",");
+                self.ctwo.ylist = res[1].yzwlist.split(",");
+                self.cthree.zlist = res[2].zzwlist.split(",");
+                self.cthree.ylist = res[2].yzwlist.split(",");
+                self.lineTem2();
               });
           }
         });
@@ -738,7 +764,7 @@ export default {
         ]
       };
       myChart.setOption(option);
-      console.log(this.tlegend[0]);
+      // console.log(this.tlegend[0]);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -979,7 +1005,7 @@ export default {
         ]
       };
       myChart.setOption(option);
-      // console.log(this.tableInline);
+      console.log(this.clegend[0]);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -998,18 +1024,22 @@ export default {
         .then(function(response) {
           var res = response.data;
           self.clabels = res[0].gcsjlist.split(",");
-          console.log(self.clabels);
+          // console.log(self.clabels);
           self.clegend = [];
           for (var i = 0; i < res.length; i++) {
-            if (res[i].ZXXX_ZW == "undefined") {
-              res[i].ZXXX_ZW = "";
-            }
             self.clegend.push(res[i].ZXXX_ZW);
           }
           console.log(self.clegend);
           if (res.length == 1) {
+
             self.cone.zlist = res[0].zzwlist.split(",");
             self.cone.ylist = res[0].yzwlist.split(",");
+            self.ctwo.zlist = [];
+            self.ctwo.ylist = [];
+            self.cthree.zlist = [];
+            self.cthree.ylist = [];
+            self.cfour.zlist = [];
+            self.cfour.ylist = [];
           }
 
           if (res.length == 2) {
@@ -1017,6 +1047,10 @@ export default {
             self.cone.ylist = res[0].yzwlist.split(",");
             self.ctwo.zlist = res[1].zzwlist.split(",");
             self.ctwo.ylist = res[1].yzwlist.split(",");
+            self.cthree.zlist = [];
+            self.cthree.ylist = [];
+            self.cfour.zlist = [];
+            self.cfour.ylist = [];
           }
 
           if (res.length == 3) {
@@ -1026,6 +1060,8 @@ export default {
             self.ctwo.ylist = res[1].yzwlist.split(",");
             self.cthree.zlist = res[2].zzwlist.split(",");
             self.cthree.ylist = res[2].yzwlist.split(",");
+            self.cfour.zlist = [];
+            self.cfour.ylist = [];
           }
 
           if (res.length == 4) {
