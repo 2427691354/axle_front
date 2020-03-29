@@ -96,7 +96,7 @@
                   <el-input v-model="numbers" placeholder="请输入内容"></el-input>
                 </div>
                 <div class="bot_3">
-                  <el-button type="danger" round>搜索</el-button>
+                  <el-button type="danger" round @click="mRemind">搜索</el-button>
                 </div>
                 <div class="select_1">
                   <el-select v-model="carvalue" placeholder="车型选择">
@@ -160,7 +160,7 @@ export default {
         }
       ],
       //温升阈值
-      temnum: "40",
+      temnum: "10",
       //达到次数
       numbers: "2",
       //词云数据
@@ -235,22 +235,6 @@ export default {
       carvalue: "",
 
       //车次温升提醒折线图数据
-      tone: {
-        zlist: [],
-        ylist: []
-      },
-      tfour: {
-        zlist: [],
-        ylist: []
-      },
-      ttwo: {
-        zlist: [],
-        ylist: []
-      },
-      tthree: {
-        zlist: [],
-        ylist: []
-      },
       //标签
       tlabels: [],
       //图例名称
@@ -262,7 +246,9 @@ export default {
       tableData2: [],
       //标签
       clabels: [],
-      cseries: []
+      cseries: [],
+      clegend: [],
+
     };
   },
   watch: {
@@ -274,12 +260,6 @@ export default {
         } else {
           this.selectcar();
         }
-      },
-      deep: true
-    },
-    cseries: {
-      handler() {
-        this.lineTem2();
       },
       deep: true
     }
@@ -356,6 +336,7 @@ export default {
                     .then(function(response) {
                       var res = response.data;
                       self.tlabels = res[0].mclist.split(",");
+                      self.tlegend = [];
                       self.tseries = [];
                       for (var i = 0; i < res.length; i++) {
                         self.tseries.push(
@@ -404,6 +385,7 @@ export default {
                             smooth: false
                           }
                         );
+                        self.tlegend.push(res[i].ZXXX_ZW + "轴");
                       }
                       self.lineTem();
                     });
@@ -515,7 +497,7 @@ export default {
       this.carData.splice(index, 1);
       // console.log(index);
     },
-    deleteAll(){
+    deleteAll() {
       this.carData = [];
     },
     //词云
@@ -595,7 +577,8 @@ export default {
         legend: {
           top: "10%",
           right: "5%",
-          selectedMode: "single"
+          selectedMode: "single",
+          data:this.tlegend
         },
         grid: {
           top: "20%",
@@ -624,7 +607,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "温升|绿-右温升(875001)",
+          name: "温升|绿-右温升("+this.focusonInfo[0].name+")",
           splitLine: {
             lineStyle: {
               color: "#DDD"
@@ -658,7 +641,8 @@ export default {
         legend: {
           top: "10%",
           right: "5%",
-          selectedMode: "single"
+          selectedMode: "single",
+          data:this.clegend
         },
         grid: {
           top: "20%",
@@ -707,6 +691,7 @@ export default {
       };
       myChart.setOption(option);
       // console.log(this.clegend[0]);
+      console.log(this.clegend);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -724,11 +709,10 @@ export default {
         })
         .then(function(response) {
           var res = response.data;
-          console.log(res);
+          // console.log(res);
           self.clabels = res[0].gcsjlist.split(",");
-
+          self.clegend = [];
           self.cseries = [];
-
           for (var i = 0; i < res.length; i++) {
             self.cseries.push(
               {
@@ -776,8 +760,9 @@ export default {
                 smooth: false
               }
             );
+            self.clegend.push(res[i].ZXXX_ZW + "轴");
           }
-          // console.log(self.cseries);
+          // console.log(self.clegend);
           self.lineTem2();
         });
     }
