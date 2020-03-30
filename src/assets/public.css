@@ -330,7 +330,7 @@ a:hover {
 }
 .hotshaftwarning .el-input__inner,.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner {
   border-radius: 0px;
-  border: 1px solid #5282c8;
+  border: 1px solid #abc2e8;
   color: #606266;
   height: 1rem;
   width: 70%;
@@ -378,7 +378,7 @@ a:hover {
 }
 .CumulativeReminder .box .el-input__inner{
   border-radius: 0px;
-  border: 1px solid #5282c8;
+  border: 1px solid #abc2e8;
   color: #606266;
   height: 1.2rem;
   width: 70%;
@@ -404,7 +404,7 @@ a:hover {
 
 .VehicleTempRiseReminder .el-input__inner,.TrainNumTempRiseReminder .el-input__inner{
   border-radius: 0px;
-  border: 1px solid #5282c8;
+  border: 1px solid #abc2e8;
   color: #606266;
   height: 1.2rem;
 }
