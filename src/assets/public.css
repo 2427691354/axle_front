@@ -361,7 +361,7 @@ a:hover {
   -webkit-transition: all .3s;
   transition: all .3s;
 }
-.el-input__suffix{
+.el-date-editor .el-input__suffix{
   display: none;
 }
 .StatisticalReports .timest .el-input__prefix,
@@ -371,7 +371,7 @@ a:hover {
 .StatisticalReports .stationst .el-input__icon,
 .hotshaftwarning .station .el-input__icon{
   line-height: 20%;
-  margin-left: -3rem;
+  margin-left: -2rem;
 }
 .StatisticalReports .stationst .el-input__inner{
   width: 70%;
