@@ -119,6 +119,7 @@ export default {
               top: 60,
               bottom: 40,
               containLabel: true,
+              //调整宽度（中间label显示）
               width: "48%"
             },
             {
@@ -141,11 +142,11 @@ export default {
             {
               //滚动条缩放
               type: "slider",
-              //控制两边
+              //控制两边（可以用数组）
               yAxisIndex: [0, 2],
               filterMode: "empty",
               start: 0,
-              end: 40
+              end: 43
             },
             {
               //鼠标缩放
@@ -153,7 +154,7 @@ export default {
               yAxisIndex: [0, 2],
               filterMode: "empty",
               start: 0,
-              end: 40
+              end: 43
             }
           ],
 
@@ -233,6 +234,7 @@ export default {
               axisLabel: {
                 show: true,
                 formatter: "{value}",
+                //调整边距（中间label显示）
                 margin: 30,
                 textStyle: {
                   color: "#9D9EA0",

@@ -120,7 +120,7 @@ export default {
               top: 60,
               bottom: 40,
               containLabel: true,
-              width: "42%"
+              width: "48%"
             },
             {
               show: false,
@@ -145,14 +145,14 @@ export default {
               yAxisIndex: [0,2],
               filterMode: "empty",
               start: 0,
-              end: 40
+              end: 43
             },
             {
               type: "inside",
               yAxisIndex: [0,2],
               filterMode: "empty",
               start: 0,
-              end: 40
+              end: 43
             }
           ],
 
@@ -160,6 +160,7 @@ export default {
             {
               type: "value",
               inverse: true,
+              name:"左",
               axisLine: {
                 show: false
               },
@@ -190,6 +191,7 @@ export default {
             {
               gridIndex: 2,
               type: "value",
+              name:"右",
               axisLine: {
                 show: false
               },
@@ -226,9 +228,9 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: false,
+                show: true,
                 formatter: "{value}",
-                margin: 8,
+                margin: 30,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
@@ -248,7 +250,7 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: true,
+                show: false,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
