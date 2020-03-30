@@ -5,10 +5,11 @@
       <div class="text">筛选:</div>
       <div class="date">
         <div class="date1">
-          <el-date-picker v-model="inputs.startDate" type="date" size="mini"></el-date-picker>
+          <el-date-picker v-model="inputs.startDate" type="date" size="mini" value-format="yyyy-MM-dd"></el-date-picker>
         </div>
+        <div class="text">--</div>
         <div class="date2">
-          <el-date-picker v-model="inputs.endDate" type="date" size="mini"></el-date-picker>
+          <el-date-picker v-model="inputs.endDate" type="date" size="mini" value-format="yyyy-MM-dd"></el-date-picker>
         </div>
       </div>
 
@@ -55,10 +56,10 @@
       </div>
       <div class="radio">
         <div class="radio1">
-          <el-radio v-model="inputs.radio" label="left">左温升</el-radio>
+          <el-radio v-model="inputs.radio" label="ZXXX_ZWS+desc">左温升</el-radio>
         </div>
         <div class="radio2">
-          <el-radio v-model="inputs.radio" label="right">右温升</el-radio>
+          <el-radio v-model="inputs.radio" label="ZXXX_YWS+desc">右温升</el-radio>
         </div>
       </div>
     </div>
@@ -69,17 +70,17 @@
         <el-table
           :data="tableData.slice((currentPage-1)*pagesize,currentPage*pagesize)"
           style="width: 100%"
-          height="18rem"
+          height="13.75rem"
         >
-          <el-table-column label="过车时间" prop="passingTime" width="160%"></el-table-column>
-          <el-table-column label="车号" prop="number"></el-table-column>
-          <el-table-column label="轴位" prop="position"></el-table-column>
-          <el-table-column label="左温度" prop="leftTemp"></el-table-column>
-          <el-table-column label="左温升" prop="leftRise"></el-table-column>
-          <el-table-column label="右温度" prop="rightTemp"></el-table-column>
-          <el-table-column label="右温升" prop="rightRise"></el-table-column>
-          <el-table-column label="环温" prop="ringTemp"></el-table-column>
-          <el-table-column label="探测站" prop="station"></el-table-column>
+          <el-table-column label="过车时间" prop="lcxxGcsj" width="160%"></el-table-column>
+          <el-table-column label="车号" prop="lcxxCh"></el-table-column>
+          <el-table-column label="轴位" prop="zxxxZw"></el-table-column>
+          <el-table-column label="左温度" prop="zxxxZwd"></el-table-column>
+          <el-table-column label="左温升" prop="zxxxZws"></el-table-column>
+          <el-table-column label="右温度" prop="zxxxYwd"></el-table-column>
+          <el-table-column label="右温升" prop="zxxxYws"></el-table-column>
+          <el-table-column label="环温" prop="lcxxHw"></el-table-column>
+          <el-table-column label="探测站" prop="tczMc"></el-table-column>
         </el-table>
       </div>
       <!-- 分页 -->
@@ -101,16 +102,16 @@ export default {
     return {
       inputs: {
         //开始日期
-        startDate: "",
+        startDate: "2019-02-25",
         //结束日期
-        endDate: "",
+        endDate: "2019-02-25",
         //勘测站选中值
         station: [],
         //温度
         temp1: -50,
         temp2: 50,
         //单选按钮
-        radio: "left"
+        radio: "ZXXX_ZWS+desc"
       },
 
       //勘测站选项
@@ -142,6 +143,22 @@ export default {
             {
               value: "大家洼上行",
               label: "大家洼上行"
+            },
+             {
+              value: "昌邑上行",
+              label: "昌邑上行"
+            },
+            {
+              value: "莱州上行",
+              label: "莱州上行"
+            },
+            {
+              value: "招远上行",
+              label: "招远上行"
+            },
+            {
+              value: "平度上行",
+              label: "平度上行"
             }
           ]
         },
@@ -189,256 +206,25 @@ export default {
       temp2: 50,
 
       //表格数据
-      tableData: [
-        {
-          id: 1,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 2,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 3,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 4,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 5,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 6,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 7,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 8,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 9,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 10,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        },
-        {
-          id: 11,
-          //过车时间
-          passingTime: "2020-02-01 18:12:13",
-          //车号
-          number: "07557",
-          //轴位
-          position: "3",
-          //左温度
-          leftTemp: 55.5,
-          //左温升
-          leftRise: 44.9,
-          //右温度
-          rightTemp: 49.9,
-          //右温升
-          rightRise: 39.3,
-          //环温
-          ringTemp: "10.3 ℃",
-          //探测站
-          station: "田柳上行"
-        }
-      ],
+      tableData: [],
       currentPage: 1, //初始页
       pagesize: 10 //    每页的数据
     };
   },
-  mounted() {},
+  mounted() {
+    this.searchAll();
+  },
   watch: {
     inputs: {
       //深度监听，可监听到对象、数组的变化
-      handler(val, oldVal) {
-        console.log(
-          oldVal.startDate,
-          oldVal.endDate,
-          oldVal.station[0],
-          oldVal.temp1,
-          oldVal.temp2,
-          oldVal.radio
-        ); //但是这两个值打印出来却都是一样的
+      handler(oldVal) {
+        console.log(oldVal.startDate);
+        console.log(oldVal.endDate)
+        if (oldVal.station[1] == undefined) {
+          this.searchAll();
+        } else {
+          this.search();
+        }
       },
       deep: true
     }
@@ -459,6 +245,117 @@ export default {
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
       //console.log(this.currentPage)  //点击第几页
+    },
+    searchAll() {
+      var self = this;
+      self.$http
+        .get(
+          this.baseUrl +
+            "/axleTempRiseList?s=" +
+            self.inputs.startDate +
+            "&e=" +
+            self.inputs.endDate +
+            "&st=" +
+            self.inputs.temp1 +
+            "&et=" +
+            self.inputs.temp2 +
+            "&wsyz=0&tiaojian=" +
+            self.inputs.radio +
+            "&currentPage=1&size=1100"
+        )
+        .then(function(response) {
+          var res = response.data;
+          // console.log(res);
+          if (res.tatol != 0) {
+            // console.log(res);
+            for (var i = 0; i < res.rows.length; i++) {
+              var date = new Date(res.rows[i].lcxxGcsj);
+              var Y = date.getFullYear() + "-";
+              var M =
+                (date.getMonth() + 1 < 10
+                  ? "0" + (date.getMonth() + 1)
+                  : date.getMonth() + 1) + "-";
+              var D = date.getDate() + " ";
+              var h =
+                (date.getHours() + 1 < 10
+                  ? "0" + date.getHours()
+                  : date.getHours()) + ":";
+              var m =
+                (date.getMinutes() + 1 < 10
+                  ? "0" + date.getMinutes()
+                  : date.getMinutes()) + ":";
+              var s =
+                date.getSeconds() + 1 < 10
+                  ? "0" + date.getSeconds()
+                  : date.getSeconds();
+              res.rows[i].lcxxGcsj = Y + M + D + h + m + s;
+            }
+            self.tableData = res.rows;
+          } else {
+            self.$message({
+              message: "未查询到该条记录！",
+              type: "warning"
+            });
+          }
+        });
+    },
+    search() {
+      var self = this;
+      self.$http
+        .get(
+          this.baseUrl +
+            "/axleTempRiseList?tcz=" +
+            self.inputs.station[1] +
+            "&s=" +
+            self.inputs.startDate +
+            "&e=" +
+            self.inputs.endDate +
+            "&st=" +
+            self.inputs.temp1 +
+            "&et=" +
+            self.inputs.temp2 +
+            "&wsyz=0&tiaojian=" +
+            self.inputs.radio +
+            "&currentPage=1&size=1100"
+        )
+        .then(function(response) {
+          var res = response.data;
+          console.log(res);
+          if (res.tatol != 0) {
+            // console.log(res);
+            for (var i = 0; i < res.rows.length; i++) {
+              var date = new Date(res.rows[i].lcxxGcsj);
+              var Y = date.getFullYear() + "-";
+              var M =
+                (date.getMonth() + 1 < 10
+                  ? "0" + (date.getMonth() + 1)
+                  : date.getMonth() + 1) + "-";
+              var D =
+                (date.getDate() < 10
+                  ? "0" + date.getDate()
+                  : date.getDate()) + " ";
+              var h =
+                (date.getHours()  < 10
+                  ? "0" + date.getHours()
+                  : date.getHours()) + ":";
+              var m =
+                (date.getMinutes()  < 10
+                  ? "0" + date.getMinutes()
+                  : date.getMinutes()) + ":";
+              var s =
+                date.getSeconds()  < 10
+                  ? "0" + date.getSeconds()
+                  : date.getSeconds();
+              res.rows[i].lcxxGcsj = Y + M + D + h + m + s;
+            }
+            self.tableData = res.rows;
+          } else {
+            self.$message({
+              message: "未查询到该条记录！",
+              type: "warning"
+            });
+          }
+        });
     }
   }
 };
@@ -503,7 +400,10 @@ export default {
       float: left;
     }
     .date1 {
-      margin-right: 4%;
+    }
+    .text {
+      margin-top: 0.25rem;
+      margin-left: 1%;
     }
   }
   .station {

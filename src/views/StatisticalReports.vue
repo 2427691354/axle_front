@@ -5,7 +5,7 @@
     </div>
     <div class="searchst">
       <div class="stationst">
-        <el-select v-model="value" filterable placeholder="日报表">
+        <el-select v-model="value" filterable>
           <el-option
             v-for="item in options"
             :key="item.value"
@@ -14,12 +14,28 @@
           ></el-option>
         </el-select>
       </div>
-      <div class="timest">
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
+      <!-- 日报表 -->
+      <div class="timest" v-if="this.value=='日报表'">
+        <div class="date">
+          <el-date-picker v-model="inputs.start" type="date" value-format="yyyy-MM-dd"></el-date-picker>
+        </div>
+        <div class="text">--</div>
+        <div class="date">
+          <el-date-picker v-model="inputs.end" type="date" value-format="yyyy-MM-dd"></el-date-picker>
+        </div>
+      </div>
+      <!-- 月报表 -->
+      <div class="timest" v-else>
+        <div class="date">
+          <el-date-picker v-model="inputs.start" type="month" value-format="yyyy-MM"></el-date-picker>
+        </div>
+        <div class="text">--</div>
+        <div class="date">
+          <el-date-picker v-model="inputs.end" type="month" value-format="yyyy-MM"></el-date-picker>
+        </div>
       </div>
       <div class="botst">
-        <el-button type="danger" round>搜索</el-button>
+        <el-button type="danger" round @click="dataTotal">搜索</el-button>
       </div>
     </div>
     <div class="contentst">
@@ -57,75 +73,69 @@
 <script>
 import echarts from "echarts";
 export default {
-  data () {
+  data() {
     return {
       options: [
         {
           value: "选项1",
-          label: "黄金糕"
+          label: "日报表"
         },
         {
           value: "选项2",
-          label: "双皮奶"
-        },
-        {
-          value: "选项3",
-          label: "蚵仔煎"
-        },
-        {
-          value: "选项4",
-          label: "龙须面"
-        },
-        {
-          value: "选项5",
-          label: "北京烤鸭"
+          label: "月报表"
         }
       ],
-      value: "",
-      value1: "",
+      inputs: {
+        start: "2018-2-1",
+        end: "2019-2-28"
+      },
+      value: "日报表",
+      //每个图表的xy轴
+      zlabel: [],
+      //上行
+      top: {
+        train: [],
+        car: [],
+        axle: []
+      },
+
+      //下行
+      bottom:{
+        train: [],
+        car: [],
+        axle: []
+      },
+
+      //热轴
+      thermal:{
+        jre:[],
+        qre:[],
+        wre:[]
+      }
     };
   },
-  created () { },
-  mounted () {
+  created() {},
+  mounted() {
     this.trainNum();
     this.carNum();
     this.axleNum();
     this.thermalNum();
+    this.dataTotal();
   },
   methods: {
-    trainNum () {
+    trainNum() {
       var myChart = echarts.init(document.getElementById("trainnum"));
       var option = {
         xAxis: [
           {
-            data: [
-              "羊口",
-              "田柳",
-              "华泰",
-              "寿光",
-              "大家洼",
-              "昌邑",
-              "菜州",
-              "招远",
-              "平度"
-            ],
+            data: this.zlabel,
             axisLabel: {
               interval: 0,
               show: false
             }
           },
           {
-            data: [
-              "羊口",
-              "田柳",
-              "华泰",
-              "寿光",
-              "大家洼",
-              "昌邑",
-              "菜州",
-              "招远",
-              "平度"
-            ],
+            data: this.zlabel,
             axisLabel: {
               interval: 0,
               show: true
@@ -175,7 +185,7 @@ export default {
             type: "bar",
             name: "上行",
             barWidth: "20%",
-            data: [0, 4000, 1000, 3200, 5200, 5100, 5000, 5100, 5000],
+            data: this.top.train,
             itemStyle: {
               barBorderRadius: 10,
               color: {
@@ -201,7 +211,7 @@ export default {
             type: "bar",
             name: "下行",
             barWidth: "20%",
-            data: [0, 4200, 1000, 3500, 5100, 5100, 5100, 5100, 5000],
+            data: this.bottom.train,
             itemStyle: {
               barBorderRadius: 10,
               color: {
@@ -226,11 +236,11 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
     },
-    carNum () {
+    carNum() {
       var myChart = echarts.init(document.getElementById("carnum"));
       var option = {
         legend: {
@@ -257,7 +267,7 @@ export default {
             color: "#3c3c3c",
             fontSize: 16
           },
-          formatter: function (p) {
+          formatter: function(p) {
             return p.seriesName + "<br>" + "车辆数量：" + p.value;
           },
           extraCssText: "box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)"
@@ -265,7 +275,7 @@ export default {
         xAxis: {
           axisLabel: {
             show: false,
-            formatter: function (v) {
+            formatter: function(v) {
               return v;
             }
           },
@@ -281,17 +291,7 @@ export default {
         },
         yAxis: [
           {
-            data: [
-              "羊口",
-              "田柳",
-              "华泰",
-              "寿光",
-              "大家洼",
-              "昌邑",
-              "菜州",
-              "招远",
-              "平度"
-            ],
+            data: this.zlabel,
             axisLabel: {
               fontSize: "45%",
               color: "#000"
@@ -308,17 +308,7 @@ export default {
           },
           {
             show: false,
-            data: [
-              "羊口",
-              "田柳",
-              "华泰",
-              "寿光",
-              "大家洼",
-              "昌邑",
-              "菜州",
-              "招远",
-              "平度"
-            ],
+            data: this.zlabel,
             axisLine: {
               show: false
             }
@@ -333,7 +323,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function (v) {
+                formatter: function(v) {
                   return v.value;
                 },
                 textStyle: {
@@ -350,17 +340,7 @@ export default {
                 color: "#F76F34"
               }
             },
-            data: [
-              0,
-              189331,
-              45548,
-              149146,
-              267008,
-              258993,
-              259347,
-              256044,
-              257194
-            ]
+            data: this.top.car
           },
           {
             type: "bar",
@@ -372,7 +352,7 @@ export default {
               normal: {
                 show: true,
                 position: "inside",
-                formatter: function (v) {
+                formatter: function(v) {
                   return v.value;
                 },
                 textStyle: {
@@ -388,26 +368,16 @@ export default {
                 color: "#3393E2"
               }
             },
-            data: [
-              0,
-              192271,
-              45988,
-              155904,
-              266782,
-              255037,
-              257646,
-              257053,
-              257625
-            ]
+            data: this.bottom.car
           }
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
     },
-    axleNum () {
+    axleNum() {
       var myChart = echarts.init(document.getElementById("axlenum"));
       var option = {
         grid: {
@@ -456,17 +426,7 @@ export default {
                 color: "#CFCFCF"
               }
             },
-            data: [
-              "羊口",
-              "田柳",
-              "华泰",
-              "寿光",
-              "大家洼",
-              "昌邑",
-              "菜州",
-              "招远",
-              "平度"
-            ]
+            data: this.zlabel
           }
         ],
         yAxis: [
@@ -516,17 +476,7 @@ export default {
                 }
               }
             },
-            data: [
-              0,
-              780000,
-              200000,
-              600000,
-              1100000,
-              1051000,
-              1040000,
-              1040000,
-              1040000
-            ]
+            data: this.top.axle
           },
           {
             // name: '已发布',
@@ -543,26 +493,16 @@ export default {
                 }
               }
             },
-            data: [
-              0,
-              800000,
-              200000,
-              610000,
-              1100000,
-              1031000,
-              1040000,
-              1040000,
-              1040000
-            ]
+            data: this.bottom.axle
           }
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
     },
-    thermalNum () {
+    thermalNum() {
       var myChart = echarts.init(document.getElementById("thermalnum"));
       var option = {
         tooltip: {
@@ -652,9 +592,45 @@ export default {
         ]
       };
       myChart.setOption(option);
-      window.addEventListener("resize", function () {
+      window.addEventListener("resize", function() {
         myChart.resize();
       });
+    },
+    dataTotal() {
+      var self = this;
+      self.$http
+        .get(this.baseUrl + "/dayRpt", {
+          params: {
+            start: self.inputs.start,
+            end: self.inputs.end
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          self.zlabel = res.tczlist;
+          //列车数量
+          self.top.train = res.sxsj.COUNT_TRAIN;
+          self.bottom.train = res.xxsj.COUNT_TRAIN;
+
+          //车辆数量
+          self.top.car = res.sxsj.COUNT_CAR;
+          self.bottom.car = res.xxsj.COUNT_CAR;
+
+          //车轴数
+          self.top.axle = res.sxsj.COUNT_AXLE;
+          self.bottom.axle = res.xxsj.COUNT_AXLE;
+
+          //热轴数
+          self.thermal.jre= res.sxsj.COUNT_JRE;
+          self.thermal.qre = res.xxsj.COUNT_QRE;
+          self.thermal.wre = res.xxsj.COUNT_WRE;
+
+          // console.log(self.zlabel);
+          self.trainNum();
+          self.carNum();
+          self.axleNum();
+          self.thermalNum();
+        });
     }
   }
 };
@@ -691,13 +667,25 @@ export default {
     width: 50%;
     float: left;
     line-height: 2.3rem;
-    margin-left: -4rem;
+    .date {
+      width: 22%;
+      height: 1rem;
+      float: left;
+    }
+    .text {
+      width: 4%;
+      float: left;
+      margin-top: 0.1rem;
+      height: 2rem;
+      font-size: 0.5rem;
+      color: #036fb8;
+    }
   }
   .botst {
     width: 10%;
     float: left;
     line-height: 2.3rem;
-    margin-left: -5rem;
+    margin-left: -13rem;
   }
 }
 .contentst {

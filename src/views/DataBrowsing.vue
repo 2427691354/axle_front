@@ -20,12 +20,12 @@
           {{this.textBox.type}}
           {{this.textBox.trainNum}}辆
           {{this.textBox.axleNum}}轴
-          {{this.textBox.speed}}
-          温度：{{this.textBox.ringTemp}}
+          {{this.textBox.speed}}km/h
+          环温：{{this.textBox.ringTemp}}℃
         </div>
       </div>
       <div class="bottom">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
+        <el-tabs v-model="activeName" >
           <el-tab-pane label="全列轴温" name="first">
             <div class="table1">
               <el-table
@@ -34,34 +34,34 @@
                 height="22rem"
                 :span-method="objectSpanMethod"
               >
-                <el-table-column label="辆位" prop="carPosition" width="50%"></el-table-column>
-                <el-table-column label="轴位" prop="axlePosition" width="50%"></el-table-column>
-                <el-table-column label="左报警" prop="leftWarning"></el-table-column>
-                <el-table-column label="左温度" prop="leftTemp"></el-table-column>
-                <el-table-column label="左温升" prop="leftRise"></el-table-column>
-                <el-table-column label="右报警" prop="rightWarning"></el-table-column>
-                <el-table-column label="右温度" prop="rightTemp"></el-table-column>
-                <el-table-column label="右温升" prop="rightRise"></el-table-column>
-                <el-table-column label="车号" prop="number"></el-table-column>
+                <el-table-column label="辆位" prop="ZXXX_LW" width="50%"></el-table-column>
+                <el-table-column label="轴位" prop="ZXXX_ZW" width="50%"></el-table-column>
+                <el-table-column label="左报警" prop="ZXXX_ZRZDJ"></el-table-column>
+                <el-table-column label="左温度" prop="ZXXX_ZWD"></el-table-column>
+                <el-table-column label="左温升" prop="ZXXX_ZWS"></el-table-column>
+                <el-table-column label="右报警" prop="ZXXX_YRZDJ"></el-table-column>
+                <el-table-column label="右温度" prop="ZXXX_YWD"></el-table-column>
+                <el-table-column label="右温升" prop="ZXXX_YWS"></el-table-column>
+                <el-table-column label="车号" prop="LCXX_CH"></el-table-column>
               </el-table>
             </div>
           </el-tab-pane>
           <el-tab-pane label="车次追踪" name="second">
             <div class="textBox2">
-              运行速度(km/h)：{{this.textBox2.speed}}&nbsp;&nbsp;
-              接车序号：{{this.textBox2.number}}&nbsp;&nbsp;
+              运行速度(km/h)：{{this.textBox2.ds}}_{{this.textBox2.js}}_{{this.textBox2.gs}}&nbsp;&nbsp;
+              接车序号：#{{this.textBox2.number}}&nbsp;&nbsp;
               左平均温升(℃)：{{this.textBox2.leftAvg}}&nbsp;&nbsp;
               右平均温升(℃)：{{this.textBox2.rightAvg}}&nbsp;&nbsp;
             </div>
             <div class="tableBody">
               <el-table :data="tableData2" style="width: 100%" height="20.5rem">
-                <el-table-column label="过车时间" prop="date" width="150%"></el-table-column>
-                <el-table-column label="探测点" prop="station"></el-table-column>
-                <el-table-column label="车型" prop="type"></el-table-column>
-                <el-table-column label="辆数" prop="trainNum"></el-table-column>
-                <el-table-column label="轴数" prop="axleNum"></el-table-column>
-                <el-table-column label="车速（km/h）" prop="speed"></el-table-column>
-                <el-table-column label="环温（℃）" prop="ringTemp"></el-table-column>
+                <el-table-column label="过车时间" prop="LCXX_GCSJ" width="150%"></el-table-column>
+                <el-table-column label="探测点" prop="TCZ_MC"></el-table-column>
+                <el-table-column label="车型" prop="LCXX_KH"></el-table-column>
+                <el-table-column label="辆数" prop="LCXX_ZLS"></el-table-column>
+                <el-table-column label="轴数" prop="LCXX_ZZS"></el-table-column>
+                <el-table-column label="车速（km/h）" prop="LCXX_GDJS"></el-table-column>
+                <el-table-column label="环温（℃）" prop="LCXX_HW"></el-table-column>
               </el-table>
             </div>
           </el-tab-pane>
@@ -109,12 +109,12 @@
           <el-timeline-item
             v-for="(activity, index) in this.timeLine.activities.slice((currentPage-1)*pagesize,currentPage*pagesize)"
             :key="index"
-            :timestamp="activity.timestamp"
-            :size="activity.size"
-            :color="activity.color"
+            :timestamp="activity.LCXX_GCSJ"
+            size="large"
+            color="#018eed"
             style="height:2.4rem"
           >
-            <a href="#" @click="timeLineClick(activity.content)">{{activity.content}}</a>
+            <a href="#" @click="timeLineClick(activity)">{{activity.LCXX_HBWJXH}}</a>
           </el-timeline-item>
         </el-timeline>
       </div>
@@ -139,8 +139,6 @@ import echarts from "echarts";
 export default {
   data() {
     return {
-      //警告框是否显示
-      alertshow: false,
       //树形控件数据
       treeData: [
         {
@@ -252,25 +250,26 @@ export default {
       //页面中间上面文字数据
       textBox: {
         //站点名
-        station: "羊口上行",
+        station: "",
         //序号
-        number: "11186",
+        number: "",
         //日期
-        date: "2018-04-15 00:52:51",
-
+        date: "",
         //类型
-        type: "货车",
+        type: "",
         //车辆数
-        trainNum: "48",
+        trainNum: "",
         //轴数
-        axleNum: "198",
+        axleNum: "",
         //车速
-        speed: "40km/h",
+        speed: "",
         //环温
-        ringTemp: "3.6℃"
+        ringTemp: ""
       },
       //选项卡默认选中
       activeName: "first",
+      //表格1接口参数1
+      LCXX_BH: "",
       //表格1数据
       tableData1: [
         {
@@ -677,226 +676,18 @@ export default {
       //tab第二页页面中间下面文字数据
       textBox2: {
         //速度
-        speed: "38_40_41",
+        ds: "",
+        js: "",
+        gs: "",
         //接车序号
-        number: "#561",
+        number: "",
         //左平均温升
-        leftAvg: 15.5,
+        leftAvg: "",
         //右平均温升
-        rightAvg: 10.1
+        rightAvg: ""
       },
       //表格2数据
-      tableData2: [
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        },
-        {
-          //过车时间
-          date: "2019-02-25 01:50:51",
-          //探测点
-          station: "招远上行",
-          //车型
-          type: "货车",
-          //辆数
-          trainNum: 48,
-          //轴数
-          axleNum: 198,
-          //车速
-          speed: 44,
-          //环温
-          ringTemp: 0.7
-        }
-      ],
+      tableData2: [],
       //下拉框1选项
       options1: [
         {
@@ -962,1581 +753,55 @@ export default {
       //右侧时间树数据
       timeLine: {
         //站点名
-        station: "羊口上行",
+        station: "",
         //时间树数据
-        activities: [
-          {
-            content: "11177",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11178",
-            timestamp: "2018-04-13 02:57:28",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11179",
-            timestamp: "2018-04-11 04:07:24",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11180",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11181",
-            timestamp: "2018-04-13 02:57:28",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11182",
-            timestamp: "2018-04-11 04:07:24",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11183",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11184",
-            timestamp: "2018-04-13 02:57:28",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11185",
-            timestamp: "2018-04-11 04:07:24",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11186",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11187",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11188",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11189",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11190",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11191",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11192",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11193",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11194",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          }
-        ]
+        activities: []
       },
-
-      //羊口上行时间树
-      yangKoUpTimeLine: {
-        //站点名
-        station: "羊口上行",
-        //时间轴数据
-        activities: [
-          {
-            content: "11177",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11178",
-            timestamp: "2018-04-13 02:57:28",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11179",
-            timestamp: "2018-04-11 04:07:24",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11180",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11181",
-            timestamp: "2018-04-13 02:57:28",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11182",
-            timestamp: "2018-04-11 04:07:24",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11183",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11184",
-            timestamp: "2018-04-13 02:57:28",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11185",
-            timestamp: "2018-04-11 04:07:24",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11186",
-            timestamp: "2018-04-15 00:52:52",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11187",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11188",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11189",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11190",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11191",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11192",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11193",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          },
-          {
-            content: "11194",
-            timestamp: "2018-04-15 00:52:51",
-            color: "#018eed",
-            size: "large"
-          }
-        ]
-      },
-
-      //11177data
-      yangkoudata11177: {
-        textBox: {
-          //站点名
-          station: "羊口上行",
-          //号码
-          number: "11177",
-          //时间
-          date: "2018-04-15 00:52:51",
-          //类型
-          type: "货车",
-          //车辆数
-          trainNum: 22,
-          //轴数
-          axleNum: 222,
-          //车速
-          speed: "40km/h",
-          //环温
-          ringTemp: "3.6℃"
-        },
-        //表格1数据
-        tableData1: [
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "cc",
-            //左温度
-            leftTemp: 55,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55,
-            //左温升
-            leftRise: 44,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          }
-        ],
-        //表格2数据
-        tableData2: [
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "羊口上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 28,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "羊口上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          }
-        ],
-        //tab第二页页面中间下面文字数据
-        textBox2: {
-          //速度
-          speed: "38_40_42",
-          //接车序号
-          number: "#561",
-          //左平均温升
-          leftAvg: 15.5,
-          //右平均温升
-          rightAvg: 10.1
-        },
-        echart: {
-          //左轴数据
-          left: [24, 25, 17, 54, 34, 25, 12],
-          //右轴数据
-          right: [25.4, 23.4, 15, 65, 30, 34, 25]
-        }
-      },
-      //11186data
-      yangkoudata11186: {
-        textBox: {
-          //站点名
-          station: "羊口上行",
-          //号码
-          number: "11186",
-          //时间
-          date: "2018-04-15 00:52:52",
-          //类型
-          type: "货车",
-          //车辆数
-          trainNum: 22,
-          //轴数
-          axleNum: 222,
-          //车速
-          speed: "40km/h",
-          //环温
-          ringTemp: "3.6℃"
-        },
-        //表格1数据
-        tableData1: [
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "cc",
-            //左温度
-            leftTemp: 55,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "1",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "2",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "3",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "1",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "2",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "3",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          },
-          {
-            //辆位
-            carPosition: "4",
-            //轴位
-            axlePosition: "4",
-            //左报警
-            leftWarning: "正常",
-            //左温度
-            leftTemp: 55.5,
-            //左温升
-            leftRise: 44.9,
-            //右报警
-            rightWarning: "正常",
-            //右温度
-            rightTemp: 49.9,
-            //右温升
-            rightRise: 39.3,
-            //车号
-            number: "89101"
-          }
-        ],
-        //表格2数据
-        tableData2: [
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "羊口上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 28,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "羊口上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          },
-          {
-            //过车时间
-            date: "2019-02-25 01:50:51",
-            //探测点
-            station: "招远上行",
-            //车型
-            type: "货车",
-            //辆数
-            trainNum: 48,
-            //轴数
-            axleNum: 198,
-            //车速
-            speed: 44,
-            //环温
-            ringTemp: 0.7
-          }
-        ],
-        //tab第二页页面中间下面文字数据
-        textBox2: {
-          //速度
-          speed: "37_40_42",
-          //接车序号
-          number: "#561",
-          //左平均温升
-          leftAvg: 15.5,
-          //右平均温升
-          rightAvg: 10.1
-        },
-        echart: {
-          //左轴数据
-          left: [24, 25, 17, 54, 34, 25, 12],
-          //右轴数据
-          right: [25.4, 23.4, 15, 65, 30, 34, 25]
-        }
-      }
+      XLList: [],
+      //当前站点名
+      tczMc: "",
+      //当前站点号
+      tczJd: ""
     };
   },
-  mounted() {},
+  mounted() {
+    // this.getGlist(987654321);
+    this.initTczjd();
+  },
   methods: {
+    //为树形控件个元素提供tczjd,并默认显示昌邑上行数据
+    initTczjd() {
+      var self = this;
+      self.$http.get(this.baseUrl + "/XLList").then(function(response) {
+        var res = response.data;
+        self.XLList = res;
+        // console.log(res);
+        for (var i = 0; i < 9; i++) {
+          for (var j = 0; j < res[0].sx.length; j++) {
+            if (res[0].sx[j].tczMc == self.treeData[0].children[i].label) {
+              self.treeData[0].children[i].tczJd = res[0].sx[j].tczJd;
+            }
+          }
+        }
+        for (var x = 0; x < 8; x++) {
+          for (var y = 0; y < res[0].xx.length; y++) {
+            if (res[0].xx[y].tczMc == self.treeData[1].children[x].label) {
+              self.treeData[1].children[x].tczJd = res[0].xx[y].tczJd;
+            }
+          }
+        }
+        self.tczJd = self.treeData[0].children[5].tczJd;
+        self.tczMc = self.treeData[0].children[5].label;
+        self.getGlist(self.tczJd);
+        // console.log(self.tczMc);
+      });
+    },
     //点击树形控件事件
     handleNodeClick(data) {
-      console.log(data.id);
-      switch (data.id) {
-        case 2:
-          alert("羊口上行");
-          this.timeLine = this.yangKoUpTimeLine;
-          var content = this.yangKoUpTimeLine.activities[9].content;
-          if (content == "11186") {
-            this.textBox = this.yangkoudata11186.textBox;
-            this.textBox.number = this.timeLine.activities.slice(
-              (this.currentPage - 1) * this.pagesize,
-              this.currentPage * this.pagesize
-            )[9].content;
-            this.textBox.date = this.timeLine.activities.slice(
-              (this.currentPage - 1) * this.pagesize,
-              this.currentPage * this.pagesize
-            )[9].timestamp;
-            this.tableData1 = this.yangkoudata11186.tableData1;
-            this.textBox2 = this.yangkoudata11186.textBox2;
-            this.tableData2 = this.yangkoudata11186.tableData2;
-            this.echart = this.yangkoudata11186.echart;
-          }
-          break;
-        // case 3:
-        //   alert("田柳上行");
-        //   this.textBox = this.tianliuUp.textBox;
-        //   this.tableData1 = this.tianliuUp.tableData1;
-        //   this.textBox2 = this.tianliuUp.textBox2;
-        //   this.tableData2 = this.tianliuUp.tableData2;
-        //   this.echart = this.tianliuUp.echart;
-        //   this.timeLine = this.tianliuUp.timeLine;
-        //   break;
-      }
+      this.tczJd = data.tczJd;
+      this.tczMc = data.label;
+      // console.log(this.tczMc);
+      this.getGlist(this.tczJd);
     },
     //树形控件添加图标
     renderContent(h, { node, data }) {
@@ -2546,10 +811,6 @@ export default {
           <span> {node.label}</span>
         </span>
       );
-    },
-    //选项卡切换事件
-    handleClick(tab, event) {
-      console.log(tab, event);
     },
     //表格行合并
     objectSpanMethod({ rowIndex, columnIndex }) {
@@ -2660,28 +921,171 @@ export default {
     //分页组件切换事件
     handleCurrentChange(currentPage) {
       this.currentPage = currentPage;
+      this.getGlist(this.tczJd);
       //console.log(this.currentPage)  //点击第几页
     },
     //时间树点击事件
-    timeLineClick(content) {
-      //获取序号
-      console.log(content);
-      //根据序号查询。。。。。
-      if (content == "11177") {
-        this.textBox = this.yangkoudata11177.textBox;
-        console.log(this.textBox);
-        this.tableData1 = this.yangkoudata11177.tableData1;
-        this.textBox2 = this.yangkoudata11177.textBox2;
-        this.tableData2 = this.yangkoudata11177.tableData2;
-        this.echart = this.yangkoudata11177.echart;
-      } else if (content == "11186") {
-        this.textBox = this.yangkoudata11186.textBox;
+    timeLineClick(ac) {
+      //获取节点对象
+      // console.log(ac);
+      this.changeByJL(ac);
+    },
+    //转化时间格式
+    todate(d) {
+      var date = new Date(d);
+      var Y = date.getFullYear() + "-";
+      var M =
+        (date.getMonth() + 1 < 10
+          ? "0" + (date.getMonth() + 1)
+          : date.getMonth() + 1) + "-";
+      var D =
+        (date.getDate() < 10 ? "0" + date.getDate() : date.getDate()) + " ";
+      var h =
+        (date.getHours() < 10 ? "0" + date.getHours() : date.getHours()) + ":";
+      var m =
+        (date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes()) +
+        ":";
+      var s =
+        date.getSeconds() + 1 < 10
+          ? "0" + date.getSeconds()
+          : date.getSeconds();
+      return Y + M + D + h + m + s;
+    },
+    //根据站点名获取过车记录
+    getGlist(tczJd) {
+      var self = this;
+      self.$http
+        .get(
+          this.baseUrl + "/gcList?tczjd=" + tczJd + "&currentPage=1&size=400"
+        )
+        .then(function(response) {
+          var res = response.data;
+          for (var i = 0; i < res.rows.length; i++) {
+            res.rows[i].LCXX_GCSJ = self.todate(res.rows[i].LCXX_GCSJ);
+            // console.log(res.rows[i].LCXX_GCSJ);
+          }
+          self.timeLine.activities = res.rows;
 
-        this.tableData1 = this.yangkoudata11186.tableData1;
-        this.textBox2 = this.yangkoudata11186.textBox2;
-        this.tableData2 = this.yangkoudata11186.tableData2;
-        this.echart = this.yangkoudata11186.echart;
+          if (res.total != 0) {
+            //时间树标题站点名
+            self.timeLine.station = res.rows[0].TCZ_MC;
+            //页面中间上方站点名
+            self.textBox.station = self.timeLine.station;
+            //默认展示时间树每页第一项对应内容
+            var ac = self.timeLine.activities.slice(
+              (self.currentPage - 1) * self.pagesize,
+              self.currentPage * self.pagesize
+            )[0];
+            // console.log(ac.LCXX_HBWJXH);
+            self.changeByJL(ac);
+          }
+
+          // console.log(self.timeLine.activities);
+        });
+    },
+    //根据时间树节点切换对应内容
+    changeByJL(ac) {
+      this.LCXX_BH = ac.LCXX_BH;
+      // console.log(this.LCXX_BH);
+      //页面中间上方日期
+      this.textBox.date = ac.LCXX_GCSJ;
+      //页面中间上方序号
+      this.textBox.number = ac.LCXX_HBWJXH;
+      //页面中间上总列数
+      this.textBox.trainNum = ac.LCXX_ZLS;
+      //页面中间上总轴数
+      this.textBox.axleNum = ac.LCXX_ZZS;
+      //页面中间上速度
+      this.textBox.speed = ac.LCXX_PJSU;
+      //页面中间上环温
+      this.textBox.ringTemp = ac.LCXX_HW;
+      //页面中间上类型
+      if (ac.LCXX_KH == 72) {
+        this.textBox.type = "货车";
+      } else if (ac.LCXX_KH == 74) {
+        this.textBox.type = "客车";
       }
+      //页面中间速度
+      this.textBox2.ds = ac.LCXX_ZDSU;
+      this.textBox2.js = ac.LCXX_PJSU;
+      this.textBox2.gs = ac.LCXX_ZGSU;
+      //页面中间接车序号
+      this.textBox2.number = ac.TCZ_ID;
+      //页面中间左温升
+      this.textBox2.leftAvg = ac.LCXX_ZJWS_T1;
+      //页面中间右温升
+      this.textBox2.rightAvg = ac.LCXX_YJWS_T1;
+      //table2
+      this.getTable2(ac.LCXX_HBWJXH);
+      //table1
+      this.getTable1(ac.LCXX_GCSJ);
+    },
+    getTable2(xh) {
+      var self = this;
+      self.$http
+        .get(this.baseUrl + "/tracelist?tcdjd=" + self.tczJd + "&xh=" + xh)
+        .then(function(response) {
+          var res = response.data;
+          for (var i = 0; i < res.length; i++) {
+            res[i].LCXX_GCSJ = self.todate(res[i].LCXX_GCSJ);
+            if (res[i].LCXX_KH == 72) {
+              res[i].LCXX_KH = "货车";
+            } else if (res[i].LCXX_KH == 74) {
+              res[i].LCXX_KH = "客车";
+            }
+          }
+          self.tableData2 = res;
+          // console.log(res);
+        });
+    },
+    getTable1(time) {
+      time = time.trim().split(/\s+/);
+      time = time[0] + "+" + time[1];
+      var self = this;
+      self.$http
+        .get(
+          this.baseUrl +
+            "/axleListBylcbh2?lcbh=" +
+            self.LCXX_BH +
+            "&tcz=" +
+            self.tczMc +
+            "&gcsj=" +
+            time
+        )
+        .then(function(response) {
+          var res = response.data;
+          for (var i = 0; i < res.length; i++) {
+            switch(res[i].ZXXX_YRZDJ){
+              case 0:
+                res[i].ZXXX_YRZDJ = "正常";
+                break;
+              case 1:
+                res[i].ZXXX_YRZDJ = "激热";
+                break;
+              case 2:
+                res[i].ZXXX_YRZDJ = "强热";
+                break;
+              case 3:
+                res[i].ZXXX_YRZDJ = "微热";
+                break;
+            }
+             switch(res[i].ZXXX_ZRZDJ){
+              case 0:
+                res[i].ZXXX_ZRZDJ = "正常";
+                break;
+              case 1:
+                res[i].ZXXX_ZRZDJ = "激热";
+                break;
+              case 2:
+                res[i].ZXXX_ZRZDJ = "强热";
+                break;
+              case 3:
+                res[i].ZXXX_ZRZDJ = "微热";
+                break;
+            }
+          }
+          self.tableData1 = res;
+        });
     }
   }
 };

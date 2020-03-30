@@ -5,8 +5,13 @@
     </div>
     <div class="search_6">
       <div class="time_3">
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
-        <el-date-picker v-model="value1" type="date"></el-date-picker>
+        <div class="date">
+          <el-date-picker v-model="starttime" type="date"></el-date-picker>
+        </div>
+        <div class="text">--</div>
+        <div class="date">
+          <el-date-picker v-model="endtime" type="date"></el-date-picker>
+        </div>
       </div>
       <div class="carnum">
         <el-input v-model="input_1" placeholder="车厢编号"></el-input>
@@ -16,7 +21,7 @@
       </div>
       <span class="demonstration">里程范围</span>
       <div class="block">
-        <el-slider v-model="value2" :step="1000" :max="20000" show-stops range :marks="marks"></el-slider>
+        <el-slider v-model="value3" :step="1000" :max="20000" show-stops range :marks="marks"></el-slider>
       </div>
     </div>
     <div class="content_3">
@@ -168,8 +173,15 @@ export default {
         }
       ],
       currentPage: 1,
-      pagesize: 13
+      pagesize: 13,
+      starttime:'',
+      endtime:'',
+      value3:'',
+      input_1:'1233'
     };
+  },
+  mounted(){
+    this.carsort();
   },
   methods: {
     getSummaries(param) {
@@ -210,6 +222,17 @@ export default {
     handleCurrentChange: function(currentPage) {
       this.currentPage = currentPage;
       console.log(this.currentPage); //点击第几页
+    },
+    carsort(){
+      var cx = this.$router.params.carname;
+      console.log(cx)
+      var self = this;
+      self.$http
+      .get(this.baseUrl+"/findByCxOrCh",{
+        params:{
+          clxx_cx:cx
+        }
+      })
     }
   }
 };
@@ -240,12 +263,25 @@ export default {
     width: 35%;
     float: left;
     line-height: 2.3rem;
-    margin-left: -3%;
+    margin-left: 2%;
+    .date {
+      width: 30%;
+      height: 1rem;
+      float: left;
+    }
+    .text {
+      width: 4%;
+      float: left;
+      height: 2rem;
+      text-align: center;
+      font-size: 0.5rem;
+      color: #036fb8;
+    }
   }
   .carnum {
     width: 15%;
     line-height: 2.3rem;
-    margin-left: -10%;
+    margin-left: -12%;
     float: left;
   }
   .bot_4 {
@@ -292,7 +328,7 @@ export default {
     margin-top: 3.2%;
     position: absolute;
     margin-left: 60%;
-      span {
+    span {
       width: 10%;
       height: inherit;
       font-size: 0.5rem;
