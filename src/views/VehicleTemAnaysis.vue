@@ -160,6 +160,7 @@ export default {
           xAxis: [
             {
               type: "value",
+              name:"左",
               inverse: true,
               axisLine: {
                 show: false
@@ -191,6 +192,7 @@ export default {
             {
               gridIndex: 2,
               type: "value",
+              name:"右",
               axisLine: {
                 show: false
               },
@@ -218,6 +220,7 @@ export default {
           yAxis: [
             {
               type: "category",
+              
               inverse: true,
               // yAxisIndex: 0,
               position: "right",
