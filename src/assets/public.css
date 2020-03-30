@@ -342,6 +342,7 @@ a:hover {
 .VehicleTemAnaysis .el-input__prefix,
 .AxleTemAnaysis .el-input__prefix{
   margin-top: -1px;
+  width: 0;
 }
 .VehicleTemAnaysis .el-input__icon,.AxleTemAnaysis .el-input__icon,.AccumulatedMileageQuery .el-input__icon,.StatisticalReports .timest .el-input__icon,.hotshaftwarning .time .el-input__icon{
     height: 1rem;
@@ -360,7 +361,9 @@ a:hover {
   -webkit-transition: all .3s;
   transition: all .3s;
 }
-
+.el-input__suffix{
+  display: none;
+}
 .StatisticalReports .timest .el-input__prefix,
 .hotshaftwarning .time .el-input__prefix, .el-input__suffix {
   width: 15%;
