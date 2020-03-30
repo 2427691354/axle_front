@@ -119,7 +119,7 @@ export default {
               top: 60,
               bottom: 40,
               containLabel: true,
-              width: "42%"
+              width: "48%"
             },
             {
               show: false,
@@ -219,7 +219,7 @@ export default {
             {
               type: "category",
               inverse: true,
-              yAxisIndex:0,
+              // yAxisIndex: 0,
               position: "right",
               axisLine: {
                 show: false
@@ -228,9 +228,9 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: false,
+                show: true,
                 formatter: "{value}",
-                margin: 8,
+                margin: 30,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
@@ -250,7 +250,9 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: true,
+                show: false,
+                formatter: "{value}",
+                // margin: 8,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
@@ -263,6 +265,7 @@ export default {
                     align: "center"
                   }
                 };
+                // console.log(value);
               })
             },
             {

@@ -250,7 +250,9 @@ export default {
       //标签
       clabels: [],
       cseries: [],
-      clegend: []
+      clegend: [],
+
+      wordvalue: ""
     };
   },
   watch: {
@@ -261,6 +263,16 @@ export default {
           this.mRemind();
         } else {
           this.selectcar();
+        }
+      },
+      deep: true
+    },
+    wordvalue:{
+      handler() {
+        if(this.wordvalue == ""){
+          this.mRemind();
+        }else{
+          this.focusOn();
         }
       },
       deep: true
@@ -321,9 +333,10 @@ export default {
                 for (var i = 0; i < res.length; i++) {
                   self.focusonInfo.push({
                     name: res[i].CLXX_CHDD,
-                    value: Math.random() * 5000
+                    value: Math.random() * 3000
                   });
                 }
+                self.wordvalue = self.focusonInfo[0].name;
                 // console.log(self.focusonInfo);
                 self.focusOn();
                 if (self.focusonInfo[0].name != "") {
@@ -567,6 +580,77 @@ export default {
       };
       myChart.setOption(option);
       // console.log(this.focusonInfo);
+      var self = this;
+      myChart.on("click", function(param) {
+        if (param.name == undefined) {
+          self.wordvalue = this.focusonInfo[0].name;
+        } else {
+          self.wordvalue = param.name;
+        }
+        console.log(self.wordvalue);
+        self.$http
+          .get(self.baseUrl + "/findWsBhByCh", {
+            params: {
+              clxx_ch: param.name
+            }
+          })
+          .then(function(response) {
+            var res = response.data;
+            self.tlabels = res[0].mclist.split(",");
+            self.tlegend = [];
+            self.tseries = [];
+            for (var i = 0; i < res.length; i++) {
+              self.tseries.push(
+                {
+                  name: res[i].ZXXX_ZW + "轴",
+                  type: "line",
+                  data: res[i].zzwlist.split(","),
+                  lineStyle: {
+                    normal: {
+                      width: 2,
+                      color: "#54DAC2",
+                      shadowColor: "rgba(245,128,128, 0.5)",
+                      shadowBlur: 10,
+                      shadowOffsetY: 7
+                    }
+                  },
+                  symbol: "emptyCircle",
+                  symbolSize: 8,
+                  itemStyle: {
+                    normal: {
+                      color: "#54DAC2"
+                    }
+                  },
+                  smooth: false
+                },
+                {
+                  name: res[i].ZXXX_ZW + "轴",
+                  type: "line",
+                  symbol: "emptyCircle",
+                  symbolSize: 8,
+                  data: res[i].yzwlist.split(","),
+                  lineStyle: {
+                    normal: {
+                      width: 2,
+                      color: "#F9A589",
+                      shadowColor: "rgba(249,165,137, 0.5)",
+                      shadowBlur: 8,
+                      shadowOffsetY: 5
+                    }
+                  },
+                  itemStyle: {
+                    normal: {
+                      color: "#F9A589"
+                    }
+                  },
+                  smooth: false
+                }
+              );
+              self.tlegend.push(res[i].ZXXX_ZW + "轴");
+            }
+            self.lineTem();
+          });
+      });
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -611,7 +695,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "温升|绿-右温升(" + this.focusonInfo[0].name + ")",
+          name: "温升|绿-右温升(" + this.wordvalue + ")",
           splitLine: {
             lineStyle: {
               color: "#DDD"
@@ -630,7 +714,7 @@ export default {
         series: this.tseries
       };
       myChart.setOption(option);
-      // console.log(this.tlegend[0]);
+      // console.log(this.wordvalue);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -766,7 +850,7 @@ export default {
           console.log(self.cseries);
           self.lineTem2();
         });
-        row.carnumber[0]='';
+      row.carnumber[0] = "";
     }
   }
 };
