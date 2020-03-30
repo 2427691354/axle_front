@@ -17,16 +17,20 @@
           :collapse="isCollapse"
         >
           <el-menu-item index="/">
-            <i class="el-icon-menu"><span class="iconfont">&#xe600;</span></i>
+            <i class="el-icon-menu">
+              <span class="iconfont">&#xe600;</span>
+            </i>
             <span slot="title">首页</span>
           </el-menu-item>
           <el-menu-item index="/databrowsing">
-            <i class="el-icon-menu"><span class="iconfont">&#xe71d;</span></i>
+            <i class="el-icon-menu">
+              <span class="iconfont">&#xe71d;</span>
+            </i>
             <span slot="title">数据浏览</span>
           </el-menu-item>
           <el-submenu index="3">
             <template slot="title">
-              <!-- <span class="el-icon-menu"><span class="iconfont">&#xe662;</span></i> -->
+              <i class="el-icon-menu"><span class="iconfont">&#xe662;</span></i>
               <span slot="title">热轴报警</span>
             </template>
             <el-menu-item index="/temperaturerisesearch">
@@ -43,13 +47,15 @@
             </el-menu-item>
           </el-submenu>
           <el-menu-item index="/statisticalreports">
-            <i class="el-icon-menu"><span class="iconfont">&#xe621;</span></i>
+            <i class="el-icon-menu">
+              <span class="iconfont">&#xe621;</span>
+            </i>
             <span slot="title">统计报表</span>
           </el-menu-item>
-        
+
           <el-submenu index="5">
             <template slot="title">
-              <!-- <span class="el-icon-menu"><span class="iconfont">&#xe63b;</span></i> -->
+              <i class="el-icon-menu"><span class="iconfont">&#xe63b;</span></i>
             <span slot="title">维护服务</span>
             </template>
             <el-menu-item index="/maintenanceReminder">
@@ -64,7 +70,7 @@
               <!-- <i class="el-icon-setting"></i> -->
               <span slot="title">车型温升统计分析</span>
             </el-menu-item>
-             <el-menu-item index="/axleTemAnaysis">
+            <el-menu-item index="/axleTemAnaysis">
               <!-- <i class="el-icon-setting"></i> -->
               <span slot="title">车型轴温统计分析</span>
             </el-menu-item>
@@ -196,12 +202,12 @@ export default {
   background: #fff;
   box-shadow: 1px 1px 6px 0px rgba(15, 6, 14, 0.15);
 
- .el-icon-menu:before{
-   content: none;
- }
- el-submenu__title span{
-   display: none;
- }
+  .el-icon-menu:before {
+    content: none;
+  }
+  el-submenu__title span {
+    display: none;
+  }
   .el-menu-vertical-demo:not(.el-menu--collapse) {
     color: #888f97;
     font-family: SourceHanSansCN-Light;
@@ -213,9 +219,7 @@ export default {
       font-size: 1rem;
       line-height: 2rem;
     }
-    .subitem{
-      margin-left: 1.3rem;
-    }
+    
     span {
       float: left;
       margin-left: 0.4rem;

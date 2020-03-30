@@ -37,7 +37,7 @@ export default {
     return {
       inputs: {
         value1: "2019-02-01",
-        value2: "2019-03-31"
+        value2: "2019-02-28"
       },
       //标签
       labels: [],
@@ -92,7 +92,7 @@ export default {
             top: "3%",
             left: "3%",
             textStyle: {
-              color: "#000",
+              color: "#000"
               // fontSize: 16
             }
           },
@@ -112,7 +112,6 @@ export default {
               type: "shadow"
             }
           },
-
           grid: [
             {
               show: false,
@@ -120,7 +119,8 @@ export default {
               top: 60,
               bottom: 40,
               containLabel: true,
-              width: "42%"
+              //调整宽度（中间label显示）
+              width: "48%"
             },
             {
               show: false,
@@ -138,41 +138,30 @@ export default {
               width: "42%"
             }
           ],
-
           dataZoom: [
             {
+              //滚动条缩放
               type: "slider",
-              yAxisIndex: 0,
+              //控制两边（可以用数组）
+              yAxisIndex: [0, 2],
               filterMode: "empty",
               start: 0,
-              end: 100
+              end: 43
             },
             {
-              type: "slider",
-              yAxisIndex: 2,
-              filterMode: "empty",
-              start: 0,
-              end: 100
-            },
-            {
+              //鼠标缩放
               type: "inside",
-              yAxisIndex: 0,
+              yAxisIndex: [0, 2],
               filterMode: "empty",
               start: 0,
-              end: 100
-            },
-            {
-              type: "inside",
-              yAxisIndex: 2,
-              filterMode: "empty",
-              start: 0,
-              end: 100
+              end: 43
             }
           ],
 
           xAxis: [
             {
               type: "value",
+              name:"左",
               inverse: true,
               axisLine: {
                 show: false
@@ -204,6 +193,7 @@ export default {
             {
               gridIndex: 2,
               type: "value",
+              name:"右",
               axisLine: {
                 show: false
               },
@@ -231,7 +221,9 @@ export default {
           yAxis: [
             {
               type: "category",
+              
               inverse: true,
+              // yAxisIndex: 0,
               position: "right",
               axisLine: {
                 show: false
@@ -240,9 +232,10 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: false,
+                show: true,
                 formatter: "{value}",
-                margin: 8,
+                //调整边距（中间label显示）
+                margin: 30,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
@@ -262,7 +255,9 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: true,
+                show: false,
+                formatter: "{value}",
+                // margin: 8,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
@@ -275,6 +270,7 @@ export default {
                     align: "center"
                   }
                 };
+                // console.log(value);
               })
             },
             {
@@ -303,7 +299,7 @@ export default {
               name: "左均轴温",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "广",
               label: {
                 normal: {
@@ -327,10 +323,10 @@ export default {
               data: this.avgz
             },
             {
-              name: "右均轴温",
+              name: "左方差",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "广",
               label: {
                 normal: {
@@ -351,13 +347,13 @@ export default {
                   color: "#01A4F7"
                 }
               },
-              data: this.avgy
+              data: this.fcz
             },
             {
-              name: "左方差",
+              name: "右均轴温",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "告",
               xAxisIndex: 2,
               yAxisIndex: 2,
@@ -380,13 +376,13 @@ export default {
                   color: "#7E47FF"
                 }
               },
-              data: this.fcz
+              data: this.avgy
             },
             {
               name: "右方差",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "告",
               xAxisIndex: 2,
               yAxisIndex: 2,
@@ -443,7 +439,7 @@ export default {
             height: "30%",
             left: "12%",
             right: "12%",
-            top:'15%'
+            top: "15%"
           },
 
           {
@@ -461,7 +457,7 @@ export default {
           itemHeight: 15, // 设置高度
           itemGap: 10, // 设置间距
           top: "8%",
-          left:'7%',
+          left: "7%",
           data: ["左均温升", "右均温升", "左方差", "右方差"]
         },
         xAxis: [
@@ -660,7 +656,7 @@ export default {
             height: "32%",
             left: "12%",
             right: "12%",
-            top:'15%'
+            top: "15%"
           },
 
           {
@@ -678,7 +674,7 @@ export default {
           itemHeight: 15, // 设置高度
           itemGap: 10, // 设置间距
           top: "8%",
-          left:'7%',
+          left: "7%",
           data: ["左均温升", "右均温升", "左方差", "右方差"]
         },
         xAxis: [
@@ -867,7 +863,7 @@ export default {
           self.avgy = res.avgy.split(",");
           self.fcz = res.fcz.split(",");
           self.fcy = res.fcy.split(",");
-          // console.log(self.avgz);
+          console.log(self.labels);
 
           self.cartemBar();
         })

@@ -189,7 +189,7 @@ a:hover {
 .TemperatureRiseSearch .el-pager li {
   padding: 0 ;
   font-size: 0.45rem;
-  min-width: 27px;
+  min-width: 1rem;
   height: 1.05rem;
   line-height: 1.05rem;
   border-top: 1px #dddddd solid;
@@ -198,6 +198,7 @@ a:hover {
 }
 .index .el-pager li.active,
 .TemperatureRiseSearch .el-pager li.active{
+
   background-color: #337ab7;
   color:#fff;
 }
@@ -341,6 +342,7 @@ a:hover {
 .VehicleTemAnaysis .el-input__prefix,
 .AxleTemAnaysis .el-input__prefix{
   margin-top: -1px;
+  width: 0;
 }
 .VehicleTemAnaysis .el-input__icon,.AxleTemAnaysis .el-input__icon,.AccumulatedMileageQuery .el-input__icon,.StatisticalReports .timest .el-input__icon,.hotshaftwarning .time .el-input__icon{
     height: 1rem;
@@ -359,7 +361,9 @@ a:hover {
   -webkit-transition: all .3s;
   transition: all .3s;
 }
-
+.el-input__suffix{
+  display: none;
+}
 .StatisticalReports .timest .el-input__prefix,
 .hotshaftwarning .time .el-input__prefix, .el-input__suffix {
   width: 15%;
@@ -574,4 +578,7 @@ a:hover {
 }
 .MaintenanceReminder .el-tabs__header{
   padding: 1%;
+}
+.el-pager .more::before {
+  line-height: 0;
 }

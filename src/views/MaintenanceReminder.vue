@@ -64,11 +64,11 @@
               <div class="search_3">
                 <span>温升阈值</span>
                 <div class="tem">
-                  <el-input v-model="temnum" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.temnum" placeholder="请输入内容"></el-input>
                 </div>
                 <span>达到次数</span>
                 <div class="nums">
-                  <el-input v-model="numbers" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.numbers" placeholder="请输入内容"></el-input>
                 </div>
                 <div class="bot_3">
                   <el-button type="danger" round @click="mRemind">搜索</el-button>
@@ -89,14 +89,14 @@
               <div class="search_4">
                 <span>温升阈值</span>
                 <div class="tem">
-                  <el-input v-model="temnum" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.temnum" placeholder="请输入内容"></el-input>
                 </div>
                 <span>达到次数</span>
                 <div class="nums">
-                  <el-input v-model="numbers" placeholder="请输入内容"></el-input>
+                  <el-input v-model="inputs.numbers" placeholder="请输入内容"></el-input>
                 </div>
                 <div class="bot_3">
-                  <el-button type="danger" round>搜索</el-button>
+                  <el-button type="danger" round @click="mRemind">搜索</el-button>
                 </div>
                 <div class="select_1">
                   <el-select v-model="carvalue" placeholder="车型选择">
@@ -159,10 +159,12 @@ export default {
           info: "微热"
         }
       ],
-      //温升阈值
-      temnum: "40",
-      //达到次数
-      numbers: "2",
+      inputs: {
+        //温升阈值
+        temnum: "10",
+        //达到次数
+        numbers: "2"
+      },
       //词云数据
       focusonInfo: [],
       //车辆温升下拉数据
@@ -232,25 +234,9 @@ export default {
           label: "G60K"
         }
       ],
+      //车型选择
       carvalue: "",
-
       //车次温升提醒折线图数据
-      tone: {
-        zlist: [],
-        ylist: []
-      },
-      tfour: {
-        zlist: [],
-        ylist: []
-      },
-      ttwo: {
-        zlist: [],
-        ylist: []
-      },
-      tthree: {
-        zlist: [],
-        ylist: []
-      },
       //标签
       tlabels: [],
       //图例名称
@@ -260,9 +246,13 @@ export default {
       //车辆温升表格数据
       tableInline: "",
       tableData2: [],
+      //车辆温升折线图
       //标签
       clabels: [],
-      cseries: []
+      cseries: [],
+      clegend: [],
+
+      wordvalue: ""
     };
   },
   watch: {
@@ -277,9 +267,13 @@ export default {
       },
       deep: true
     },
-    cseries: {
+    wordvalue:{
       handler() {
-        this.lineTem2();
+        if(this.wordvalue == ""){
+          this.mRemind();
+        }else{
+          this.focusOn();
+        }
       },
       deep: true
     }
@@ -301,8 +295,8 @@ export default {
         .get(this.baseUrl + "/updateLcYz", {
           params: {
             lcyz: self.yuzhi,
-            lxcs: self.numbers,
-            wsyz: self.temnum
+            lxcs: self.inputs.numbers,
+            wsyz: self.inputs.temnum
           }
         })
         .then(function(response) {
@@ -339,9 +333,10 @@ export default {
                 for (var i = 0; i < res.length; i++) {
                   self.focusonInfo.push({
                     name: res[i].CLXX_CHDD,
-                    value: Math.random() * 5000
+                    value: Math.random() * 3000
                   });
                 }
+                self.wordvalue = self.focusonInfo[0].name;
                 // console.log(self.focusonInfo);
                 self.focusOn();
                 if (self.focusonInfo[0].name != "") {
@@ -356,6 +351,7 @@ export default {
                     .then(function(response) {
                       var res = response.data;
                       self.tlabels = res[0].mclist.split(",");
+                      self.tlegend = [];
                       self.tseries = [];
                       for (var i = 0; i < res.length; i++) {
                         self.tseries.push(
@@ -404,6 +400,7 @@ export default {
                             smooth: false
                           }
                         );
+                        self.tlegend.push(res[i].ZXXX_ZW + "轴");
                       }
                       self.lineTem();
                     });
@@ -510,12 +507,14 @@ export default {
           // console.log(self.carData);
         });
     },
+    //点击维护
     deleteRow(index) {
       //删除
       this.carData.splice(index, 1);
       // console.log(index);
     },
-    deleteAll(){
+    //点击全部维护
+    deleteAll() {
       this.carData = [];
     },
     //词云
@@ -581,6 +580,77 @@ export default {
       };
       myChart.setOption(option);
       // console.log(this.focusonInfo);
+      var self = this;
+      myChart.on("click", function(param) {
+        if (param.name == undefined) {
+          self.wordvalue = this.focusonInfo[0].name;
+        } else {
+          self.wordvalue = param.name;
+        }
+        console.log(self.wordvalue);
+        self.$http
+          .get(self.baseUrl + "/findWsBhByCh", {
+            params: {
+              clxx_ch: param.name
+            }
+          })
+          .then(function(response) {
+            var res = response.data;
+            self.tlabels = res[0].mclist.split(",");
+            self.tlegend = [];
+            self.tseries = [];
+            for (var i = 0; i < res.length; i++) {
+              self.tseries.push(
+                {
+                  name: res[i].ZXXX_ZW + "轴",
+                  type: "line",
+                  data: res[i].zzwlist.split(","),
+                  lineStyle: {
+                    normal: {
+                      width: 2,
+                      color: "#54DAC2",
+                      shadowColor: "rgba(245,128,128, 0.5)",
+                      shadowBlur: 10,
+                      shadowOffsetY: 7
+                    }
+                  },
+                  symbol: "emptyCircle",
+                  symbolSize: 8,
+                  itemStyle: {
+                    normal: {
+                      color: "#54DAC2"
+                    }
+                  },
+                  smooth: false
+                },
+                {
+                  name: res[i].ZXXX_ZW + "轴",
+                  type: "line",
+                  symbol: "emptyCircle",
+                  symbolSize: 8,
+                  data: res[i].yzwlist.split(","),
+                  lineStyle: {
+                    normal: {
+                      width: 2,
+                      color: "#F9A589",
+                      shadowColor: "rgba(249,165,137, 0.5)",
+                      shadowBlur: 8,
+                      shadowOffsetY: 5
+                    }
+                  },
+                  itemStyle: {
+                    normal: {
+                      color: "#F9A589"
+                    }
+                  },
+                  smooth: false
+                }
+              );
+              self.tlegend.push(res[i].ZXXX_ZW + "轴");
+            }
+            self.lineTem();
+          });
+      });
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -595,7 +665,8 @@ export default {
         legend: {
           top: "10%",
           right: "5%",
-          selectedMode: "single"
+          selectedMode: "single",
+          data: this.tlegend
         },
         grid: {
           top: "20%",
@@ -624,7 +695,7 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "温升|绿-右温升(875001)",
+          name: "温升|绿-右温升(" + this.wordvalue + ")",
           splitLine: {
             lineStyle: {
               color: "#DDD"
@@ -643,7 +714,7 @@ export default {
         series: this.tseries
       };
       myChart.setOption(option);
-      // console.log(this.tlegend[0]);
+      // console.log(this.wordvalue);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -658,7 +729,8 @@ export default {
         legend: {
           top: "10%",
           right: "5%",
-          selectedMode: "single"
+          selectedMode: "single",
+          data: this.clegend
         },
         grid: {
           top: "20%",
@@ -681,9 +753,6 @@ export default {
               color: "#DDD"
             }
           }
-          // axisLabel:{
-          //   interval:0
-          // }
         },
         yAxis: {
           type: "value",
@@ -707,6 +776,7 @@ export default {
       };
       myChart.setOption(option);
       // console.log(this.clegend[0]);
+      console.log(this.clegend);
       window.addEventListener("resize", function() {
         myChart.resize();
       });
@@ -724,11 +794,10 @@ export default {
         })
         .then(function(response) {
           var res = response.data;
-          console.log(res);
+          // console.log(res);
           self.clabels = res[0].gcsjlist.split(",");
-
+          self.clegend = [];
           self.cseries = [];
-
           for (var i = 0; i < res.length; i++) {
             self.cseries.push(
               {
@@ -776,10 +845,12 @@ export default {
                 smooth: false
               }
             );
+            self.clegend.push(res[i].ZXXX_ZW + "轴");
           }
-          // console.log(self.cseries);
+          console.log(self.cseries);
           self.lineTem2();
         });
+      row.carnumber[0] = "";
     }
   }
 };

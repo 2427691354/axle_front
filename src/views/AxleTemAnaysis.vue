@@ -120,7 +120,7 @@ export default {
               top: 60,
               bottom: 40,
               containLabel: true,
-              width: "42%"
+              width: "48%"
             },
             {
               show: false,
@@ -142,31 +142,17 @@ export default {
           dataZoom: [
             {
               type: "slider",
-              yAxisIndex: 0,
+              yAxisIndex: [0,2],
               filterMode: "empty",
               start: 0,
-              end: 100
-            },
-            {
-              type: "slider",
-              yAxisIndex: 2,
-              filterMode: "empty",
-              start: 0,
-              end: 100
+              end: 43
             },
             {
               type: "inside",
-              yAxisIndex: 0,
+              yAxisIndex: [0,2],
               filterMode: "empty",
               start: 0,
-              end: 100
-            },
-            {
-              type: "inside",
-              yAxisIndex: 2,
-              filterMode: "empty",
-              start: 0,
-              end: 100
+              end: 43
             }
           ],
 
@@ -174,6 +160,7 @@ export default {
             {
               type: "value",
               inverse: true,
+              name:"左",
               axisLine: {
                 show: false
               },
@@ -204,6 +191,7 @@ export default {
             {
               gridIndex: 2,
               type: "value",
+              name:"右",
               axisLine: {
                 show: false
               },
@@ -240,9 +228,9 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: false,
+                show: true,
                 formatter: "{value}",
-                margin: 8,
+                margin: 30,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
@@ -262,7 +250,7 @@ export default {
                 show: false
               },
               axisLabel: {
-                show: true,
+                show: false,
                 textStyle: {
                   color: "#9D9EA0",
                   fontSize: 12
@@ -303,7 +291,7 @@ export default {
               name: "左均轴温",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "广",
               label: {
                 normal: {
@@ -327,10 +315,10 @@ export default {
               data: this.avgz
             },
             {
-              name: "右均轴温",
+              name: "左方差",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "广",
               label: {
                 normal: {
@@ -351,13 +339,13 @@ export default {
                   color: "#01A4F7"
                 }
               },
-              data: this.avgy
+              data: this.fcz
             },
             {
-              name: "左方差",
+              name: "右均温升",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "告",
               xAxisIndex: 2,
               yAxisIndex: 2,
@@ -380,13 +368,13 @@ export default {
                   color: "#7E47FF"
                 }
               },
-              data: this.fcz
+              data: this.avgy
             },
             {
               name: "右方差",
               type: "bar",
               barGap: 20,
-              barWidth: 10,
+              barWidth: "80%",
               stack: "告",
               xAxisIndex: 2,
               yAxisIndex: 2,

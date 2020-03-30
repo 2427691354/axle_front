@@ -100,17 +100,18 @@ export default {
       },
 
       //下行
-      bottom:{
+      bottom: {
         train: [],
         car: [],
         axle: []
       },
 
       //热轴
-      thermal:{
-        jre:[],
-        qre:[],
-        wre:[]
+      tlabel:[],
+      thermal: {
+        jre: [],
+        qre: [],
+        wre: []
       }
     };
   },
@@ -172,6 +173,11 @@ export default {
             bottom: "25%"
           }
         ],
+        tooltip: {
+          show: true,
+          //带线
+          trigger: "axis"
+        },
         legend: {
           data: ["上行", "下行"],
           top: "2%",
@@ -260,17 +266,8 @@ export default {
         },
         tooltip: {
           show: true,
-          backgroundColor: "#fff",
-          borderColor: "#ddd",
-          borderWidth: 1,
-          textStyle: {
-            color: "#3c3c3c",
-            fontSize: 16
-          },
-          formatter: function(p) {
-            return p.seriesName + "<br>" + "车辆数量：" + p.value;
-          },
-          extraCssText: "box-shadow: 0 0 5px rgba(0, 0, 0, 0.1)"
+          //不带横线
+          trigger: "item"
         },
         xAxis: {
           axisLabel: {
@@ -389,7 +386,7 @@ export default {
         },
         tooltip: {
           show: true,
-          trigger: "item"
+          trigger: "axis"
         },
         legend: {
           show: false,
@@ -524,6 +521,12 @@ export default {
           bottom: "15%",
           containLabel: true
         },
+        dataZoom: [
+          {
+            type: "inside", //详细配置可见echarts官网
+            yAxisIndex: [0]
+          }
+        ],
         xAxis: [
           {
             type: "value",
@@ -558,36 +561,34 @@ export default {
             axisTick: {
               show: false
             },
-            data: [
-              "羊口上行",
-              "华泰上行",
-              "大家洼上行",
-              "菜州上行",
-              "平度上行",
-              "田柳下行",
-              "寿光下行",
-              "昌邑下行",
-              "招远下行"
-            ]
+            data: this.tlabel
           }
         ],
         series: [
           {
             name: "激热轴",
             type: "bar",
-            stack: "广",
-            data: [1, 0, 0, 0, 0, 1, 0, 0, 0]
+            barGap: "50%",
+            stack: "total",
+            barWidth: "50%",
+            data: this.thermal.jre
           },
           {
             name: "强热轴",
             type: "bar",
-            data: [0, 0, 1, 0, 0, 0, 0, 1, 0]
+            //堆叠与重叠
+            barGap: "50%",
+            stack: "total",
+            barWidth: "50%",
+            data: this.thermal.qre
           },
           {
             name: "微热轴",
             type: "bar",
-            stack: "广",
-            data: [6, 5, 3, 7, 1, 6, 5, 3, 7]
+            barGap: "50%",
+            stack: "total",
+            barWidth: "50%",
+            data: this.thermal.wre
           }
         ]
       };
@@ -621,11 +622,23 @@ export default {
           self.bottom.axle = res.xxsj.COUNT_AXLE;
 
           //热轴数
-          self.thermal.jre= res.sxsj.COUNT_JRE;
-          self.thermal.qre = res.xxsj.COUNT_QRE;
-          self.thermal.wre = res.xxsj.COUNT_WRE;
+          var a = [];
+          for(var i=0;i<res.tczlist.length;i++){
+            a.push(res.tczlist[i]+"上行")
+          }
+          for( i=0;i<res.tczlist.length;i++){
+            a.push(res.tczlist[i]+"下行")
+          }
+          //合并数组concat
+          self.tlabel = a;
+          // console.log(self.tlabel)
+          self.thermal.jre = res.sxsj.COUNT_JRE.concat(res.xxsj.COUNT_JRE);
+          self.thermal.qre = res.sxsj.COUNT_QRE.concat(res.xxsj.COUNT_QRE);
+          self.thermal.wre = res.sxsj.COUNT_WRE.concat(res.xxsj.COUNT_WRE);
 
-          // console.log(self.zlabel);
+          console.log(self.thermal.jre);
+          console.log(self.thermal.qre);
+          console.log(self.thermal.wre);
           self.trainNum();
           self.carNum();
           self.axleNum();
