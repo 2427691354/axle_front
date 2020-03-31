@@ -573,12 +573,13 @@ a:hover {
   line-height: 1rem;
 }
 
-.MaintenanceReminder .el-tabs__item{
+.MaintenanceReminder .ivu-tabs-nav-container {
+  margin-top: 1%;
+  line-height: 1rem;
   font-size: 0.6rem;
+  font-weight: 500;
 }
-.MaintenanceReminder .el-tabs__header{
-  padding: 1%;
-}
+
 .el-pager .more::before {
   line-height: 0;
 }
