@@ -269,7 +269,7 @@ export default {
         },
         grid: {
           containLabel: true,
-          left: "10%",
+          left: "8%",
           right: 0,
           bottom: "15%",
           top: "5%"
@@ -300,7 +300,7 @@ export default {
           {
             data: this.zlabel,
             axisLabel: {
-              fontSize: "45%",
+              // fontSize: "45%",
               color: "#000"
             },
             axisLine: {
@@ -335,7 +335,7 @@ export default {
                 },
                 textStyle: {
                   color: "#fff",
-                  fontSize: "40%"
+                  // fontSize: "40%"
                 }
               }
             },
@@ -364,7 +364,7 @@ export default {
                 },
                 textStyle: {
                   color: "#fff",
-                  fontSize: "40%"
+                  // fontSize: "40%"
                 }
               }
             },
@@ -732,12 +732,12 @@ export default {
     width: 15%;
     height: inherit;
     float: left;
-    line-height: 2.3rem;
+    margin-top: 1.5%;
   }
   .timest {
     width: 50%;
     float: left;
-    line-height: 2.3rem;
+    margin-top: 1.5%;
     .date {
       width: 22%;
       height: 1rem;
@@ -755,7 +755,7 @@ export default {
   .botst {
     width: 10%;
     float: left;
-    line-height: 2.3rem;
+    margin-top: 1.5%;
     margin-left: -13rem;
   }
 }
