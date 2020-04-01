@@ -8,7 +8,6 @@ import TemperatureRiseForecast from '../views/TemperatureRiseForecast.vue'
 import TemperatureRiseSearch from '../views/TemperatureRiseSearch.vue'
 import MaintenanceReminder from '../views/MaintenanceReminder.vue'
 import AccumulatedMileageQuery from '../views/AccumulatedMileageQuery.vue'
-import MileageDetails from '../views/AccumulatedMileageQuerys/MileageDetails.vue'
 import VehicleTemAnaysis from '../views/VehicleTemAnaysis.vue'
 import AxleTemAnaysis from '../views/AxleTemAnaysis.vue'
 
@@ -54,11 +53,6 @@ const routes = [
     path: '/accumulatedMileageQuery',
     name: 'AccumulatedMileageQuery',
     component: AccumulatedMileageQuery,
-  },
-  {
-    path: '/mileageDetails',
-    name: 'MileageDetails',
-    component: MileageDetails
   },
   {
     path:'/vehicleTemAnaysis',

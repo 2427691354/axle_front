@@ -658,10 +658,11 @@ export default {
     font-size: 0.5rem;
     color: #9b9b9b;
     float: left;
-    line-height: 2.5rem;
+    margin-top: 1.5%;
     span {
       width: 20%;
       margin-right: 2%;
+      margin-top: 0.8%;
       float: left;
     }
     .date {
@@ -680,14 +681,14 @@ export default {
     width: 15%;
     height: inherit;
     float: left;
-    padding-top: 1%;
+    margin-top: 1.5%;
     margin-left: -8rem;
   }
   .state {
     width: 25%;
     height: inherit;
     float: left;
-    line-height: 2.2rem;
+    margin-top: 1.5%;
     margin-left: -1rem;
     .wei {
       width: 20%;

@@ -22,7 +22,14 @@
       <div class="boxblock" v-if="showblock">
         <span class="demonstration">里程范围</span>
         <div class="block">
-          <el-slider v-model="inputs.rangeblock" :step="1000" :max="20000" show-stops range :marks="marks"></el-slider>
+          <el-slider
+            v-model="inputs.rangeblock"
+            :step="1000"
+            :max="20000"
+            show-stops
+            range
+            :marks="marks"
+          ></el-slider>
         </div>
       </div>
     </div>
@@ -34,7 +41,7 @@
       <div class="table_5">
         <el-table
           :data="tableData.slice((currentpage-1)*pagesize,currentpage*pagesize)"
-          height="21rem"
+          height="20.9rem"
           :summary-method="getSummaries"
           show-summary
           style="width: 100%; margin-top: 20px"
@@ -85,7 +92,7 @@ export default {
       },
       tableData: [],
       currentpage: 1,
-      pagesize: 20,
+      pagesize: 11,
       showblock: false,
       showtable: false,
       showfun: true,
@@ -99,7 +106,7 @@ export default {
     inputs: {
       //深度监听，可监听到对象、数组的变化
       handler() {
-        this.mileageDate();
+          this.tablesDate();
       },
       deep: true
     }
@@ -252,13 +259,13 @@ export default {
 
       // console.log(self.inputs.rangeblock[1]);
 
-      //绑定里程范围查询表格数据
+      //车厢编号查询
       self.$http
         .get(this.baseUrl + "/findByCxOrCh", {
           params: {
             clxx_chdd: self.cars,
             currentPage: 1,
-            size: 20,
+            size: 100,
             start: self.inputs.rangeblock[0],
             end: self.inputs.rangeblock[1],
             s: self.start,
@@ -278,9 +285,11 @@ export default {
               total: res2.rows[i].sum
             });
           }
+          // console.log(self.tableData);
         });
     },
     tablesDate() {
+      //包含里程范围查询
       var self = this;
       // console.log(self.carname)
       self.$http
@@ -289,8 +298,8 @@ export default {
             clxx_cx: self.carname,
             currentPage: 1,
             size: 200,
-            start: 0,
-            end: 20000,
+            start: self.inputs.rangeblock[0],
+            end: self.inputs.rangeblock[1],
             s: self.start,
             e: self.end
           }
@@ -308,7 +317,11 @@ export default {
               total: res.rows[i].sum
             });
           }
+          // console.log(self.tableData);
         });
+
+
+
     },
     getSummaries(param) {
       //   const { columns, data } = param;

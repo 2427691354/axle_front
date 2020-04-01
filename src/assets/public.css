@@ -330,7 +330,7 @@ a:hover {
 }
 .hotshaftwarning .el-input__inner,.VehicleTemAnaysis .el-input__inner,.AxleTemAnaysis .el-input__inner,.AccumulatedMileageQuery .el-input__inner,.StatisticalReports .el-input__inner {
   border-radius: 0px;
-  border: 1px solid #5282c8;
+  border: 1px solid #abc2e8;
   color: #606266;
   height: 1rem;
   width: 70%;
@@ -361,7 +361,7 @@ a:hover {
   -webkit-transition: all .3s;
   transition: all .3s;
 }
-.el-input__suffix{
+.el-date-editor .el-input__suffix{
   display: none;
 }
 .StatisticalReports .timest .el-input__prefix,
@@ -371,14 +371,14 @@ a:hover {
 .StatisticalReports .stationst .el-input__icon,
 .hotshaftwarning .station .el-input__icon{
   line-height: 20%;
-  margin-left: -3rem;
+  margin-left: -2rem;
 }
 .StatisticalReports .stationst .el-input__inner{
   width: 70%;
 }
 .CumulativeReminder .box .el-input__inner{
   border-radius: 0px;
-  border: 1px solid #5282c8;
+  border: 1px solid #abc2e8;
   color: #606266;
   height: 1.2rem;
   width: 70%;
@@ -404,7 +404,7 @@ a:hover {
 
 .VehicleTempRiseReminder .el-input__inner,.TrainNumTempRiseReminder .el-input__inner{
   border-radius: 0px;
-  border: 1px solid #5282c8;
+  border: 1px solid #abc2e8;
   color: #606266;
   height: 1.2rem;
 }
@@ -573,12 +573,13 @@ a:hover {
   line-height: 1rem;
 }
 
-.MaintenanceReminder .el-tabs__item{
+.MaintenanceReminder .ivu-tabs-nav-container {
+  margin-top: 1%;
+  line-height: 1rem;
   font-size: 0.6rem;
+  font-weight: 500;
 }
-.MaintenanceReminder .el-tabs__header{
-  padding: 1%;
-}
+
 .el-pager .more::before {
   line-height: 0;
 }

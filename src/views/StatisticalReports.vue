@@ -15,7 +15,7 @@
         </el-select>
       </div>
       <!-- 日报表 -->
-      <div class="timest" v-if="this.value=='日报表'">
+      <div class="timest" v-if="this.value==='日报表'">
         <div class="date">
           <el-date-picker v-model="inputs.start" type="date" value-format="yyyy-MM-dd"></el-date-picker>
         </div>
@@ -27,15 +27,20 @@
       <!-- 月报表 -->
       <div class="timest" v-else>
         <div class="date">
-          <el-date-picker v-model="inputs.start" type="month" value-format="yyyy-MM"></el-date-picker>
+          <el-date-picker v-model="mouth.start" type="month" value-format="yyyy-MM" placeholder="开始月份"></el-date-picker>
         </div>
         <div class="text">--</div>
         <div class="date">
-          <el-date-picker v-model="inputs.end" type="month" value-format="yyyy-MM"></el-date-picker>
+          <el-date-picker v-model="mouth.end" type="month" value-format="yyyy-MM" placeholder="结束月份"></el-date-picker>
         </div>
       </div>
-      <div class="botst">
+      <!-- 日报表按钮 -->
+      <div class="botst" v-if="this.value==='日报表'">
         <el-button type="danger" round @click="dataTotal">搜索</el-button>
+      </div>
+      <!-- 月报表按钮 -->
+      <div class="botst" v-else>
+        <el-button type="danger" round @click="mouthTotal">搜索</el-button>
       </div>
     </div>
     <div class="contentst">
@@ -77,17 +82,21 @@ export default {
     return {
       options: [
         {
-          value: "选项1",
+          value: "日报表",
           label: "日报表"
         },
         {
-          value: "选项2",
+          value: "月报表",
           label: "月报表"
         }
       ],
       inputs: {
         start: "2018-2-1",
         end: "2019-2-28"
+      },
+      mouth: {
+        start: "2018-2",
+        end: "2019-2"
       },
       value: "日报表",
       //每个图表的xy轴
@@ -122,6 +131,7 @@ export default {
     this.axleNum();
     this.thermalNum();
     this.dataTotal();
+    this.mouthTotal();
   },
   methods: {
     trainNum() {
@@ -259,7 +269,7 @@ export default {
         },
         grid: {
           containLabel: true,
-          left: "10%",
+          left: "8%",
           right: 0,
           bottom: "15%",
           top: "5%"
@@ -290,7 +300,7 @@ export default {
           {
             data: this.zlabel,
             axisLabel: {
-              fontSize: "45%",
+              // fontSize: "45%",
               color: "#000"
             },
             axisLine: {
@@ -325,7 +335,7 @@ export default {
                 },
                 textStyle: {
                   color: "#fff",
-                  fontSize: "40%"
+                  // fontSize: "40%"
                 }
               }
             },
@@ -354,7 +364,7 @@ export default {
                 },
                 textStyle: {
                   color: "#fff",
-                  fontSize: "40%"
+                  // fontSize: "40%"
                 }
               }
             },
@@ -636,9 +646,57 @@ export default {
           self.thermal.qre = res.sxsj.COUNT_QRE.concat(res.xxsj.COUNT_QRE);
           self.thermal.wre = res.sxsj.COUNT_WRE.concat(res.xxsj.COUNT_WRE);
 
-          console.log(self.thermal.jre);
-          console.log(self.thermal.qre);
-          console.log(self.thermal.wre);
+          // console.log(self.thermal.jre);
+          // console.log(self.thermal.qre);
+          // console.log(self.thermal.wre);
+          self.trainNum();
+          self.carNum();
+          self.axleNum();
+          self.thermalNum();
+        });
+    },
+    mouthTotal(){
+      var self = this;
+      self.$http
+        .get(this.baseUrl + "/monthRpt", {
+          params: {
+            start: self.mouth.start,
+            end: self.mouth.end
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          self.zlabel = res.tczlist;
+          //列车数量
+          self.top.train = res.sxsj.COUNT_TRAIN;
+          self.bottom.train = res.xxsj.COUNT_TRAIN;
+
+          //车辆数量
+          self.top.car = res.sxsj.COUNT_CAR;
+          self.bottom.car = res.xxsj.COUNT_CAR;
+
+          //车轴数
+          self.top.axle = res.sxsj.COUNT_AXLE;
+          self.bottom.axle = res.xxsj.COUNT_AXLE;
+
+          //热轴数
+          var a = [];
+          for(var i=0;i<res.tczlist.length;i++){
+            a.push(res.tczlist[i]+"上行")
+          }
+          for( i=0;i<res.tczlist.length;i++){
+            a.push(res.tczlist[i]+"下行")
+          }
+          //合并数组concat
+          self.tlabel = a;
+          // console.log(self.tlabel)
+          self.thermal.jre = res.sxsj.COUNT_JRE.concat(res.xxsj.COUNT_JRE);
+          self.thermal.qre = res.sxsj.COUNT_QRE.concat(res.xxsj.COUNT_QRE);
+          self.thermal.wre = res.sxsj.COUNT_WRE.concat(res.xxsj.COUNT_WRE);
+
+          // console.log(self.thermal.jre);
+          // console.log(self.thermal.qre);
+          // console.log(self.thermal.wre);
           self.trainNum();
           self.carNum();
           self.axleNum();
@@ -674,12 +732,12 @@ export default {
     width: 15%;
     height: inherit;
     float: left;
-    line-height: 2.3rem;
+    margin-top: 1.5%;
   }
   .timest {
     width: 50%;
     float: left;
-    line-height: 2.3rem;
+    margin-top: 1.5%;
     .date {
       width: 22%;
       height: 1rem;
@@ -697,7 +755,7 @@ export default {
   .botst {
     width: 10%;
     float: left;
-    line-height: 2.3rem;
+    margin-top: 1.5%;
     margin-left: -13rem;
   }
 }
