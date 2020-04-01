@@ -8,8 +8,8 @@
     <div class="content_2">
       <!-- 导航栏 -->
       <div class="navs">
-        <Tabs  v-model="activeName">
-          <TabPane  label="里程提醒" name="first">
+        <Tabs v-model="activeName">
+          <TabPane label="里程提醒" name="first">
             <div class="CumulativeReminder">
               <!-- 搜索里程维护阈值 -->
               <div class="search_2">
@@ -38,8 +38,8 @@
                 </div>
               </div>
             </div>
-          </TabPane >
-          <TabPane  label="热轴提醒" name="second">
+          </TabPane>
+          <TabPane label="热轴提醒" name="second">
             <div class="HotShaftReminder">
               <div class="table_3">
                 <el-table :data="tableData" style="width: 100%">
@@ -57,8 +57,8 @@
                 </el-table>
               </div>
             </div>
-          </TabPane >
-          <TabPane  label="车次温升提醒" name="third">
+          </TabPane>
+          <TabPane label="车次温升提醒" name="third">
             <div class="TrainNumTempRiseReminder">
               <!-- 搜索框等 -->
               <div class="search_3">
@@ -82,8 +82,8 @@
                 <div id="temChart"></div>
               </div>
             </div>
-          </TabPane >
-          <TabPane  label="车辆温升提醒" name="fourth">
+          </TabPane>
+          <TabPane label="车辆温升提醒" name="fourth">
             <div class="VehicleTempRiseReminder">
               <!-- 搜索框等 -->
               <div class="search_4">
@@ -127,18 +127,18 @@
                 <div id="lineChart_1"></div>
               </div>
             </div>
-          </TabPane >
-        </Tabs >
+          </TabPane>
+        </Tabs>
       </div>
     </div>
   </div>
 </template>
 <script>
-import Vue from 'vue'
+import Vue from "vue";
 import echarts from "echarts";
 //用了iview的标签页
-import ViewUI from 'view-design';
-import 'view-design/dist/styles/iview.css';
+import ViewUI from "view-design";
+import "view-design/dist/styles/iview.css";
 Vue.use(ViewUI);
 export default {
   data() {
@@ -265,7 +265,7 @@ export default {
       //深度监听，可监听到对象、数组的变化
       handler() {
         if (this.carvalue == "" || this.carvalue == "全部车型") {
-          this.mRemind();
+          this.dataShow();
         } else {
           this.selectcar();
         }
@@ -275,7 +275,7 @@ export default {
     wordvalue: {
       handler() {
         if (this.wordvalue == "") {
-          this.mRemind();
+          this.dataShow();
         } else {
           this.focusOn();
         }
@@ -284,8 +284,9 @@ export default {
     }
   },
   mounted() {
+    this.dataShow();
     //搜索按钮点击更新数据
-    this.mRemind();
+    // this.mRemind();
     // this.focusOn();
     // this.lineTem();
     // this.lineTem2();
@@ -294,21 +295,37 @@ export default {
     // handleClick(tab, event) {
     //   console.log(tab, event);
     // },
-    mRemind() {
-      // this.$alert("修改成功").then(() => {
+    //初始化显示
+    dataShow() {
       var self = this;
       self.$http.get(this.baseUrl + "/systemvalue").then(function(response) {
         var res = response.data;
-        //如果值为空则引入后台数据，改变则按输入值来查询
-        if (
-          self.inputs.temnum == "" ||
-          self.inputs.numbers == "" ||
-          self.yuzhi == ""
-        ) {
           self.inputs.temnum = res.wsYz;
           self.inputs.numbers = res.lxcs;
           self.yuzhi = res.lcYz;
-        }
+          self.$http
+            .get(self.baseUrl + "/updateLcYz", {
+              params: {
+                lcyz: self.yuzhi,
+                lxcs: self.inputs.numbers,
+                wsyz: self.inputs.temnum
+              }
+            })
+            .then(function(response) {
+              var res = response.data;
+              if (res == 1) {
+                //表格数据
+                self.dataTable();
+                //词云
+                self.dataCloud();
+                //车辆温升表格
+                self.datacarTable();
+              }
+            });
+      });
+    },
+    mRemind() {
+      var self = this;
         self.$alert("修改成功").then(() => {
           self.$http
             .get(self.baseUrl + "/updateLcYz", {
@@ -322,193 +339,14 @@ export default {
               var res = response.data;
               if (res == 1) {
                 //表格数据
-                self.$http
-                  .get(self.baseUrl + "/mileageRemind", {
-                    params: {
-                      currentPage: 1,
-                      size: 20
-                    }
-                  })
-                  .then(function(response) {
-                    var res = response.data;
-                    var dd = [];
-                    self.carData = dd;
-                    for (var i = 0; i < res.length; i++) {
-                      dd.push({
-                        number: res[i].clxxChdd,
-                        mileage: res[i].mileage + "km"
-                      });
-                    }
-                    // console.log(res);
-                  });
-
+                self.dataTable();
                 //词云
-                self.$http
-                  .get(self.baseUrl + "/TempRiseReMind")
-                  .then(function(response) {
-                    var res = response.data;
-                    // console.log(res2);
-                    self.focusonInfo = [];
-                    for (var i = 0; i < res.length; i++) {
-                      self.focusonInfo.push({
-                        name: res[i].CLXX_CHDD,
-                        value: Math.random() * 3000
-                      });
-                    }
-                    self.wordvalue = self.focusonInfo[0].name;
-                    // console.log(self.focusonInfo);
-                    self.focusOn();
-                    if (self.focusonInfo[0].name != "") {
-                      //车次温升折线图
-                      self.$http
-                        .get(self.baseUrl + "/findWsBhByCh", {
-                          params: {
-                            //词云第一个值
-                            clxx_ch: self.focusonInfo[0].name
-                          }
-                        })
-                        .then(function(response) {
-                          var res = response.data;
-                          self.tlabels = res[0].mclist.split(",");
-                          self.tlegend = [];
-                          self.tseries = [];
-                          for (var i = 0; i < res.length; i++) {
-                            self.tseries.push(
-                              {
-                                name: res[i].ZXXX_ZW + "轴",
-                                type: "line",
-                                data: res[i].zzwlist.split(","),
-                                lineStyle: {
-                                  normal: {
-                                    width: 2,
-                                    color: "#54DAC2",
-                                    shadowColor: "rgba(245,128,128, 0.5)",
-                                    shadowBlur: 10,
-                                    shadowOffsetY: 7
-                                  }
-                                },
-                                symbol: "emptyCircle",
-                                symbolSize: 8,
-                                itemStyle: {
-                                  normal: {
-                                    color: "#54DAC2"
-                                  }
-                                },
-                                smooth: false
-                              },
-                              {
-                                name: res[i].ZXXX_ZW + "轴",
-                                type: "line",
-                                symbol: "emptyCircle",
-                                symbolSize: 8,
-                                data: res[i].yzwlist.split(","),
-                                lineStyle: {
-                                  normal: {
-                                    width: 2,
-                                    color: "#F9A589",
-                                    shadowColor: "rgba(249,165,137, 0.5)",
-                                    shadowBlur: 8,
-                                    shadowOffsetY: 5
-                                  }
-                                },
-                                itemStyle: {
-                                  normal: {
-                                    color: "#F9A589"
-                                  }
-                                },
-                                smooth: false
-                              }
-                            );
-                            self.tlegend.push(res[i].ZXXX_ZW + "轴");
-                          }
-                          self.lineTem();
-                        });
-                    }
-                  });
-
+                self.dataCloud();
                 //车辆温升表格
-                self.$http
-                  .get(self.baseUrl + "/TempRiseReMind2")
-                  .then(function(response) {
-                    var res = response.data;
-                    self.tableData2 = [];
-                    for (var i = 0; i < res.length; i++) {
-                      self.tableData2.push({
-                        carnumber: res[i].LCXX_CH.split(",")
-                      });
-                    }
-
-                    console.log(self.tableData2[0].carnumber[0]);
-                    //车辆温升折线图
-                    self.$http
-                      .get(self.baseUrl + "/findWsBhByCh2", {
-                        params: {
-                          clxx_ch: self.tableData2[0].carnumber[0]
-                        }
-                      })
-                      .then(function(response) {
-                        var res = response.data;
-                        self.tableInline = self.tableData2[0].carnumber[0];
-                        self.clabels = res[0].gcsjlist.split(",");
-                        self.clegend = [];
-                        self.cseries = [];
-                        for (var i = 0; i < res.length; i++) {
-                          self.cseries.push(
-                            {
-                              name: res[i].ZXXX_ZW + "轴",
-                              type: "line",
-                              data: res[i].zzwlist.split(","),
-                              lineStyle: {
-                                normal: {
-                                  width: 2,
-                                  color: "#54DAC2",
-                                  shadowColor: "rgba(245,128,128, 0.5)",
-                                  shadowBlur: 10,
-                                  shadowOffsetY: 7
-                                }
-                              },
-                              symbol: "emptyCircle",
-                              symbolSize: 8,
-                              itemStyle: {
-                                normal: {
-                                  color: "#54DAC2"
-                                }
-                              },
-                              smooth: false
-                            },
-                            {
-                              name: res[i].ZXXX_ZW + "轴",
-                              type: "line",
-                              symbol: "emptyCircle",
-                              symbolSize: 8,
-                              data: res[i].yzwlist.split(","),
-                              lineStyle: {
-                                normal: {
-                                  width: 2,
-                                  color: "#F9A589",
-                                  shadowColor: "rgba(249,165,137, 0.5)",
-                                  shadowBlur: 8,
-                                  shadowOffsetY: 5
-                                }
-                              },
-                              itemStyle: {
-                                normal: {
-                                  color: "#F9A589"
-                                }
-                              },
-                              smooth: false
-                            }
-                          );
-                          self.clegend.push(res[i].ZXXX_ZW + "轴");
-                        }
-                        self.lineTem2();
-                      });
-                  });
+                self.datacarTable();
               }
             });
         });
-      });
-      // })
     },
     //车辆温升下拉框点击更新表格数据
     selectcar() {
@@ -876,6 +714,194 @@ export default {
           self.lineTem2();
         });
       row.carnumber[0] = "";
+    },
+    //表格数据
+    dataTable() {
+      var self = this;
+      self.$http
+        .get(self.baseUrl + "/mileageRemind", {
+          params: {
+            currentPage: 1,
+            size: 20
+          }
+        })
+        .then(function(response) {
+          var res = response.data;
+          var dd = [];
+          self.carData = dd;
+          for (var i = 0; i < res.length; i++) {
+            dd.push({
+              number: res[i].clxxChdd,
+              mileage: res[i].mileage + "km"
+            });
+          }
+          // console.log(res);
+        });
+    },
+    //词云数据
+    dataCloud() {
+      var self = this;
+      self.$http.get(self.baseUrl + "/TempRiseReMind").then(function(response) {
+        var res = response.data;
+        // console.log(res2);
+        self.focusonInfo = [];
+        for (var i = 0; i < res.length; i++) {
+          self.focusonInfo.push({
+            name: res[i].CLXX_CHDD,
+            value: Math.random() * 3000
+          });
+        }
+        self.wordvalue = self.focusonInfo[0].name;
+        // console.log(self.focusonInfo);
+        self.focusOn();
+        if (self.focusonInfo[0].name != "") {
+          //车次温升折线图
+          self.$http
+            .get(self.baseUrl + "/findWsBhByCh", {
+              params: {
+                //词云第一个值
+                clxx_ch: self.focusonInfo[0].name
+              }
+            })
+            .then(function(response) {
+              var res = response.data;
+              self.tlabels = res[0].mclist.split(",");
+              self.tlegend = [];
+              self.tseries = [];
+              for (var i = 0; i < res.length; i++) {
+                self.tseries.push(
+                  {
+                    name: res[i].ZXXX_ZW + "轴",
+                    type: "line",
+                    data: res[i].zzwlist.split(","),
+                    lineStyle: {
+                      normal: {
+                        width: 2,
+                        color: "#54DAC2",
+                        shadowColor: "rgba(245,128,128, 0.5)",
+                        shadowBlur: 10,
+                        shadowOffsetY: 7
+                      }
+                    },
+                    symbol: "emptyCircle",
+                    symbolSize: 8,
+                    itemStyle: {
+                      normal: {
+                        color: "#54DAC2"
+                      }
+                    },
+                    smooth: false
+                  },
+                  {
+                    name: res[i].ZXXX_ZW + "轴",
+                    type: "line",
+                    symbol: "emptyCircle",
+                    symbolSize: 8,
+                    data: res[i].yzwlist.split(","),
+                    lineStyle: {
+                      normal: {
+                        width: 2,
+                        color: "#F9A589",
+                        shadowColor: "rgba(249,165,137, 0.5)",
+                        shadowBlur: 8,
+                        shadowOffsetY: 5
+                      }
+                    },
+                    itemStyle: {
+                      normal: {
+                        color: "#F9A589"
+                      }
+                    },
+                    smooth: false
+                  }
+                );
+                self.tlegend.push(res[i].ZXXX_ZW + "轴");
+              }
+              self.lineTem();
+            });
+        }
+      });
+    },
+    //车辆温升表格
+    datacarTable() {
+      var self = this;
+      self.$http
+        .get(self.baseUrl + "/TempRiseReMind2")
+        .then(function(response) {
+          var res = response.data;
+          self.tableData2 = [];
+          for (var i = 0; i < res.length; i++) {
+            self.tableData2.push({
+              carnumber: res[i].LCXX_CH.split(",")
+            });
+          }
+
+          console.log(self.tableData2[0].carnumber[0]);
+          //车辆温升折线图
+          self.$http
+            .get(self.baseUrl + "/findWsBhByCh2", {
+              params: {
+                clxx_ch: self.tableData2[0].carnumber[0]
+              }
+            })
+            .then(function(response) {
+              var res = response.data;
+              self.tableInline = self.tableData2[0].carnumber[0];
+              self.clabels = res[0].gcsjlist.split(",");
+              self.clegend = [];
+              self.cseries = [];
+              for (var i = 0; i < res.length; i++) {
+                self.cseries.push(
+                  {
+                    name: res[i].ZXXX_ZW + "轴",
+                    type: "line",
+                    data: res[i].zzwlist.split(","),
+                    lineStyle: {
+                      normal: {
+                        width: 2,
+                        color: "#54DAC2",
+                        shadowColor: "rgba(245,128,128, 0.5)",
+                        shadowBlur: 10,
+                        shadowOffsetY: 7
+                      }
+                    },
+                    symbol: "emptyCircle",
+                    symbolSize: 8,
+                    itemStyle: {
+                      normal: {
+                        color: "#54DAC2"
+                      }
+                    },
+                    smooth: false
+                  },
+                  {
+                    name: res[i].ZXXX_ZW + "轴",
+                    type: "line",
+                    symbol: "emptyCircle",
+                    symbolSize: 8,
+                    data: res[i].yzwlist.split(","),
+                    lineStyle: {
+                      normal: {
+                        width: 2,
+                        color: "#F9A589",
+                        shadowColor: "rgba(249,165,137, 0.5)",
+                        shadowBlur: 8,
+                        shadowOffsetY: 5
+                      }
+                    },
+                    itemStyle: {
+                      normal: {
+                        color: "#F9A589"
+                      }
+                    },
+                    smooth: false
+                  }
+                );
+                self.clegend.push(res[i].ZXXX_ZW + "轴");
+              }
+              self.lineTem2();
+            });
+        });
     }
   }
 };
